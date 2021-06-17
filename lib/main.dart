@@ -11,7 +11,8 @@ void main() =>
             child: Text(
               'میزان فروش',
               style: TextStyle(
-                fontSize: 20
+                fontSize: 20,
+                fontFamily: 'B-nazanin'
               ),
             )
         ),
