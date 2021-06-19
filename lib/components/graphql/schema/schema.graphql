@@ -1,0 +1,1718 @@
+schema {
+  query: Query
+  mutation: Mutations
+}
+
+type AutomationOrderNode {
+  id: ID!
+  numberEntered: String
+  numberAutomation: Int!
+  isEntered: Boolean!
+  title: String
+  ownerText: String!
+  dateTxt: String
+  customer: String
+  isRequest: Boolean!
+  attachment: String
+  description: String
+  dateFa: Date
+}
+
+input CreateCustomerInput {
+  owner: ID!
+  code: Int
+  codeTemp: Int
+  name: String!
+  type: ID!
+  pubDate: DateTime!
+  date2: String!
+  phone: String
+  whatsapp: String
+  fax: String
+  email: String
+  website: String
+  postalCode: String
+  addr: String
+  agent: Boolean
+  user: ID
+  imported: Boolean
+  id: ID
+  clientMutationId: String
+}
+
+type CreateCustomerPayload {
+  customer: CustomerNode
+  errors: [ErrorType]
+  clientMutationId: String
+}
+
+input CreateProformaSpecBatchInput {
+  proformaId: ID
+  specsList: [ProformaSpecInput]
+  clientMutationId: String
+}
+
+type CreateProformaSpecBatchPayload {
+  proformaSpecs: [PrefSpecNode]
+  clientMutationId: String
+}
+
+type CustomerBySale {
+  customerId: Int
+  customerName: String
+  qty: Int
+  amount: Float
+}
+
+input CustomerCreateInput {
+  name: String
+  owner: String
+  type: String
+  date2: String
+  pubDate: DateTime
+}
+
+type CustomerNode implements Node {
+  """The ID of the object."""
+  id: ID!
+  owner: UserNode!
+  code: Int!
+  codeTemp: Int
+  name: String!
+  type: CustomerTypeNode!
+  pubDate: DateTime!
+  date2: Date!
+  phone: String
+  whatsapp: String
+  fax: String
+  email: String
+  website: String
+  postalCode: String
+  addr: String
+  agent: Boolean!
+  user: UserNode
+  imported: Boolean!
+  requestsSet(before: String, after: String, first: Int, last: Int, number: Int, customer_Name_Icontains: String, isActive: Boolean, finished: Boolean, dateFa: String, dateFa_Gte: String, xpref_Isnull: Boolean): RequestNodeConnection!
+  incomeSet(before: String, after: String, first: Int, last: Int): IncomeNodeConnection!
+  customerTotalKw: Int
+  salesQty: Int
+  salesKw: Float
+  amountReceived: Float
+  amountReceivable: Float
+  salesAmount: Float
+  unpaidProformas: [ProformaNode]
+  saleTotal: Float
+  paidTotal: Float
+  unpaidTotal: Float
+}
+
+type CustomerNodeConnection {
+  """Pagination data for this connection."""
+  pageInfo: PageInfo!
+
+  """Contains the nodes in this connection."""
+  edges: [CustomerNodeEdge]!
+}
+
+"""A Relay edge containing a `CustomerNode` and its cursor."""
+type CustomerNodeEdge {
+  """The item at the end of the edge"""
+  node: CustomerNode
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+type CustomerTypeNode implements Node {
+  """The ID of the object."""
+  id: ID!
+  name: String!
+  customerSet(before: String, after: String, first: Int, last: Int): CustomerNodeConnection!
+}
+
+type CustomerTypeNodeConnection {
+  """Pagination data for this connection."""
+  pageInfo: PageInfo!
+
+  """Contains the nodes in this connection."""
+  edges: [CustomerTypeNodeEdge]!
+}
+
+"""A Relay edge containing a `CustomerTypeNode` and its cursor."""
+type CustomerTypeNodeEdge {
+  """The item at the end of the edge"""
+  node: CustomerTypeNode
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+"""
+The `Date` scalar type represents a Date
+value as specified by
+[iso8601](https://en.wikipedia.org/wiki/ISO_8601).
+"""
+scalar Date
+
+"""
+The `DateTime` scalar type represents a DateTime
+value as specified by
+[iso8601](https://en.wikipedia.org/wiki/ISO_8601).
+"""
+scalar DateTime
+
+input DeleteIncomeInput {
+  id: ID
+  clientMutationId: String
+}
+
+type DeleteIncomePayload {
+  msg: String
+  number: Int
+  clientMutationId: String
+}
+
+input DeleteIncomeRowInput {
+  id: ID
+  clientMutationId: String
+}
+
+type DeleteIncomeRowPayload {
+  msg: String
+  number: Int
+  clientMutationId: String
+}
+
+input DeleteOrderInput {
+  id: ID
+  clientMutationId: String
+}
+
+type DeleteOrderPayload {
+  msg: String
+  number: Int
+  clientMutationId: String
+}
+
+input DeleteOrderSpecInput {
+  id: ID
+  clientMutationId: String
+}
+
+type DeleteOrderSpecPayload {
+  msg: String
+  number: Int
+  clientMutationId: String
+}
+
+input DeletePaymentInput {
+  id: ID
+  clientMutationId: String
+}
+
+type DeletePaymentPayload {
+  msg: String
+  number: Int
+  clientMutationId: String
+}
+
+input DeleteProformaInput {
+  id: ID
+  clientMutationId: String
+}
+
+type DeleteProformaPayload {
+  msg: String
+  number: Int
+  clientMutationId: String
+}
+
+input DeleteProformaSpecInput {
+  id: ID
+  clientMutationId: String
+}
+
+type DeleteProformaSpecPayload {
+  msg: String
+  number: Int
+  clientMutationId: String
+}
+
+"""Debugging information for the current query."""
+type DjangoDebug {
+  """Executed SQL queries for this API query."""
+  sql: [DjangoDebugSQL]
+}
+
+"""Represents a single database query made to a Django managed DB."""
+type DjangoDebugSQL {
+  """The type of database being used (e.g. postrgesql, mysql, sqlite)."""
+  vendor: String!
+
+  """The Django database alias (e.g. 'default')."""
+  alias: String!
+
+  """The actual SQL sent to this database."""
+  sql: String
+
+  """Duration of this database query in seconds."""
+  duration: Float!
+
+  """The raw SQL of this query, without params."""
+  rawSql: String!
+
+  """JSON encoded database query parameters."""
+  params: String!
+
+  """Start time of this database query."""
+  startTime: Float!
+
+  """Stop time of this database query."""
+  stopTime: Float!
+
+  """Whether this database query took more than 10 seconds."""
+  isSlow: Boolean!
+
+  """Whether this database query was a SELECT."""
+  isSelect: Boolean!
+
+  """Postgres transaction ID if available."""
+  transId: String
+
+  """Postgres transaction status if available."""
+  transStatus: String
+
+  """Postgres isolation level if available."""
+  isoLevel: String
+
+  """Postgres connection encoding if available."""
+  encoding: String
+}
+
+type ErrorType {
+  field: String!
+  messages: [String!]!
+}
+
+"""
+The `GenericScalar` scalar type represents a generic
+GraphQL scalar value that could be:
+String, Boolean, Int, Float, List or Object.
+"""
+scalar GenericScalar
+
+type ICTypeNode implements Node {
+  """The ID of the object."""
+  id: ID!
+  title: String!
+  reqspecSet(before: String, after: String, first: Int, last: Int, code: Int, reqId: ID, owner: ID, type: ID, qty: Int, kw: Float, rpm: Int, rpmNew: ID, voltage: Int, ipType: Int, icType: Int, im: ID, ip: ID, ic: ID, ie: ID, frameSize: ID, summary: String, tech: Boolean, price: Boolean, permission: Boolean, sent: Boolean, isActive: Boolean, cancelled: Boolean, finished: Boolean): ReqSpecNodeConnection!
+  prefspecSet(before: String, after: String, first: Int, last: Int, code: Int, owner: ID, xprefId: ID, reqspecEq: ID, qty: Int, type: String, price: Float, kw: Float, rpm: Int, voltage: Int, ipType: Int, icType: Int, im: ID, ip: ID, ic: ID, summary: String, considerations: String, isActive: Boolean, sent: Boolean, qtySent: Int, finished: Boolean): PrefSpecNodeConnection!
+}
+
+type ICTypeNodeConnection {
+  """Pagination data for this connection."""
+  pageInfo: PageInfo!
+
+  """Contains the nodes in this connection."""
+  edges: [ICTypeNodeEdge]!
+}
+
+"""A Relay edge containing a `ICTypeNode` and its cursor."""
+type ICTypeNodeEdge {
+  """The item at the end of the edge"""
+  node: ICTypeNode
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+type IMTypeNode implements Node {
+  """The ID of the object."""
+  id: ID!
+  title: String!
+  reqspecSet(before: String, after: String, first: Int, last: Int, code: Int, reqId: ID, owner: ID, type: ID, qty: Int, kw: Float, rpm: Int, rpmNew: ID, voltage: Int, ipType: Int, icType: Int, im: ID, ip: ID, ic: ID, ie: ID, frameSize: ID, summary: String, tech: Boolean, price: Boolean, permission: Boolean, sent: Boolean, isActive: Boolean, cancelled: Boolean, finished: Boolean): ReqSpecNodeConnection!
+  prefspecSet(before: String, after: String, first: Int, last: Int, code: Int, owner: ID, xprefId: ID, reqspecEq: ID, qty: Int, type: String, price: Float, kw: Float, rpm: Int, voltage: Int, ipType: Int, icType: Int, im: ID, ip: ID, ic: ID, summary: String, considerations: String, isActive: Boolean, sent: Boolean, qtySent: Int, finished: Boolean): PrefSpecNodeConnection!
+}
+
+type IMTypeNodeConnection {
+  """Pagination data for this connection."""
+  pageInfo: PageInfo!
+
+  """Contains the nodes in this connection."""
+  edges: [IMTypeNodeEdge]!
+}
+
+"""A Relay edge containing a `IMTypeNode` and its cursor."""
+type IMTypeNodeEdge {
+  """The item at the end of the edge"""
+  node: IMTypeNode
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+input IncomeModelFormMutationInput {
+  owner: ID!
+  customer: ID!
+  number: Int!
+  type: ID
+  amount: Float!
+  dateFa: String!
+  dueDate: String
+  summary: String
+  id: ID
+  clientMutationId: String
+}
+
+type IncomeModelFormMutationPayload {
+  income: IncomeNode
+  errors: [ErrorType]
+  clientMutationId: String
+}
+
+"""Node For Income app with relay interface."""
+type IncomeNode implements Node {
+  """The ID of the object."""
+  id: ID!
+  created: DateTime!
+  modified: DateTime!
+  owner: UserNode!
+  customer: CustomerNode!
+  number: Int!
+  type: PaymentTypeNode
+  amount: Float!
+  dateFa: Date!
+  dueDate: Date
+  summary: String
+  isActive: Boolean!
+  incomerowSet(before: String, after: String, first: Int, last: Int, amount: Float, amount_Gt: Float, income: ID, proforma: ID, summary_Icontains: String, proforma_ReqId: ID): IncomeRowNodeConnection!
+  pk: Int
+  cash: Boolean
+  assignedCount: String
+  amountAssigned: Float
+  amountNotAssigned: Float
+}
+
+type IncomeNodeConnection {
+  """Pagination data for this connection."""
+  pageInfo: PageInfo!
+
+  """Contains the nodes in this connection."""
+  edges: [IncomeNodeEdge]!
+}
+
+"""A Relay edge containing a `IncomeNode` and its cursor."""
+type IncomeNodeEdge {
+  """The item at the end of the edge"""
+  node: IncomeNode
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+input IncomeRowModelFormMutationInput {
+  owner: ID!
+  income: ID!
+  proforma: ID!
+  perm: ID
+  amount: Float!
+  dateFa: String!
+  summary: String
+  id: ID
+  clientMutationId: String
+}
+
+type IncomeRowModelFormMutationPayload {
+  incomeRow: IncomeRowNode
+  errors: [ErrorType]
+  clientMutationId: String
+}
+
+"""Node for incomerow app with relay interface."""
+type IncomeRowNode implements Node {
+  """The ID of the object."""
+  id: ID!
+  created: DateTime!
+  modified: DateTime!
+  owner: UserNode!
+  income: IncomeNode!
+  proforma: ProformaNode!
+  perm: PermNode
+  amount: Float!
+  dateFa: Date!
+  summary: String
+  isActive: Boolean!
+}
+
+type IncomeRowNodeConnection {
+  """Pagination data for this connection."""
+  pageInfo: PageInfo!
+
+  """Contains the nodes in this connection."""
+  edges: [IncomeRowNodeEdge]!
+}
+
+"""A Relay edge containing a `IncomeRowNode` and its cursor."""
+type IncomeRowNodeEdge {
+  """The item at the end of the edge"""
+  node: IncomeRowNode
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+type IPTypeNode implements Node {
+  """The ID of the object."""
+  id: ID!
+  title: String!
+  reqspecSet(before: String, after: String, first: Int, last: Int, code: Int, reqId: ID, owner: ID, type: ID, qty: Int, kw: Float, rpm: Int, rpmNew: ID, voltage: Int, ipType: Int, icType: Int, im: ID, ip: ID, ic: ID, ie: ID, frameSize: ID, summary: String, tech: Boolean, price: Boolean, permission: Boolean, sent: Boolean, isActive: Boolean, cancelled: Boolean, finished: Boolean): ReqSpecNodeConnection!
+  prefspecSet(before: String, after: String, first: Int, last: Int, code: Int, owner: ID, xprefId: ID, reqspecEq: ID, qty: Int, type: String, price: Float, kw: Float, rpm: Int, voltage: Int, ipType: Int, icType: Int, im: ID, ip: ID, ic: ID, summary: String, considerations: String, isActive: Boolean, sent: Boolean, qtySent: Int, finished: Boolean): PrefSpecNodeConnection!
+}
+
+type IPTypeNodeConnection {
+  """Pagination data for this connection."""
+  pageInfo: PageInfo!
+
+  """Contains the nodes in this connection."""
+  edges: [IPTypeNodeEdge]!
+}
+
+"""A Relay edge containing a `IPTypeNode` and its cursor."""
+type IPTypeNodeEdge {
+  """The item at the end of the edge"""
+  node: IPTypeNode
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+"""
+Allows use of a JSON String for input / output from the GraphQL schema.
+
+Use of this type is *not recommended* as you lose the benefits of having a defined, static
+schema (one of the key benefits of GraphQL).
+"""
+scalar JSONString
+
+type KwCounts {
+  title: String
+  kw: Int
+  count: Int
+}
+
+type MotorCodeNode implements Node {
+  """The ID of the object."""
+  id: ID!
+  owner: UserNode!
+  code: String!
+  kw: Float!
+  frameSize: String
+  speed: Int!
+  voltage: Int
+  ip: String
+  ic: String
+  im: String
+  ie: String
+  yd: String
+  efficiency: Float
+  pf: Float
+  currentLn: Float
+  currentLsToLn: Float
+  torqueTn: Float
+  torqueTsToTn: Float
+  torqueTmaxToTn: Float
+  torqueRotorInertia: Float
+  weight: Float
+  freq: Float!
+  description: String
+  summary: String
+  motordbSet(before: String, after: String, first: Int, last: Int, priceSet: ID, motor: ID, primeCost: Float, basePrice: Float, salePrice: Float, pubDate: DateTime): MotorDbNodeConnection!
+}
+
+type MotorCodeNodeConnection {
+  """Pagination data for this connection."""
+  pageInfo: PageInfo!
+
+  """Contains the nodes in this connection."""
+  edges: [MotorCodeNodeEdge]!
+}
+
+"""A Relay edge containing a `MotorCodeNode` and its cursor."""
+type MotorCodeNodeEdge {
+  """The item at the end of the edge"""
+  node: MotorCodeNode
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+type MotorDbNode implements Node {
+  """The ID of the object."""
+  id: ID!
+  priceSet: PriceDbType!
+  motor: MotorCodeNode!
+  primeCost: Float
+  basePrice: Float
+  salePrice: Float
+  pubDate: DateTime!
+  profit: Float
+}
+
+type MotorDbNodeConnection {
+  """Pagination data for this connection."""
+  pageInfo: PageInfo!
+
+  """Contains the nodes in this connection."""
+  edges: [MotorDbNodeEdge]!
+}
+
+"""A Relay edge containing a `MotorDbNode` and its cursor."""
+type MotorDbNodeEdge {
+  """The item at the end of the edge"""
+  node: MotorDbNode
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+type MotorNode implements Node {
+  """The ID of the object."""
+  id: ID!
+  type: String!
+  kw: MotorsKw
+  frameSize: String!
+  speed: MotorsSpeed
+  voltage: MotorsVoltage
+  ip: MotorsIp
+  ic: MotorsIc
+  exType: MotorsExType!
+  efficiency: Float!
+  PF: Float!
+  currentLn: Float!
+  currentLsToLn: Float!
+  torqueTn: Float!
+  torqueTsToTn: Float!
+  torqueTmaxToTn: Float!
+  torqueRotorInertia: Float!
+  weight: Float!
+  freq: Float!
+  im: MotorsIm!
+  summary: String
+}
+
+type MotorNodeConnection {
+  """Pagination data for this connection."""
+  pageInfo: PageInfo!
+
+  """Contains the nodes in this connection."""
+  edges: [MotorNodeEdge]!
+}
+
+"""A Relay edge containing a `MotorNode` and its cursor."""
+type MotorNodeEdge {
+  """The item at the end of the edge"""
+  node: MotorNode
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+type MotorPriceNode implements Node {
+  """The ID of the object."""
+  id: ID!
+  code: String!
+  kw: Float!
+  frameSize: String
+  speed: Int!
+  voltage: Int
+  ip: Int
+  ic: Int
+  im: String
+  yd: String
+  efficiency: Float
+  pf: Float
+  currentLn: Float
+  currentLsToLn: Float
+  torqueTn: Float
+  torqueTsToTn: Float
+  torqueTmaxToTn: Float
+  torqueRotorInertia: Float
+  weight: Float
+  freq: Float!
+  description: String
+  summary: String
+}
+
+type MotorPriceNodeConnection {
+  """Pagination data for this connection."""
+  pageInfo: PageInfo!
+
+  """Contains the nodes in this connection."""
+  edges: [MotorPriceNodeEdge]!
+}
+
+"""A Relay edge containing a `MotorPriceNode` and its cursor."""
+type MotorPriceNodeEdge {
+  """The item at the end of the edge"""
+  node: MotorPriceNode
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+"""An enumeration."""
+enum MotorsExType {
+  """safe"""
+  A_0
+
+  """Exn"""
+  A_1
+
+  """ExnA"""
+  A_2
+
+  """Exe"""
+  A_3
+
+  """Exd"""
+  A_4
+
+  """Exde"""
+  A_5
+
+  """other types"""
+  A_6
+}
+
+"""An enumeration."""
+enum MotorsIc {
+  """IC411"""
+  A_0
+
+  """IC511"""
+  A_1
+
+  """IC611"""
+  A_2
+}
+
+"""An enumeration."""
+enum MotorsIm {
+  """IMB3"""
+  A_0
+
+  """IMB35"""
+  A_1
+}
+
+"""An enumeration."""
+enum MotorsIp {
+  """IP55"""
+  A_0
+
+  """IP65"""
+  A_1
+
+  """IP23"""
+  A_2
+
+  """Other"""
+  A_3
+}
+
+"""An enumeration."""
+enum MotorsKw {
+  """5.5 kw"""
+  A_0
+
+  """7.5 kw"""
+  A_1
+
+  """11 kw"""
+  A_2
+
+  """15 kw"""
+  A_3
+
+  """18.5 kw"""
+  A_4
+
+  """22 kw"""
+  A_5
+
+  """30 kw"""
+  A_6
+
+  """37 kw"""
+  A_7
+
+  """45 kw"""
+  A_8
+
+  """55 kw"""
+  A_9
+
+  """75 kw"""
+  A_10
+
+  """90 kw"""
+  A_11
+
+  """110 kw"""
+  A_12
+
+  """132 kw"""
+  A_13
+
+  """160 kw"""
+  A_14
+
+  """185 kw"""
+  A_15
+
+  """200 kw"""
+  A_16
+
+  """220 kw"""
+  A_17
+
+  """250 kw"""
+  A_18
+
+  """280 kw"""
+  A_19
+
+  """315 kw"""
+  A_20
+
+  """355 kw"""
+  A_21
+
+  """400 kw"""
+  A_22
+
+  """450 kw"""
+  A_23
+
+  """500 kw"""
+  A_24
+
+  """560 kw"""
+  A_25
+
+  """630 kw"""
+  A_26
+
+  """710 kw"""
+  A_27
+
+  """800 kw"""
+  A_28
+
+  """900 kw"""
+  A_29
+
+  """1000 kw"""
+  A_30
+
+  """1120 kw"""
+  A_31
+
+  """1250 kw"""
+  A_32
+
+  """1400 kw"""
+  A_33
+
+  """1600 kw"""
+  A_34
+
+  """1800 kw"""
+  A_35
+
+  """2000 kw"""
+  A_36
+}
+
+"""An enumeration."""
+enum MotorsSpeed {
+  """750 RPM"""
+  A_3
+
+  """1000 RPM"""
+  A_0
+
+  """1500 RPM"""
+  A_1
+
+  """3000 RPM"""
+  A_2
+}
+
+"""An enumeration."""
+enum MotorsVoltage {
+  """380"""
+  A_0
+
+  """400"""
+  A_1
+
+  """3000"""
+  A_2
+
+  """3300"""
+  A_3
+
+  """6000"""
+  A_4
+
+  """6600"""
+  A_5
+}
+
+type Mutations {
+  incomeMutation(input: IncomeModelFormMutationInput!): IncomeModelFormMutationPayload
+  incomeRowMutation(input: IncomeRowModelFormMutationInput!): IncomeRowModelFormMutationPayload
+  deleteIncome(input: DeleteIncomeInput!): DeleteIncomePayload
+  deleteIncomeRow(input: DeleteIncomeRowInput!): DeleteIncomeRowPayload
+  paymentMutation(input: PaymentModelFormMutationInput!): PaymentModelFormMutationPayload
+  deletePayment(input: DeletePaymentInput!): DeletePaymentPayload
+  proformaMutation(input: ProformaModelFormMutationInput!): ProformaModelFormMutationPayload
+  prefspecMutation(input: PrefSpecModelFormMutationInput!): PrefSpecModelFormMutationPayload
+  createPrefSpecsBulk(input: CreateProformaSpecBatchInput!): CreateProformaSpecBatchPayload
+  deleteProforma(input: DeleteProformaInput!): DeleteProformaPayload
+  deleteProformaSpec(input: DeleteProformaSpecInput!): DeleteProformaSpecPayload
+  requestMutation(input: RequestModelFormMutationInput!): RequestModelFormMutationPayload
+  reqSpecMutation(input: ReqSpecModelFormMutationInput!): ReqSpecModelFormMutationPayload
+  deleteOrder(input: DeleteOrderInput!): DeleteOrderPayload
+  deleteOrderSpec(input: DeleteOrderSpecInput!): DeleteOrderSpecPayload
+  customerMutation(input: MyMutationInput!): MyMutationPayload
+  createCustomer(input: CreateCustomerInput!): CreateCustomerPayload
+  updateCustomerMut(input: UpdateCustomerInput!): UpdateCustomerPayload
+  updateCustomerSer(input: MyCustomerMutationInput!): MyCustomerMutationPayload
+
+  """Obtain JSON Web Token mutation"""
+  tokenAuth(username: String!, password: String!): ObtainJSONWebToken
+  verifyToken(token: String): Verify
+  refreshToken(token: String): Refresh
+}
+
+input MyCustomerMutationInput {
+  id: Int
+  name: String!
+  owner: String!
+  clientMutationId: String
+}
+
+type MyCustomerMutationPayload {
+  id: Int
+  name: String
+  owner: String
+
+  """May contain more than one error for same field."""
+  errors: [ErrorType]
+  updatedCustomer: CustomerNode
+  clientMutationId: String
+}
+
+input MyMutationInput {
+  testField: String!
+  clientMutationId: String
+}
+
+type MyMutationPayload {
+  testField: String!
+  errors: [ErrorType]
+  clientMutationId: String
+}
+
+"""An object with an ID"""
+interface Node {
+  """The ID of the object."""
+  id: ID!
+}
+
+"""Obtain JSON Web Token mutation"""
+type ObtainJSONWebToken {
+  payload: GenericScalar!
+  refreshExpiresIn: Int!
+  token: String!
+}
+
+"""
+The Relay compliant `PageInfo` type, containing data necessary to paginate this connection.
+"""
+type PageInfo {
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+}
+
+input PaymentModelFormMutationInput {
+  owner: ID!
+  xprefId: ID!
+  number: Int!
+  type: ID
+  tempNumber: Int
+  amount: Float!
+  paymentDate: DateTime!
+  dateFa: String!
+  dateFaText: String
+  dueDate: String
+  dueDateText: String
+  summary: String
+  isActive: Boolean
+  isImported: Boolean
+  id: ID
+  clientMutationId: String
+}
+
+type PaymentModelFormMutationPayload {
+  payment: PaymentNode
+  errors: [ErrorType]
+  clientMutationId: String
+}
+
+type PaymentNode implements Node {
+  """The ID of the object."""
+  id: ID!
+  owner: UserNode!
+  xprefId: ProformaNode!
+  number: Int!
+  type: PaymentTypeNode
+  tempNumber: Int
+  amount: Float!
+  paymentDate: DateTime!
+  dateFa: Date!
+  dateFaText: String
+  dueDate: Date
+  dueDateText: String
+  summary: String
+  isActive: Boolean!
+  isImported: Boolean!
+  customerName: String
+  pk: Int
+}
+
+type PaymentNodeConnection {
+  """Pagination data for this connection."""
+  pageInfo: PageInfo!
+
+  """Contains the nodes in this connection."""
+  edges: [PaymentNodeEdge]!
+}
+
+"""A Relay edge containing a `PaymentNode` and its cursor."""
+type PaymentNodeEdge {
+  """The item at the end of the edge"""
+  node: PaymentNode
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+type PaymentTypeNode implements Node {
+  """The ID of the object."""
+  id: ID!
+  title: String!
+  paymentSet(before: String, after: String, first: Int, last: Int, number: Int, xprefId_ReqId_Customer_Name_Icontains: String): PaymentNodeConnection!
+  incomeSet(before: String, after: String, first: Int, last: Int): IncomeNodeConnection!
+  pk: Int
+}
+
+type PaymentTypeNodeConnection {
+  """Pagination data for this connection."""
+  pageInfo: PageInfo!
+
+  """Contains the nodes in this connection."""
+  edges: [PaymentTypeNodeEdge]!
+}
+
+"""A Relay edge containing a `PaymentTypeNode` and its cursor."""
+type PaymentTypeNodeEdge {
+  """The item at the end of the edge"""
+  node: PaymentTypeNode
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+type PermNode implements Node {
+  """The ID of the object."""
+  id: ID!
+  created: DateTime!
+  modified: DateTime!
+  proforma: ProformaNode!
+  number: Int!
+  date: String!
+  year: String!
+  dueDate: Date
+  dateComplete: Date
+  permspecPerm(before: String, after: String, first: Int, last: Int, code: Int, price: Float): PermSpecNodeConnection!
+  incomerowSet(before: String, after: String, first: Int, last: Int, amount: Float, amount_Gt: Float, income: ID, proforma: ID, summary_Icontains: String, proforma_ReqId: ID): IncomeRowNodeConnection!
+}
+
+type PermNodeConnection {
+  """Pagination data for this connection."""
+  pageInfo: PageInfo!
+
+  """Contains the nodes in this connection."""
+  edges: [PermNodeEdge]!
+}
+
+"""A Relay edge containing a `PermNode` and its cursor."""
+type PermNodeEdge {
+  """The item at the end of the edge"""
+  node: PermNode
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+type PermSpecNode implements Node {
+  """The ID of the object."""
+  id: ID!
+  created: DateTime!
+  modified: DateTime!
+  perm: PermNode!
+  row: Int!
+  code: Int!
+  details: String!
+  qty: Int!
+  priceUnit: Float!
+  price: Float!
+}
+
+type PermSpecNodeConnection {
+  """Pagination data for this connection."""
+  pageInfo: PageInfo!
+
+  """Contains the nodes in this connection."""
+  edges: [PermSpecNodeEdge]!
+}
+
+"""A Relay edge containing a `PermSpecNode` and its cursor."""
+type PermSpecNodeEdge {
+  """The item at the end of the edge"""
+  node: PermSpecNode
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+input PrefSpecModelFormMutationInput {
+  code: Int!
+  owner: ID!
+  xprefId: ID!
+  reqspecEq: ID!
+  qty: Int!
+  type: String!
+  price: Float
+  kw: Float!
+  rpm: Int!
+  voltage: Int!
+  ipType: Int
+  icType: Int
+  im: ID
+  ip: ID
+  ic: ID
+  summary: String
+  considerations: String
+  isActive: Boolean
+  sent: Boolean
+  qtySent: Int
+  finished: Boolean
+  id: ID
+  clientMutationId: String
+}
+
+type PrefSpecModelFormMutationPayload {
+  prefSpec: PrefSpecNode
+  errors: [ErrorType]
+  clientMutationId: String
+}
+
+type PrefSpecNode implements Node {
+  """The ID of the object."""
+  id: ID!
+  code: Int!
+  owner: UserNode!
+  xprefId: ProformaNode!
+  reqspecEq: ReqSpecNode!
+  qty: Int!
+  type: String!
+  price: Float
+  kw: Float!
+  rpm: Int!
+  voltage: Int!
+  ipType: Int
+  icType: Int
+  im: IMTypeNode
+  ip: IPTypeNode
+  ic: ICTypeNode
+  summary: String
+  considerations: String
+  isActive: Boolean!
+  sent: Boolean!
+  qtySent: Int
+  finished: Boolean!
+}
+
+type PrefSpecNodeConnection {
+  """Pagination data for this connection."""
+  pageInfo: PageInfo!
+
+  """Contains the nodes in this connection."""
+  edges: [PrefSpecNodeEdge]!
+}
+
+"""A Relay edge containing a `PrefSpecNode` and its cursor."""
+type PrefSpecNodeEdge {
+  """The item at the end of the edge"""
+  node: PrefSpecNode
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+type PrefSpecSummary {
+  kw: Float
+  rpm: Int
+  count: Int
+}
+
+type PriceDbType implements Node {
+  """The ID of the object."""
+  id: ID!
+  title: String!
+  summary: String!
+  datePublished: DateTime!
+  datePublishedFa: Date!
+  motordbSet(before: String, after: String, first: Int, last: Int, priceSet: ID, motor: ID, primeCost: Float, basePrice: Float, salePrice: Float, pubDate: DateTime): MotorDbNodeConnection!
+}
+
+type PriceDbTypeConnection {
+  """Pagination data for this connection."""
+  pageInfo: PageInfo!
+
+  """Contains the nodes in this connection."""
+  edges: [PriceDbTypeEdge]!
+}
+
+"""A Relay edge containing a `PriceDbType` and its cursor."""
+type PriceDbTypeEdge {
+  """The item at the end of the edge"""
+  node: PriceDbType
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+input ProformaModelFormMutationInput {
+  owner: ID!
+  reqId: ID!
+  number: Int!
+  numberTd: Int
+  numberPartOrder: Int
+  dateFa: String!
+  dateFaText: String
+  dateModified: DateTime
+  expDateFa: String!
+  permNumber: Int
+  permDate: String
+  dueDate: String
+  dueDateDays: String
+  summary: String
+  verified: Boolean
+  perm: Boolean
+  followUp: String
+  toFollow: Boolean
+  on: Boolean
+  issueType: ID
+  signed: Boolean
+  cancelled: Boolean
+  id: ID
+  clientMutationId: String
+}
+
+type ProformaModelFormMutationPayload {
+  xpref: ProformaNode
+  errors: [ErrorType]
+  clientMutationId: String
+}
+
+type ProformaNode implements Node {
+  """The ID of the object."""
+  id: ID!
+  owner: UserNode!
+  reqId: RequestNode!
+  number: Int!
+  numberTd: Int
+  numberPartOrder: Int
+  pubDate: DateTime!
+  dateFa: Date!
+  dateFaText: String
+  dateModified: DateTime
+  expDateFa: Date!
+  permNumber: Int
+  permDate: Date
+  dueDate: Date
+  dueDateDays: String
+  summary: String
+  verified: Boolean!
+  isActive: Boolean!
+  perm: Boolean!
+  followUp: String
+  toFollow: Boolean!
+  on: Boolean!
+  signed: Boolean!
+  cancelled: Boolean!
+  prefspecSet(before: String, after: String, first: Int, last: Int, code: Int, owner: ID, xprefId: ID, reqspecEq: ID, qty: Int, type: String, price: Float, kw: Float, rpm: Int, voltage: Int, ipType: Int, icType: Int, im: ID, ip: ID, ic: ID, summary: String, considerations: String, isActive: Boolean, sent: Boolean, qtySent: Int, finished: Boolean): PrefSpecNodeConnection!
+  paymentSet(before: String, after: String, first: Int, last: Int, number: Int, xprefId_ReqId_Customer_Name_Icontains: String): PaymentNodeConnection!
+  permProf(before: String, after: String, first: Int, last: Int, number: Int): PermNodeConnection!
+  incomerowSet(before: String, after: String, first: Int, last: Int, amount: Float, amount_Gt: Float, income: ID, proforma: ID, summary_Icontains: String, proforma_ReqId: ID): IncomeRowNodeConnection!
+  customerName: String
+  pk: Int
+  specsNoProforma: [ReqSpecNode]
+  amountTotal: Float
+  paidTotal: Float
+  unpaidTotal: Float
+}
+
+type ProformaNodeConnection {
+  """Pagination data for this connection."""
+  pageInfo: PageInfo!
+
+  """Contains the nodes in this connection."""
+  edges: [ProformaNodeEdge]!
+}
+
+"""A Relay edge containing a `ProformaNode` and its cursor."""
+type ProformaNodeEdge {
+  """The item at the end of the edge"""
+  node: ProformaNode
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+input ProformaSpecInput {
+  eqId: ID
+  id: ID
+  qty: Int
+  price: Float
+}
+
+type ProjectTypeType implements Node {
+  """The ID of the object."""
+  id: ID!
+  title: String!
+  summary: String!
+  reqspecSet(before: String, after: String, first: Int, last: Int, code: Int, reqId: ID, owner: ID, type: ID, qty: Int, kw: Float, rpm: Int, rpmNew: ID, voltage: Int, ipType: Int, icType: Int, im: ID, ip: ID, ic: ID, ie: ID, frameSize: ID, summary: String, tech: Boolean, price: Boolean, permission: Boolean, sent: Boolean, isActive: Boolean, cancelled: Boolean, finished: Boolean): ReqSpecNodeConnection!
+}
+
+type ProjectTypeTypeConnection {
+  """Pagination data for this connection."""
+  pageInfo: PageInfo!
+
+  """Contains the nodes in this connection."""
+  edges: [ProjectTypeTypeEdge]!
+}
+
+"""A Relay edge containing a `ProjectTypeType` and its cursor."""
+type ProjectTypeTypeEdge {
+  """The item at the end of the edge"""
+  node: ProjectTypeType
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+type Query {
+  automationOrders: [AutomationOrderNode]
+
+  """The ID of the object"""
+  motor(id: ID!): MotorNode
+  allMotors(before: String, after: String, first: Int, last: Int, type: String, kw: String, frameSize: String, speed: String, voltage: String, ip: String, ic: String, exType: String, efficiency: Float, PF: Float, currentLn: Float, currentLsToLn: Float, torqueTn: Float, torqueTsToTn: Float, torqueTmaxToTn: Float, torqueRotorInertia: Float, weight: Float, freq: Float, im: String, summary: String): MotorNodeConnection
+
+  """The ID of the object"""
+  motorPrice(id: ID!): MotorPriceNode
+  allMotorPrices(before: String, after: String, first: Int, last: Int, code: String, kw: Float, frameSize: String, speed: Int, voltage: Int, ip: Int, ic: Int, im: String, yd: String, efficiency: Float, pf: Float, currentLn: Float, currentLsToLn: Float, torqueTn: Float, torqueTsToTn: Float, torqueTmaxToTn: Float, torqueRotorInertia: Float, weight: Float, freq: Float, description: String, summary: String): MotorPriceNodeConnection
+
+  """The ID of the object"""
+  motorCode(id: ID!): MotorCodeNode
+  allMotorCodes(before: String, after: String, first: Int, last: Int, owner: ID, code: String, kw: Float, frameSize: String, speed: Int, voltage: Int, ip: String, ic: String, im: String, ie: String, yd: String, efficiency: Float, pf: Float, currentLn: Float, currentLsToLn: Float, torqueTn: Float, torqueTsToTn: Float, torqueTmaxToTn: Float, torqueRotorInertia: Float, weight: Float, freq: Float, description: String, summary: String): MotorCodeNodeConnection
+
+  """The ID of the object"""
+  income(id: ID!): IncomeNode
+  allIncomes(before: String, after: String, first: Int, last: Int, owner_LastName_Icontains: String, number: Int, amount: Float, customer_Name_Icontains: String, pk: Float): IncomeNodeConnection
+
+  """The ID of the object"""
+  incomeRow(id: ID!): IncomeRowNode
+  allIncomeRows(before: String, after: String, first: Int, last: Int, amount: Float, amount_Gt: Float, income: ID, proforma: ID, summary_Icontains: String, proforma_ReqId: ID): IncomeRowNodeConnection
+
+  """The ID of the object"""
+  priceDb(id: ID!): PriceDbType
+  allPriceDbs(before: String, after: String, first: Int, last: Int, title: String, summary: String, datePublished: DateTime, datePublishedFa: String): PriceDbTypeConnection
+
+  """The ID of the object"""
+  motorDb(id: ID!): MotorDbNode
+  allMotorDb(before: String, after: String, first: Int, last: Int, priceSet: ID, motor: ID, primeCost: Float, basePrice: Float, salePrice: Float, pubDate: DateTime): MotorDbNodeConnection
+
+  """The ID of the object"""
+  customer(id: ID!): CustomerNode
+  allCustomers(before: String, after: String, first: Int, last: Int, id: ID, name: String, name_Icontains: String, pk: Float): CustomerNodeConnection
+
+  """The ID of the object"""
+  customerType(id: ID!): CustomerTypeNode
+  allCustomerTypes(before: String, after: String, first: Int, last: Int, name_Icontains: String): CustomerTypeNodeConnection
+
+  """The ID of the object"""
+  payment(id: ID!): PaymentNode
+  allPayments(before: String, after: String, first: Int, last: Int, number: Int, xprefId_ReqId_Customer_Name_Icontains: String): PaymentNodeConnection
+
+  """The ID of the object"""
+  paymentType(id: ID!): PaymentTypeNode
+  allPaymentTypes(before: String, after: String, first: Int, last: Int, title: String): PaymentTypeNodeConnection
+
+  """The ID of the object"""
+  proforma(id: ID!): ProformaNode
+  allProformas(before: String, after: String, first: Int, last: Int, number: Int, reqId: ID, numberTd: Int, reqId_Customer_Name_Icontains: String, perm: Boolean, permNumber: Int, customerPk: Float): ProformaNodeConnection
+
+  """The ID of the object"""
+  prefSpec(id: ID!): PrefSpecNode
+  allPrefSpecs(before: String, after: String, first: Int, last: Int, code: Int, owner: ID, xprefId: ID, reqspecEq: ID, qty: Int, type: String, price: Float, kw: Float, rpm: Int, voltage: Int, ipType: Int, icType: Int, im: ID, ip: ID, ic: ID, summary: String, considerations: String, isActive: Boolean, sent: Boolean, qtySent: Int, finished: Boolean): PrefSpecNodeConnection
+  salesTotal(days: Int): Float
+  incomeTotal(days: Int): Float
+  specsSoldByQty(days: Int): [PrefSpecSummary]
+  customerBySale(days: Int): [CustomerBySale]
+
+  """The ID of the object"""
+  perm(id: ID!): PermNode
+  allPerms(before: String, after: String, first: Int, last: Int, number: Int): PermNodeConnection
+
+  """The ID of the object"""
+  permSpec(id: ID!): PermSpecNode
+  allPermSpecs(before: String, after: String, first: Int, last: Int, code: Int, price: Float): PermSpecNodeConnection
+
+  """The ID of the object"""
+  request(id: ID!): RequestNode
+  allRequests(before: String, after: String, first: Int, last: Int, number: Int, customer_Name_Icontains: String, isActive: Boolean, finished: Boolean, dateFa: String, dateFa_Gte: String, xpref_Isnull: Boolean): RequestNodeConnection
+  ordersNoProforma(before: String, after: String, first: Int, last: Int, number: Int, customer_Name_Icontains: String, isActive: Boolean, finished: Boolean, dateFa: String, dateFa_Gte: String, xpref_Isnull: Boolean): RequestNodeConnection
+
+  """The ID of the object"""
+  reqSpec(id: ID!): ReqSpecNode
+  allReqSpecs(before: String, after: String, first: Int, last: Int, code: Int, reqId: ID, owner: ID, type: ID, qty: Int, kw: Float, rpm: Int, rpmNew: ID, voltage: Int, ipType: Int, icType: Int, im: ID, ip: ID, ic: ID, ie: ID, frameSize: ID, summary: String, tech: Boolean, price: Boolean, permission: Boolean, sent: Boolean, isActive: Boolean, cancelled: Boolean, finished: Boolean): ReqSpecNodeConnection
+  projectType(id: Int, title: String): ProjectTypeType
+  allProjectTypes(before: String, after: String, first: Int, last: Int, title: String, summary: String): ProjectTypeTypeConnection
+
+  """The ID of the object"""
+  rpmType(id: ID!): RpmTypeNode
+  allRpmTypes(before: String, after: String, first: Int, last: Int, rpm: Int, pole: Int): RpmTypeNodeConnection
+
+  """The ID of the object"""
+  im(id: ID!): IMTypeNode
+  allIms(before: String, after: String, first: Int, last: Int, title: String): IMTypeNodeConnection
+
+  """The ID of the object"""
+  ip(id: ID!): IPTypeNode
+  allIps(before: String, after: String, first: Int, last: Int, title: String): IPTypeNodeConnection
+
+  """The ID of the object"""
+  ic(id: ID!): ICTypeNode
+  allIcs(before: String, after: String, first: Int, last: Int, title: String): ICTypeNodeConnection
+  dashboardStatistics(customer: ID, days: Int): Statistics
+
+  """The ID of the object"""
+  user(id: ID!): UserNode
+  allUsers(before: String, after: String, first: Int, last: Int, isActive: Boolean, isCustomer: Boolean, salesExp: Boolean): UserNodeConnection
+  me: UserNode
+  userBy(username: String): UserNode
+  _debug: DjangoDebug
+}
+
+type Refresh {
+  payload: GenericScalar!
+  refreshExpiresIn: Int!
+  token: String!
+}
+
+input ReqSpecModelFormMutationInput {
+  code: Int!
+  reqId: ID!
+  owner: ID!
+  type: ID!
+  qty: Int!
+  kw: Float!
+  rpm: Int
+  rpmNew: ID!
+  voltage: Int!
+  ipType: Int
+  icType: Int
+  im: ID
+  ip: ID
+  ic: ID
+  ie: ID
+  frameSize: ID
+  summary: String
+  tech: Boolean
+  price: Boolean
+  permission: Boolean
+  sent: Boolean
+  cancelled: Boolean
+  finished: Boolean
+  id: ID
+  clientMutationId: String
+}
+
+type ReqSpecModelFormMutationPayload {
+  reqSpec: ReqSpecNode
+  errors: [ErrorType]
+  clientMutationId: String
+}
+
+type ReqSpecNode implements Node {
+  """The ID of the object."""
+  id: ID!
+  code: Int!
+  reqId: RequestNode!
+  owner: UserNode!
+  type: ProjectTypeType!
+  qty: Int!
+  kw: Float!
+  rpm: Int
+  rpmNew: RpmTypeNode!
+  voltage: Int!
+  ipType: Int
+  icType: Int
+  im: IMTypeNode
+  ip: IPTypeNode
+  ic: ICTypeNode
+  summary: String
+  tech: Boolean!
+  price: Boolean!
+  permission: Boolean!
+  sent: Boolean!
+  isActive: Boolean!
+  cancelled: Boolean!
+  finished: Boolean!
+  prefspecSet(before: String, after: String, first: Int, last: Int, code: Int, owner: ID, xprefId: ID, reqspecEq: ID, qty: Int, type: String, price: Float, kw: Float, rpm: Int, voltage: Int, ipType: Int, icType: Int, im: ID, ip: ID, ic: ID, summary: String, considerations: String, isActive: Boolean, sent: Boolean, qtySent: Int, finished: Boolean): PrefSpecNodeConnection!
+}
+
+type ReqSpecNodeConnection {
+  """Pagination data for this connection."""
+  pageInfo: PageInfo!
+
+  """Contains the nodes in this connection."""
+  edges: [ReqSpecNodeEdge]!
+}
+
+"""A Relay edge containing a `ReqSpecNode` and its cursor."""
+type ReqSpecNodeEdge {
+  """The item at the end of the edge"""
+  node: ReqSpecNode
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+input RequestModelFormMutationInput {
+  customer: ID!
+  owner: ID!
+  number: Int!
+  tempNumber: Int
+  parentNumber: Int
+  dateFa: String!
+  yearNumber: String!
+  dateFaText: String
+  dateFinished: String
+  colleagues: [ID]
+  summary: String
+  addedByCustomer: Boolean
+  editedByCustomer: Boolean
+  finished: Boolean
+  numberPart: Int
+  dateModified: DateTime
+  followUp: String
+  toFollow: Boolean
+  on: Boolean
+  id: ID
+  clientMutationId: String
+}
+
+type RequestModelFormMutationPayload {
+  requests: RequestNode
+  errors: [ErrorType]
+  order: RequestNode
+  clientMutationId: String
+}
+
+type RequestNode implements Node {
+  """The ID of the object."""
+  id: ID!
+  customer: CustomerNode!
+  owner: UserNode!
+  number: Int!
+  tempNumber: Int
+  parentNumber: Int
+  pubDate: DateTime!
+  dateFa: Date!
+  yearNumber: String!
+  dateFaText: String
+  dateFinished: Date
+  colleagues(before: String, after: String, first: Int, last: Int, isActive: Boolean, isCustomer: Boolean, salesExp: Boolean): UserNodeConnection!
+  summary: String
+  addedByCustomer: Boolean!
+  editedByCustomer: Boolean!
+  isActive: Boolean!
+  finished: Boolean!
+  numberPart: Int
+  dateModified: DateTime
+  followUp: String
+  toFollow: Boolean!
+  on: Boolean!
+  reqspecSet(before: String, after: String, first: Int, last: Int, code: Int, reqId: ID, owner: ID, type: ID, qty: Int, kw: Float, rpm: Int, rpmNew: ID, voltage: Int, ipType: Int, icType: Int, im: ID, ip: ID, ic: ID, ie: ID, frameSize: ID, summary: String, tech: Boolean, price: Boolean, permission: Boolean, sent: Boolean, isActive: Boolean, cancelled: Boolean, finished: Boolean): ReqSpecNodeConnection!
+  xprefSet(before: String, after: String, first: Int, last: Int, number: Int, numberTd: Int, reqId_Customer_Name_Icontains: String): ProformaNodeConnection!
+  totalKw: Int
+  totalQty: Int
+}
+
+type RequestNodeConnection {
+  """Pagination data for this connection."""
+  pageInfo: PageInfo!
+
+  """Contains the nodes in this connection."""
+  edges: [RequestNodeEdge]!
+  totalCount: Int
+  numPages: Int
+}
+
+"""A Relay edge containing a `RequestNode` and its cursor."""
+type RequestNodeEdge {
+  """The item at the end of the edge"""
+  node: RequestNode
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+type RpmTypeNode implements Node {
+  """The ID of the object."""
+  id: ID!
+  rpm: Int!
+  pole: Int!
+  reqspecSet(before: String, after: String, first: Int, last: Int, code: Int, reqId: ID, owner: ID, type: ID, qty: Int, kw: Float, rpm: Int, rpmNew: ID, voltage: Int, ipType: Int, icType: Int, im: ID, ip: ID, ic: ID, ie: ID, frameSize: ID, summary: String, tech: Boolean, price: Boolean, permission: Boolean, sent: Boolean, isActive: Boolean, cancelled: Boolean, finished: Boolean): ReqSpecNodeConnection!
+}
+
+type RpmTypeNodeConnection {
+  """Pagination data for this connection."""
+  pageInfo: PageInfo!
+
+  """Contains the nodes in this connection."""
+  edges: [RpmTypeNodeEdge]!
+}
+
+"""A Relay edge containing a `RpmTypeNode` and its cursor."""
+type RpmTypeNodeEdge {
+  """The item at the end of the edge"""
+  node: RpmTypeNode
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+type Statistics {
+  total(days: Int): KwCounts
+  routine(days: Int): KwCounts
+  project(days: Int): KwCounts
+  services(days: Int): KwCounts
+  ex(days: Int): KwCounts
+}
+
+input UpdateCustomerInput {
+  customer: CustomerCreateInput
+  id: String!
+  clientMutationId: String
+}
+
+type UpdateCustomerPayload {
+  errors: [String]
+  updatedCustomer: CustomerNode
+  clientMutationId: String
+}
+
+type UserNode implements Node {
+  """The ID of the object."""
+  id: ID!
+  password: String!
+  lastLogin: DateTime
+
+  """
+  Designates that this user has all permissions without explicitly assigning them.
+  """
+  isSuperuser: Boolean!
+
+  """Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."""
+  username: String!
+  firstName: String!
+  lastName: String!
+  email: String!
+
+  """Designates whether the user can log into this admin site."""
+  isStaff: Boolean!
+
+  """
+  Designates whether this user should be treated as active. Unselect this instead of deleting accounts.
+  """
+  isActive: Boolean!
+  dateJoined: DateTime!
+  isCustomer: Boolean!
+  salesExp: Boolean!
+  reqOwner(before: String, after: String, first: Int, last: Int, number: Int, customer_Name_Icontains: String, isActive: Boolean, finished: Boolean, dateFa: String, dateFa_Gte: String, xpref_Isnull: Boolean): RequestNodeConnection!
+  requestsSet(before: String, after: String, first: Int, last: Int, number: Int, customer_Name_Icontains: String, isActive: Boolean, finished: Boolean, dateFa: String, dateFa_Gte: String, xpref_Isnull: Boolean): RequestNodeConnection!
+  reqspecSet(before: String, after: String, first: Int, last: Int, code: Int, reqId: ID, owner: ID, type: ID, qty: Int, kw: Float, rpm: Int, rpmNew: ID, voltage: Int, ipType: Int, icType: Int, im: ID, ip: ID, ic: ID, ie: ID, frameSize: ID, summary: String, tech: Boolean, price: Boolean, permission: Boolean, sent: Boolean, isActive: Boolean, cancelled: Boolean, finished: Boolean): ReqSpecNodeConnection!
+  xprefSet(before: String, after: String, first: Int, last: Int, number: Int, numberTd: Int, reqId_Customer_Name_Icontains: String): ProformaNodeConnection!
+  prefspecSet(before: String, after: String, first: Int, last: Int, code: Int, owner: ID, xprefId: ID, reqspecEq: ID, qty: Int, type: String, price: Float, kw: Float, rpm: Int, voltage: Int, ipType: Int, icType: Int, im: ID, ip: ID, ic: ID, summary: String, considerations: String, isActive: Boolean, sent: Boolean, qtySent: Int, finished: Boolean): PrefSpecNodeConnection!
+  paymentSet(before: String, after: String, first: Int, last: Int, number: Int, xprefId_ReqId_Customer_Name_Icontains: String): PaymentNodeConnection!
+  owner(before: String, after: String, first: Int, last: Int): CustomerNodeConnection!
+  customer: CustomerNode
+  motorscodeSet(before: String, after: String, first: Int, last: Int, owner: ID, code: String, kw: Float, frameSize: String, speed: Int, voltage: Int, ip: String, ic: String, im: String, ie: String, yd: String, efficiency: Float, pf: Float, currentLn: Float, currentLsToLn: Float, torqueTn: Float, torqueTsToTn: Float, torqueTmaxToTn: Float, torqueRotorInertia: Float, weight: Float, freq: Float, description: String, summary: String): MotorCodeNodeConnection!
+  incomeSet(before: String, after: String, first: Int, last: Int): IncomeNodeConnection!
+  incomerowSet(before: String, after: String, first: Int, last: Int, amount: Float, amount_Gt: Float, income: ID, proforma: ID, summary_Icontains: String, proforma_ReqId: ID): IncomeRowNodeConnection!
+  orderNotEnteredCount: Int
+  orderEnteredCount: Int
+  orderNoProformaCount: Int
+  percentEntered: Float
+  permissions: [String]
+  permissionJson: [JSONString]
+}
+
+type UserNodeConnection {
+  """Pagination data for this connection."""
+  pageInfo: PageInfo!
+
+  """Contains the nodes in this connection."""
+  edges: [UserNodeEdge]!
+}
+
+"""A Relay edge containing a `UserNode` and its cursor."""
+type UserNodeEdge {
+  """The item at the end of the edge"""
+  node: UserNode
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+type Verify {
+  payload: GenericScalar!
+}
+
