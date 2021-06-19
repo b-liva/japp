@@ -16,6 +16,28 @@ class _HomeState extends State<Home> {
   int monthMw=12;
   int yearMw=95;
 
+  Widget projectTypeTemplate(pr){
+    return Card(
+      margin: EdgeInsets.fromLTRB(16, 16, 16, 0),
+      child: Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.all(10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              textDirection: TextDirection.rtl,
+              children: [
+                Text('${pr.title}'),
+                Text('${pr.mw} MW'),
+                Text('${pr.sales}'),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
   List<ProjectTypeStats> prTypeData = [
     ProjectTypeStats(title: 'پروژه', mw: 8, sales: 12000),
     ProjectTypeStats(title: 'روتین', mw: 6, sales: 8000),
@@ -57,15 +79,7 @@ class _HomeState extends State<Home> {
           ),
           SizedBox(height: 40),
           Column(
-            children: prTypeData.map((d) => Row(
-              textDirection: TextDirection.rtl,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Text('${d.title}'),
-                Text('${d.mw}'),
-                Text('${d.sales}'),
-              ],
-            )).toList(),
+            children: prTypeData.map((d) => projectTypeTemplate(d)).toList(),
           )
         ],
       )
