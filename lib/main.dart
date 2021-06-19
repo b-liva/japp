@@ -14,15 +14,30 @@ class Home extends StatelessWidget {
         title: Text('JCM '),
 //      backgroundColor: Colors.blueAccent[200],
       ),
-      body: Center(
-          child: Text(
-            'میزان فروش ماه ',
-            style: TextStyle(
-                fontSize: 20,
-                fontFamily: 'B-nazanin'
-            ),
-          )
-      ),
+      body: Row(
+        textDirection: TextDirection.rtl,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Column(
+            children: [
+              Text('ماه جاری'),
+              SizedBox(height: 10),
+              Text('12 MW'),
+              SizedBox(height: 10),
+              Text('120000 میلیون ریال'),
+            ],
+          ),
+          Column(
+            children: [
+              Text('سال مالی'),
+              SizedBox(height: 10),
+              Text('85 MW'),
+              SizedBox(height: 10),
+              Text('600000 میلیون ریال'),
+            ],
+          ),
+        ],
+      )
     );
   }
 }
