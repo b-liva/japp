@@ -3,5 +3,5 @@ class ProjectTypeStats {
   int mw;
   int sales;
 
-  ProjectTypeStats({this.title, this.mw, this.sales});
+  ProjectTypeStats({required this.title, required this.mw, required this.sales});
 }
