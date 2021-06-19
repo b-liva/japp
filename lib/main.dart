@@ -14,6 +14,13 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   int monthMw=12;
   int yearMw=95;
+
+  List<String> projectTypeData = [
+    '10 مگاوات پروژه',
+    '12 مگاوات روتین',
+    '2 مگاوات تعمیرات',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,35 +56,7 @@ class _HomeState extends State<Home> {
           ),
           SizedBox(height: 40),
           Column(
-            children: [
-              Row(
-                textDirection: TextDirection.rtl,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Text('پروژه'),
-                  Text('6MW'),
-                  Text('65000'),
-                ],
-              ),
-              Row(
-                textDirection: TextDirection.rtl,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Text('روتین'),
-                  Text('6MW'),
-                  Text('65000'),
-                ],
-              ),
-              Row(
-                textDirection: TextDirection.rtl,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Text('تعمیرات'),
-                  Text('6MW'),
-                  Text('65000'),
-                ],
-              ),
-            ],
+            children: projectTypeData.map((d) => Text(d, textDirection: TextDirection.rtl,)).toList(),
           )
         ],
       )
