@@ -6,7 +6,14 @@ void main() =>
     ));
 
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  int monthMw=12;
+  int yearMw=95;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +31,7 @@ class Home extends StatelessWidget {
                 children: [
                   Text('ماه جاری'),
                   SizedBox(height: 10),
-                  Text('12 MW'),
+                  Text('$monthMw MW'),
                   SizedBox(height: 10),
                   Text('120000 میلیون ریال'),
                 ],
@@ -33,7 +40,7 @@ class Home extends StatelessWidget {
                 children: [
                   Text('سال مالی'),
                   SizedBox(height: 10),
-                  Text('85 MW'),
+                  Text('$yearMw MW'),
                   SizedBox(height: 10),
                   Text('600000 میلیون ریال'),
                 ],
