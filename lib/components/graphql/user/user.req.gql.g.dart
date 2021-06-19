@@ -6,22 +6,23 @@ part of 'user.req.gql.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializer<GgetUsersReq> _$ggetUsersReqSerializer =
-    new _$GgetUsersReqSerializer();
+Serializer<GFetchSaleExpsReq> _$gFetchSaleExpsReqSerializer =
+    new _$GFetchSaleExpsReqSerializer();
 
-class _$GgetUsersReqSerializer implements StructuredSerializer<GgetUsersReq> {
+class _$GFetchSaleExpsReqSerializer
+    implements StructuredSerializer<GFetchSaleExpsReq> {
   @override
-  final Iterable<Type> types = const [GgetUsersReq, _$GgetUsersReq];
+  final Iterable<Type> types = const [GFetchSaleExpsReq, _$GFetchSaleExpsReq];
   @override
-  final String wireName = 'GgetUsersReq';
+  final String wireName = 'GFetchSaleExpsReq';
 
   @override
-  Iterable<Object?> serialize(Serializers serializers, GgetUsersReq object,
+  Iterable<Object?> serialize(Serializers serializers, GFetchSaleExpsReq object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
       'vars',
       serializers.serialize(object.vars,
-          specifiedType: const FullType(_i3.GgetUsersVars)),
+          specifiedType: const FullType(_i3.GFetchSaleExpsVars)),
       'operation',
       serializers.serialize(object.operation,
           specifiedType: const FullType(_i4.Operation)),
@@ -42,7 +43,7 @@ class _$GgetUsersReqSerializer implements StructuredSerializer<GgetUsersReq> {
       result
         ..add('optimisticResponse')
         ..add(serializers.serialize(value,
-            specifiedType: const FullType(_i2.GgetUsersData)));
+            specifiedType: const FullType(_i2.GFetchSaleExpsData)));
     }
     value = object.updateCacheHandlerKey;
     if (value != null) {
@@ -70,10 +71,10 @@ class _$GgetUsersReqSerializer implements StructuredSerializer<GgetUsersReq> {
   }
 
   @override
-  GgetUsersReq deserialize(
+  GFetchSaleExpsReq deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new GgetUsersReqBuilder();
+    final result = new GFetchSaleExpsReqBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -83,8 +84,8 @@ class _$GgetUsersReqSerializer implements StructuredSerializer<GgetUsersReq> {
       switch (key) {
         case 'vars':
           result.vars.replace(serializers.deserialize(value,
-                  specifiedType: const FullType(_i3.GgetUsersVars))!
-              as _i3.GgetUsersVars);
+                  specifiedType: const FullType(_i3.GFetchSaleExpsVars))!
+              as _i3.GFetchSaleExpsVars);
           break;
         case 'operation':
           result.operation = serializers.deserialize(value,
@@ -96,8 +97,8 @@ class _$GgetUsersReqSerializer implements StructuredSerializer<GgetUsersReq> {
           break;
         case 'optimisticResponse':
           result.optimisticResponse.replace(serializers.deserialize(value,
-                  specifiedType: const FullType(_i2.GgetUsersData))!
-              as _i2.GgetUsersData);
+                  specifiedType: const FullType(_i2.GFetchSaleExpsData))!
+              as _i2.GFetchSaleExpsData);
           break;
         case 'updateCacheHandlerKey':
           result.updateCacheHandlerKey = serializers.deserialize(value,
@@ -126,18 +127,18 @@ class _$GgetUsersReqSerializer implements StructuredSerializer<GgetUsersReq> {
   }
 }
 
-class _$GgetUsersReq extends GgetUsersReq {
+class _$GFetchSaleExpsReq extends GFetchSaleExpsReq {
   @override
-  final _i3.GgetUsersVars vars;
+  final _i3.GFetchSaleExpsVars vars;
   @override
   final _i4.Operation operation;
   @override
   final String? requestId;
   @override
-  final _i2.GgetUsersData? Function(_i2.GgetUsersData?, _i2.GgetUsersData?)?
-      updateResult;
+  final _i2.GFetchSaleExpsData? Function(
+      _i2.GFetchSaleExpsData?, _i2.GFetchSaleExpsData?)? updateResult;
   @override
-  final _i2.GgetUsersData? optimisticResponse;
+  final _i2.GFetchSaleExpsData? optimisticResponse;
   @override
   final String? updateCacheHandlerKey;
   @override
@@ -147,10 +148,11 @@ class _$GgetUsersReq extends GgetUsersReq {
   @override
   final bool executeOnListen;
 
-  factory _$GgetUsersReq([void Function(GgetUsersReqBuilder)? updates]) =>
-      (new GgetUsersReqBuilder()..update(updates)).build();
+  factory _$GFetchSaleExpsReq(
+          [void Function(GFetchSaleExpsReqBuilder)? updates]) =>
+      (new GFetchSaleExpsReqBuilder()..update(updates)).build();
 
-  _$GgetUsersReq._(
+  _$GFetchSaleExpsReq._(
       {required this.vars,
       required this.operation,
       this.requestId,
@@ -161,25 +163,26 @@ class _$GgetUsersReq extends GgetUsersReq {
       this.fetchPolicy,
       required this.executeOnListen})
       : super._() {
-    BuiltValueNullFieldError.checkNotNull(vars, 'GgetUsersReq', 'vars');
+    BuiltValueNullFieldError.checkNotNull(vars, 'GFetchSaleExpsReq', 'vars');
     BuiltValueNullFieldError.checkNotNull(
-        operation, 'GgetUsersReq', 'operation');
+        operation, 'GFetchSaleExpsReq', 'operation');
     BuiltValueNullFieldError.checkNotNull(
-        executeOnListen, 'GgetUsersReq', 'executeOnListen');
+        executeOnListen, 'GFetchSaleExpsReq', 'executeOnListen');
   }
 
   @override
-  GgetUsersReq rebuild(void Function(GgetUsersReqBuilder) updates) =>
+  GFetchSaleExpsReq rebuild(void Function(GFetchSaleExpsReqBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  GgetUsersReqBuilder toBuilder() => new GgetUsersReqBuilder()..replace(this);
+  GFetchSaleExpsReqBuilder toBuilder() =>
+      new GFetchSaleExpsReqBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     final dynamic _$dynamicOther = other;
-    return other is GgetUsersReq &&
+    return other is GFetchSaleExpsReq &&
         vars == other.vars &&
         operation == other.operation &&
         requestId == other.requestId &&
@@ -211,7 +214,7 @@ class _$GgetUsersReq extends GgetUsersReq {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('GgetUsersReq')
+    return (newBuiltValueToStringHelper('GFetchSaleExpsReq')
           ..add('vars', vars)
           ..add('operation', operation)
           ..add('requestId', requestId)
@@ -225,14 +228,14 @@ class _$GgetUsersReq extends GgetUsersReq {
   }
 }
 
-class GgetUsersReqBuilder
-    implements Builder<GgetUsersReq, GgetUsersReqBuilder> {
-  _$GgetUsersReq? _$v;
+class GFetchSaleExpsReqBuilder
+    implements Builder<GFetchSaleExpsReq, GFetchSaleExpsReqBuilder> {
+  _$GFetchSaleExpsReq? _$v;
 
-  _i3.GgetUsersVarsBuilder? _vars;
-  _i3.GgetUsersVarsBuilder get vars =>
-      _$this._vars ??= new _i3.GgetUsersVarsBuilder();
-  set vars(_i3.GgetUsersVarsBuilder? vars) => _$this._vars = vars;
+  _i3.GFetchSaleExpsVarsBuilder? _vars;
+  _i3.GFetchSaleExpsVarsBuilder get vars =>
+      _$this._vars ??= new _i3.GFetchSaleExpsVarsBuilder();
+  set vars(_i3.GFetchSaleExpsVarsBuilder? vars) => _$this._vars = vars;
 
   _i4.Operation? _operation;
   _i4.Operation? get operation => _$this._operation;
@@ -242,19 +245,21 @@ class GgetUsersReqBuilder
   String? get requestId => _$this._requestId;
   set requestId(String? requestId) => _$this._requestId = requestId;
 
-  _i2.GgetUsersData? Function(_i2.GgetUsersData?, _i2.GgetUsersData?)?
-      _updateResult;
-  _i2.GgetUsersData? Function(_i2.GgetUsersData?, _i2.GgetUsersData?)?
+  _i2.GFetchSaleExpsData? Function(
+      _i2.GFetchSaleExpsData?, _i2.GFetchSaleExpsData?)? _updateResult;
+  _i2.GFetchSaleExpsData? Function(
+          _i2.GFetchSaleExpsData?, _i2.GFetchSaleExpsData?)?
       get updateResult => _$this._updateResult;
   set updateResult(
-          _i2.GgetUsersData? Function(_i2.GgetUsersData?, _i2.GgetUsersData?)?
+          _i2.GFetchSaleExpsData? Function(
+                  _i2.GFetchSaleExpsData?, _i2.GFetchSaleExpsData?)?
               updateResult) =>
       _$this._updateResult = updateResult;
 
-  _i2.GgetUsersDataBuilder? _optimisticResponse;
-  _i2.GgetUsersDataBuilder get optimisticResponse =>
-      _$this._optimisticResponse ??= new _i2.GgetUsersDataBuilder();
-  set optimisticResponse(_i2.GgetUsersDataBuilder? optimisticResponse) =>
+  _i2.GFetchSaleExpsDataBuilder? _optimisticResponse;
+  _i2.GFetchSaleExpsDataBuilder get optimisticResponse =>
+      _$this._optimisticResponse ??= new _i2.GFetchSaleExpsDataBuilder();
+  set optimisticResponse(_i2.GFetchSaleExpsDataBuilder? optimisticResponse) =>
       _$this._optimisticResponse = optimisticResponse;
 
   String? _updateCacheHandlerKey;
@@ -279,11 +284,11 @@ class GgetUsersReqBuilder
   set executeOnListen(bool? executeOnListen) =>
       _$this._executeOnListen = executeOnListen;
 
-  GgetUsersReqBuilder() {
-    GgetUsersReq._initializeBuilder(this);
+  GFetchSaleExpsReqBuilder() {
+    GFetchSaleExpsReq._initializeBuilder(this);
   }
 
-  GgetUsersReqBuilder get _$this {
+  GFetchSaleExpsReqBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _vars = $v.vars.toBuilder();
@@ -301,25 +306,25 @@ class GgetUsersReqBuilder
   }
 
   @override
-  void replace(GgetUsersReq other) {
+  void replace(GFetchSaleExpsReq other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$GgetUsersReq;
+    _$v = other as _$GFetchSaleExpsReq;
   }
 
   @override
-  void update(void Function(GgetUsersReqBuilder)? updates) {
+  void update(void Function(GFetchSaleExpsReqBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  _$GgetUsersReq build() {
-    _$GgetUsersReq _$result;
+  _$GFetchSaleExpsReq build() {
+    _$GFetchSaleExpsReq _$result;
     try {
       _$result = _$v ??
-          new _$GgetUsersReq._(
+          new _$GFetchSaleExpsReq._(
               vars: vars.build(),
               operation: BuiltValueNullFieldError.checkNotNull(
-                  operation, 'GgetUsersReq', 'operation'),
+                  operation, 'GFetchSaleExpsReq', 'operation'),
               requestId: requestId,
               updateResult: updateResult,
               optimisticResponse: _optimisticResponse?.build(),
@@ -327,7 +332,7 @@ class GgetUsersReqBuilder
               updateCacheHandlerContext: updateCacheHandlerContext,
               fetchPolicy: fetchPolicy,
               executeOnListen: BuiltValueNullFieldError.checkNotNull(
-                  executeOnListen, 'GgetUsersReq', 'executeOnListen'));
+                  executeOnListen, 'GFetchSaleExpsReq', 'executeOnListen'));
     } catch (_) {
       late String _$failedField;
       try {
@@ -338,7 +343,7 @@ class GgetUsersReqBuilder
         _optimisticResponse?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            'GgetUsersReq', _$failedField, e.toString());
+            'GFetchSaleExpsReq', _$failedField, e.toString());
       }
       rethrow;
     }

@@ -1,5 +1,5 @@
-query getUsers {
-    allUsers {
+query FetchSaleExps($isSales:Boolean, $isCustomer:Boolean){
+    allUsers(salesExp:$isSales, isCustomer:$isCustomer) {
         edges {
             node {
                 id

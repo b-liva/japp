@@ -6,17 +6,20 @@ import 'package:jcm/components/graphql/schema/serializers.gql.dart' as _i1;
 
 part 'user.var.gql.g.dart';
 
-abstract class GgetUsersVars
-    implements Built<GgetUsersVars, GgetUsersVarsBuilder> {
-  GgetUsersVars._();
+abstract class GFetchSaleExpsVars
+    implements Built<GFetchSaleExpsVars, GFetchSaleExpsVarsBuilder> {
+  GFetchSaleExpsVars._();
 
-  factory GgetUsersVars([Function(GgetUsersVarsBuilder b) updates]) =
-      _$GgetUsersVars;
+  factory GFetchSaleExpsVars([Function(GFetchSaleExpsVarsBuilder b) updates]) =
+      _$GFetchSaleExpsVars;
 
-  static Serializer<GgetUsersVars> get serializer => _$ggetUsersVarsSerializer;
+  bool? get isSales;
+  bool? get isCustomer;
+  static Serializer<GFetchSaleExpsVars> get serializer =>
+      _$gFetchSaleExpsVarsSerializer;
   Map<String, dynamic> toJson() =>
-      (_i1.serializers.serializeWith(GgetUsersVars.serializer, this)
+      (_i1.serializers.serializeWith(GFetchSaleExpsVars.serializer, this)
           as Map<String, dynamic>);
-  static GgetUsersVars? fromJson(Map<String, dynamic> json) =>
-      _i1.serializers.deserializeWith(GgetUsersVars.serializer, json);
+  static GFetchSaleExpsVars? fromJson(Map<String, dynamic> json) =>
+      _i1.serializers.deserializeWith(GFetchSaleExpsVars.serializer, json);
 }

@@ -6,25 +6,27 @@ part of 'user.data.gql.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializer<GgetUsersData> _$ggetUsersDataSerializer =
-    new _$GgetUsersDataSerializer();
-Serializer<GgetUsersData_allUsers> _$ggetUsersDataAllUsersSerializer =
-    new _$GgetUsersData_allUsersSerializer();
-Serializer<GgetUsersData_allUsers_edges>
-    _$ggetUsersDataAllUsersEdgesSerializer =
-    new _$GgetUsersData_allUsers_edgesSerializer();
-Serializer<GgetUsersData_allUsers_edges_node>
-    _$ggetUsersDataAllUsersEdgesNodeSerializer =
-    new _$GgetUsersData_allUsers_edges_nodeSerializer();
+Serializer<GFetchSaleExpsData> _$gFetchSaleExpsDataSerializer =
+    new _$GFetchSaleExpsDataSerializer();
+Serializer<GFetchSaleExpsData_allUsers> _$gFetchSaleExpsDataAllUsersSerializer =
+    new _$GFetchSaleExpsData_allUsersSerializer();
+Serializer<GFetchSaleExpsData_allUsers_edges>
+    _$gFetchSaleExpsDataAllUsersEdgesSerializer =
+    new _$GFetchSaleExpsData_allUsers_edgesSerializer();
+Serializer<GFetchSaleExpsData_allUsers_edges_node>
+    _$gFetchSaleExpsDataAllUsersEdgesNodeSerializer =
+    new _$GFetchSaleExpsData_allUsers_edges_nodeSerializer();
 
-class _$GgetUsersDataSerializer implements StructuredSerializer<GgetUsersData> {
+class _$GFetchSaleExpsDataSerializer
+    implements StructuredSerializer<GFetchSaleExpsData> {
   @override
-  final Iterable<Type> types = const [GgetUsersData, _$GgetUsersData];
+  final Iterable<Type> types = const [GFetchSaleExpsData, _$GFetchSaleExpsData];
   @override
-  final String wireName = 'GgetUsersData';
+  final String wireName = 'GFetchSaleExpsData';
 
   @override
-  Iterable<Object?> serialize(Serializers serializers, GgetUsersData object,
+  Iterable<Object?> serialize(
+      Serializers serializers, GFetchSaleExpsData object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
       '__typename',
@@ -37,16 +39,16 @@ class _$GgetUsersDataSerializer implements StructuredSerializer<GgetUsersData> {
       result
         ..add('allUsers')
         ..add(serializers.serialize(value,
-            specifiedType: const FullType(GgetUsersData_allUsers)));
+            specifiedType: const FullType(GFetchSaleExpsData_allUsers)));
     }
     return result;
   }
 
   @override
-  GgetUsersData deserialize(
+  GFetchSaleExpsData deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new GgetUsersDataBuilder();
+    final result = new GFetchSaleExpsDataBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -60,8 +62,8 @@ class _$GgetUsersDataSerializer implements StructuredSerializer<GgetUsersData> {
           break;
         case 'allUsers':
           result.allUsers.replace(serializers.deserialize(value,
-                  specifiedType: const FullType(GgetUsersData_allUsers))!
-              as GgetUsersData_allUsers);
+                  specifiedType: const FullType(GFetchSaleExpsData_allUsers))!
+              as GFetchSaleExpsData_allUsers);
           break;
       }
     }
@@ -70,19 +72,19 @@ class _$GgetUsersDataSerializer implements StructuredSerializer<GgetUsersData> {
   }
 }
 
-class _$GgetUsersData_allUsersSerializer
-    implements StructuredSerializer<GgetUsersData_allUsers> {
+class _$GFetchSaleExpsData_allUsersSerializer
+    implements StructuredSerializer<GFetchSaleExpsData_allUsers> {
   @override
   final Iterable<Type> types = const [
-    GgetUsersData_allUsers,
-    _$GgetUsersData_allUsers
+    GFetchSaleExpsData_allUsers,
+    _$GFetchSaleExpsData_allUsers
   ];
   @override
-  final String wireName = 'GgetUsersData_allUsers';
+  final String wireName = 'GFetchSaleExpsData_allUsers';
 
   @override
   Iterable<Object?> serialize(
-      Serializers serializers, GgetUsersData_allUsers object,
+      Serializers serializers, GFetchSaleExpsData_allUsers object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
       '__typename',
@@ -90,18 +92,18 @@ class _$GgetUsersData_allUsersSerializer
           specifiedType: const FullType(String)),
       'edges',
       serializers.serialize(object.edges,
-          specifiedType: const FullType(
-              BuiltList, const [const FullType(GgetUsersData_allUsers_edges)])),
+          specifiedType: const FullType(BuiltList,
+              const [const FullType(GFetchSaleExpsData_allUsers_edges)])),
     ];
 
     return result;
   }
 
   @override
-  GgetUsersData_allUsers deserialize(
+  GFetchSaleExpsData_allUsers deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new GgetUsersData_allUsersBuilder();
+    final result = new GFetchSaleExpsData_allUsersBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -116,7 +118,7 @@ class _$GgetUsersData_allUsersSerializer
         case 'edges':
           result.edges.replace(serializers.deserialize(value,
               specifiedType: const FullType(BuiltList, const [
-                const FullType(GgetUsersData_allUsers_edges)
+                const FullType(GFetchSaleExpsData_allUsers_edges)
               ]))! as BuiltList<Object?>);
           break;
       }
@@ -126,19 +128,19 @@ class _$GgetUsersData_allUsersSerializer
   }
 }
 
-class _$GgetUsersData_allUsers_edgesSerializer
-    implements StructuredSerializer<GgetUsersData_allUsers_edges> {
+class _$GFetchSaleExpsData_allUsers_edgesSerializer
+    implements StructuredSerializer<GFetchSaleExpsData_allUsers_edges> {
   @override
   final Iterable<Type> types = const [
-    GgetUsersData_allUsers_edges,
-    _$GgetUsersData_allUsers_edges
+    GFetchSaleExpsData_allUsers_edges,
+    _$GFetchSaleExpsData_allUsers_edges
   ];
   @override
-  final String wireName = 'GgetUsersData_allUsers_edges';
+  final String wireName = 'GFetchSaleExpsData_allUsers_edges';
 
   @override
   Iterable<Object?> serialize(
-      Serializers serializers, GgetUsersData_allUsers_edges object,
+      Serializers serializers, GFetchSaleExpsData_allUsers_edges object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
       '__typename',
@@ -151,16 +153,17 @@ class _$GgetUsersData_allUsers_edgesSerializer
       result
         ..add('node')
         ..add(serializers.serialize(value,
-            specifiedType: const FullType(GgetUsersData_allUsers_edges_node)));
+            specifiedType:
+                const FullType(GFetchSaleExpsData_allUsers_edges_node)));
     }
     return result;
   }
 
   @override
-  GgetUsersData_allUsers_edges deserialize(
+  GFetchSaleExpsData_allUsers_edges deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new GgetUsersData_allUsers_edgesBuilder();
+    final result = new GFetchSaleExpsData_allUsers_edgesBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -175,8 +178,8 @@ class _$GgetUsersData_allUsers_edgesSerializer
         case 'node':
           result.node.replace(serializers.deserialize(value,
                   specifiedType:
-                      const FullType(GgetUsersData_allUsers_edges_node))!
-              as GgetUsersData_allUsers_edges_node);
+                      const FullType(GFetchSaleExpsData_allUsers_edges_node))!
+              as GFetchSaleExpsData_allUsers_edges_node);
           break;
       }
     }
@@ -185,19 +188,19 @@ class _$GgetUsersData_allUsers_edgesSerializer
   }
 }
 
-class _$GgetUsersData_allUsers_edges_nodeSerializer
-    implements StructuredSerializer<GgetUsersData_allUsers_edges_node> {
+class _$GFetchSaleExpsData_allUsers_edges_nodeSerializer
+    implements StructuredSerializer<GFetchSaleExpsData_allUsers_edges_node> {
   @override
   final Iterable<Type> types = const [
-    GgetUsersData_allUsers_edges_node,
-    _$GgetUsersData_allUsers_edges_node
+    GFetchSaleExpsData_allUsers_edges_node,
+    _$GFetchSaleExpsData_allUsers_edges_node
   ];
   @override
-  final String wireName = 'GgetUsersData_allUsers_edges_node';
+  final String wireName = 'GFetchSaleExpsData_allUsers_edges_node';
 
   @override
   Iterable<Object?> serialize(
-      Serializers serializers, GgetUsersData_allUsers_edges_node object,
+      Serializers serializers, GFetchSaleExpsData_allUsers_edges_node object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
       '__typename',
@@ -223,10 +226,10 @@ class _$GgetUsersData_allUsers_edges_nodeSerializer
   }
 
   @override
-  GgetUsersData_allUsers_edges_node deserialize(
+  GFetchSaleExpsData_allUsers_edges_node deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new GgetUsersData_allUsers_edges_nodeBuilder();
+    final result = new GFetchSaleExpsData_allUsers_edges_nodeBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -265,31 +268,35 @@ class _$GgetUsersData_allUsers_edges_nodeSerializer
   }
 }
 
-class _$GgetUsersData extends GgetUsersData {
+class _$GFetchSaleExpsData extends GFetchSaleExpsData {
   @override
   final String G__typename;
   @override
-  final GgetUsersData_allUsers? allUsers;
+  final GFetchSaleExpsData_allUsers? allUsers;
 
-  factory _$GgetUsersData([void Function(GgetUsersDataBuilder)? updates]) =>
-      (new GgetUsersDataBuilder()..update(updates)).build();
+  factory _$GFetchSaleExpsData(
+          [void Function(GFetchSaleExpsDataBuilder)? updates]) =>
+      (new GFetchSaleExpsDataBuilder()..update(updates)).build();
 
-  _$GgetUsersData._({required this.G__typename, this.allUsers}) : super._() {
+  _$GFetchSaleExpsData._({required this.G__typename, this.allUsers})
+      : super._() {
     BuiltValueNullFieldError.checkNotNull(
-        G__typename, 'GgetUsersData', 'G__typename');
+        G__typename, 'GFetchSaleExpsData', 'G__typename');
   }
 
   @override
-  GgetUsersData rebuild(void Function(GgetUsersDataBuilder) updates) =>
+  GFetchSaleExpsData rebuild(
+          void Function(GFetchSaleExpsDataBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  GgetUsersDataBuilder toBuilder() => new GgetUsersDataBuilder()..replace(this);
+  GFetchSaleExpsDataBuilder toBuilder() =>
+      new GFetchSaleExpsDataBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is GgetUsersData &&
+    return other is GFetchSaleExpsData &&
         G__typename == other.G__typename &&
         allUsers == other.allUsers;
   }
@@ -301,32 +308,32 @@ class _$GgetUsersData extends GgetUsersData {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('GgetUsersData')
+    return (newBuiltValueToStringHelper('GFetchSaleExpsData')
           ..add('G__typename', G__typename)
           ..add('allUsers', allUsers))
         .toString();
   }
 }
 
-class GgetUsersDataBuilder
-    implements Builder<GgetUsersData, GgetUsersDataBuilder> {
-  _$GgetUsersData? _$v;
+class GFetchSaleExpsDataBuilder
+    implements Builder<GFetchSaleExpsData, GFetchSaleExpsDataBuilder> {
+  _$GFetchSaleExpsData? _$v;
 
   String? _G__typename;
   String? get G__typename => _$this._G__typename;
   set G__typename(String? G__typename) => _$this._G__typename = G__typename;
 
-  GgetUsersData_allUsersBuilder? _allUsers;
-  GgetUsersData_allUsersBuilder get allUsers =>
-      _$this._allUsers ??= new GgetUsersData_allUsersBuilder();
-  set allUsers(GgetUsersData_allUsersBuilder? allUsers) =>
+  GFetchSaleExpsData_allUsersBuilder? _allUsers;
+  GFetchSaleExpsData_allUsersBuilder get allUsers =>
+      _$this._allUsers ??= new GFetchSaleExpsData_allUsersBuilder();
+  set allUsers(GFetchSaleExpsData_allUsersBuilder? allUsers) =>
       _$this._allUsers = allUsers;
 
-  GgetUsersDataBuilder() {
-    GgetUsersData._initializeBuilder(this);
+  GFetchSaleExpsDataBuilder() {
+    GFetchSaleExpsData._initializeBuilder(this);
   }
 
-  GgetUsersDataBuilder get _$this {
+  GFetchSaleExpsDataBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _G__typename = $v.G__typename;
@@ -337,24 +344,24 @@ class GgetUsersDataBuilder
   }
 
   @override
-  void replace(GgetUsersData other) {
+  void replace(GFetchSaleExpsData other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$GgetUsersData;
+    _$v = other as _$GFetchSaleExpsData;
   }
 
   @override
-  void update(void Function(GgetUsersDataBuilder)? updates) {
+  void update(void Function(GFetchSaleExpsDataBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  _$GgetUsersData build() {
-    _$GgetUsersData _$result;
+  _$GFetchSaleExpsData build() {
+    _$GFetchSaleExpsData _$result;
     try {
       _$result = _$v ??
-          new _$GgetUsersData._(
+          new _$GFetchSaleExpsData._(
               G__typename: BuiltValueNullFieldError.checkNotNull(
-                  G__typename, 'GgetUsersData', 'G__typename'),
+                  G__typename, 'GFetchSaleExpsData', 'G__typename'),
               allUsers: _allUsers?.build());
     } catch (_) {
       late String _$failedField;
@@ -363,7 +370,7 @@ class GgetUsersDataBuilder
         _allUsers?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            'GgetUsersData', _$failedField, e.toString());
+            'GFetchSaleExpsData', _$failedField, e.toString());
       }
       rethrow;
     }
@@ -372,37 +379,38 @@ class GgetUsersDataBuilder
   }
 }
 
-class _$GgetUsersData_allUsers extends GgetUsersData_allUsers {
+class _$GFetchSaleExpsData_allUsers extends GFetchSaleExpsData_allUsers {
   @override
   final String G__typename;
   @override
-  final BuiltList<GgetUsersData_allUsers_edges> edges;
+  final BuiltList<GFetchSaleExpsData_allUsers_edges> edges;
 
-  factory _$GgetUsersData_allUsers(
-          [void Function(GgetUsersData_allUsersBuilder)? updates]) =>
-      (new GgetUsersData_allUsersBuilder()..update(updates)).build();
+  factory _$GFetchSaleExpsData_allUsers(
+          [void Function(GFetchSaleExpsData_allUsersBuilder)? updates]) =>
+      (new GFetchSaleExpsData_allUsersBuilder()..update(updates)).build();
 
-  _$GgetUsersData_allUsers._({required this.G__typename, required this.edges})
+  _$GFetchSaleExpsData_allUsers._(
+      {required this.G__typename, required this.edges})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
-        G__typename, 'GgetUsersData_allUsers', 'G__typename');
+        G__typename, 'GFetchSaleExpsData_allUsers', 'G__typename');
     BuiltValueNullFieldError.checkNotNull(
-        edges, 'GgetUsersData_allUsers', 'edges');
+        edges, 'GFetchSaleExpsData_allUsers', 'edges');
   }
 
   @override
-  GgetUsersData_allUsers rebuild(
-          void Function(GgetUsersData_allUsersBuilder) updates) =>
+  GFetchSaleExpsData_allUsers rebuild(
+          void Function(GFetchSaleExpsData_allUsersBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  GgetUsersData_allUsersBuilder toBuilder() =>
-      new GgetUsersData_allUsersBuilder()..replace(this);
+  GFetchSaleExpsData_allUsersBuilder toBuilder() =>
+      new GFetchSaleExpsData_allUsersBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is GgetUsersData_allUsers &&
+    return other is GFetchSaleExpsData_allUsers &&
         G__typename == other.G__typename &&
         edges == other.edges;
   }
@@ -414,32 +422,34 @@ class _$GgetUsersData_allUsers extends GgetUsersData_allUsers {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('GgetUsersData_allUsers')
+    return (newBuiltValueToStringHelper('GFetchSaleExpsData_allUsers')
           ..add('G__typename', G__typename)
           ..add('edges', edges))
         .toString();
   }
 }
 
-class GgetUsersData_allUsersBuilder
-    implements Builder<GgetUsersData_allUsers, GgetUsersData_allUsersBuilder> {
-  _$GgetUsersData_allUsers? _$v;
+class GFetchSaleExpsData_allUsersBuilder
+    implements
+        Builder<GFetchSaleExpsData_allUsers,
+            GFetchSaleExpsData_allUsersBuilder> {
+  _$GFetchSaleExpsData_allUsers? _$v;
 
   String? _G__typename;
   String? get G__typename => _$this._G__typename;
   set G__typename(String? G__typename) => _$this._G__typename = G__typename;
 
-  ListBuilder<GgetUsersData_allUsers_edges>? _edges;
-  ListBuilder<GgetUsersData_allUsers_edges> get edges =>
-      _$this._edges ??= new ListBuilder<GgetUsersData_allUsers_edges>();
-  set edges(ListBuilder<GgetUsersData_allUsers_edges>? edges) =>
+  ListBuilder<GFetchSaleExpsData_allUsers_edges>? _edges;
+  ListBuilder<GFetchSaleExpsData_allUsers_edges> get edges =>
+      _$this._edges ??= new ListBuilder<GFetchSaleExpsData_allUsers_edges>();
+  set edges(ListBuilder<GFetchSaleExpsData_allUsers_edges>? edges) =>
       _$this._edges = edges;
 
-  GgetUsersData_allUsersBuilder() {
-    GgetUsersData_allUsers._initializeBuilder(this);
+  GFetchSaleExpsData_allUsersBuilder() {
+    GFetchSaleExpsData_allUsers._initializeBuilder(this);
   }
 
-  GgetUsersData_allUsersBuilder get _$this {
+  GFetchSaleExpsData_allUsersBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _G__typename = $v.G__typename;
@@ -450,24 +460,24 @@ class GgetUsersData_allUsersBuilder
   }
 
   @override
-  void replace(GgetUsersData_allUsers other) {
+  void replace(GFetchSaleExpsData_allUsers other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$GgetUsersData_allUsers;
+    _$v = other as _$GFetchSaleExpsData_allUsers;
   }
 
   @override
-  void update(void Function(GgetUsersData_allUsersBuilder)? updates) {
+  void update(void Function(GFetchSaleExpsData_allUsersBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  _$GgetUsersData_allUsers build() {
-    _$GgetUsersData_allUsers _$result;
+  _$GFetchSaleExpsData_allUsers build() {
+    _$GFetchSaleExpsData_allUsers _$result;
     try {
       _$result = _$v ??
-          new _$GgetUsersData_allUsers._(
+          new _$GFetchSaleExpsData_allUsers._(
               G__typename: BuiltValueNullFieldError.checkNotNull(
-                  G__typename, 'GgetUsersData_allUsers', 'G__typename'),
+                  G__typename, 'GFetchSaleExpsData_allUsers', 'G__typename'),
               edges: edges.build());
     } catch (_) {
       late String _$failedField;
@@ -476,7 +486,7 @@ class GgetUsersData_allUsersBuilder
         edges.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            'GgetUsersData_allUsers', _$failedField, e.toString());
+            'GFetchSaleExpsData_allUsers', _$failedField, e.toString());
       }
       rethrow;
     }
@@ -485,35 +495,36 @@ class GgetUsersData_allUsersBuilder
   }
 }
 
-class _$GgetUsersData_allUsers_edges extends GgetUsersData_allUsers_edges {
+class _$GFetchSaleExpsData_allUsers_edges
+    extends GFetchSaleExpsData_allUsers_edges {
   @override
   final String G__typename;
   @override
-  final GgetUsersData_allUsers_edges_node? node;
+  final GFetchSaleExpsData_allUsers_edges_node? node;
 
-  factory _$GgetUsersData_allUsers_edges(
-          [void Function(GgetUsersData_allUsers_edgesBuilder)? updates]) =>
-      (new GgetUsersData_allUsers_edgesBuilder()..update(updates)).build();
+  factory _$GFetchSaleExpsData_allUsers_edges(
+          [void Function(GFetchSaleExpsData_allUsers_edgesBuilder)? updates]) =>
+      (new GFetchSaleExpsData_allUsers_edgesBuilder()..update(updates)).build();
 
-  _$GgetUsersData_allUsers_edges._({required this.G__typename, this.node})
+  _$GFetchSaleExpsData_allUsers_edges._({required this.G__typename, this.node})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
-        G__typename, 'GgetUsersData_allUsers_edges', 'G__typename');
+        G__typename, 'GFetchSaleExpsData_allUsers_edges', 'G__typename');
   }
 
   @override
-  GgetUsersData_allUsers_edges rebuild(
-          void Function(GgetUsersData_allUsers_edgesBuilder) updates) =>
+  GFetchSaleExpsData_allUsers_edges rebuild(
+          void Function(GFetchSaleExpsData_allUsers_edgesBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  GgetUsersData_allUsers_edgesBuilder toBuilder() =>
-      new GgetUsersData_allUsers_edgesBuilder()..replace(this);
+  GFetchSaleExpsData_allUsers_edgesBuilder toBuilder() =>
+      new GFetchSaleExpsData_allUsers_edgesBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is GgetUsersData_allUsers_edges &&
+    return other is GFetchSaleExpsData_allUsers_edges &&
         G__typename == other.G__typename &&
         node == other.node;
   }
@@ -525,34 +536,34 @@ class _$GgetUsersData_allUsers_edges extends GgetUsersData_allUsers_edges {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('GgetUsersData_allUsers_edges')
+    return (newBuiltValueToStringHelper('GFetchSaleExpsData_allUsers_edges')
           ..add('G__typename', G__typename)
           ..add('node', node))
         .toString();
   }
 }
 
-class GgetUsersData_allUsers_edgesBuilder
+class GFetchSaleExpsData_allUsers_edgesBuilder
     implements
-        Builder<GgetUsersData_allUsers_edges,
-            GgetUsersData_allUsers_edgesBuilder> {
-  _$GgetUsersData_allUsers_edges? _$v;
+        Builder<GFetchSaleExpsData_allUsers_edges,
+            GFetchSaleExpsData_allUsers_edgesBuilder> {
+  _$GFetchSaleExpsData_allUsers_edges? _$v;
 
   String? _G__typename;
   String? get G__typename => _$this._G__typename;
   set G__typename(String? G__typename) => _$this._G__typename = G__typename;
 
-  GgetUsersData_allUsers_edges_nodeBuilder? _node;
-  GgetUsersData_allUsers_edges_nodeBuilder get node =>
-      _$this._node ??= new GgetUsersData_allUsers_edges_nodeBuilder();
-  set node(GgetUsersData_allUsers_edges_nodeBuilder? node) =>
+  GFetchSaleExpsData_allUsers_edges_nodeBuilder? _node;
+  GFetchSaleExpsData_allUsers_edges_nodeBuilder get node =>
+      _$this._node ??= new GFetchSaleExpsData_allUsers_edges_nodeBuilder();
+  set node(GFetchSaleExpsData_allUsers_edges_nodeBuilder? node) =>
       _$this._node = node;
 
-  GgetUsersData_allUsers_edgesBuilder() {
-    GgetUsersData_allUsers_edges._initializeBuilder(this);
+  GFetchSaleExpsData_allUsers_edgesBuilder() {
+    GFetchSaleExpsData_allUsers_edges._initializeBuilder(this);
   }
 
-  GgetUsersData_allUsers_edgesBuilder get _$this {
+  GFetchSaleExpsData_allUsers_edgesBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _G__typename = $v.G__typename;
@@ -563,24 +574,25 @@ class GgetUsersData_allUsers_edgesBuilder
   }
 
   @override
-  void replace(GgetUsersData_allUsers_edges other) {
+  void replace(GFetchSaleExpsData_allUsers_edges other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$GgetUsersData_allUsers_edges;
+    _$v = other as _$GFetchSaleExpsData_allUsers_edges;
   }
 
   @override
-  void update(void Function(GgetUsersData_allUsers_edgesBuilder)? updates) {
+  void update(
+      void Function(GFetchSaleExpsData_allUsers_edgesBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  _$GgetUsersData_allUsers_edges build() {
-    _$GgetUsersData_allUsers_edges _$result;
+  _$GFetchSaleExpsData_allUsers_edges build() {
+    _$GFetchSaleExpsData_allUsers_edges _$result;
     try {
       _$result = _$v ??
-          new _$GgetUsersData_allUsers_edges._(
-              G__typename: BuiltValueNullFieldError.checkNotNull(
-                  G__typename, 'GgetUsersData_allUsers_edges', 'G__typename'),
+          new _$GFetchSaleExpsData_allUsers_edges._(
+              G__typename: BuiltValueNullFieldError.checkNotNull(G__typename,
+                  'GFetchSaleExpsData_allUsers_edges', 'G__typename'),
               node: _node?.build());
     } catch (_) {
       late String _$failedField;
@@ -589,7 +601,7 @@ class GgetUsersData_allUsers_edgesBuilder
         _node?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            'GgetUsersData_allUsers_edges', _$failedField, e.toString());
+            'GFetchSaleExpsData_allUsers_edges', _$failedField, e.toString());
       }
       rethrow;
     }
@@ -598,8 +610,8 @@ class GgetUsersData_allUsers_edgesBuilder
   }
 }
 
-class _$GgetUsersData_allUsers_edges_node
-    extends GgetUsersData_allUsers_edges_node {
+class _$GFetchSaleExpsData_allUsers_edges_node
+    extends GFetchSaleExpsData_allUsers_edges_node {
   @override
   final String G__typename;
   @override
@@ -613,11 +625,13 @@ class _$GgetUsersData_allUsers_edges_node
   @override
   final String username;
 
-  factory _$GgetUsersData_allUsers_edges_node(
-          [void Function(GgetUsersData_allUsers_edges_nodeBuilder)? updates]) =>
-      (new GgetUsersData_allUsers_edges_nodeBuilder()..update(updates)).build();
+  factory _$GFetchSaleExpsData_allUsers_edges_node(
+          [void Function(GFetchSaleExpsData_allUsers_edges_nodeBuilder)?
+              updates]) =>
+      (new GFetchSaleExpsData_allUsers_edges_nodeBuilder()..update(updates))
+          .build();
 
-  _$GgetUsersData_allUsers_edges_node._(
+  _$GFetchSaleExpsData_allUsers_edges_node._(
       {required this.G__typename,
       required this.id,
       required this.lastName,
@@ -626,32 +640,33 @@ class _$GgetUsersData_allUsers_edges_node
       required this.username})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
-        G__typename, 'GgetUsersData_allUsers_edges_node', 'G__typename');
+        G__typename, 'GFetchSaleExpsData_allUsers_edges_node', 'G__typename');
     BuiltValueNullFieldError.checkNotNull(
-        id, 'GgetUsersData_allUsers_edges_node', 'id');
+        id, 'GFetchSaleExpsData_allUsers_edges_node', 'id');
     BuiltValueNullFieldError.checkNotNull(
-        lastName, 'GgetUsersData_allUsers_edges_node', 'lastName');
+        lastName, 'GFetchSaleExpsData_allUsers_edges_node', 'lastName');
     BuiltValueNullFieldError.checkNotNull(
-        salesExp, 'GgetUsersData_allUsers_edges_node', 'salesExp');
+        salesExp, 'GFetchSaleExpsData_allUsers_edges_node', 'salesExp');
     BuiltValueNullFieldError.checkNotNull(
-        isActive, 'GgetUsersData_allUsers_edges_node', 'isActive');
+        isActive, 'GFetchSaleExpsData_allUsers_edges_node', 'isActive');
     BuiltValueNullFieldError.checkNotNull(
-        username, 'GgetUsersData_allUsers_edges_node', 'username');
+        username, 'GFetchSaleExpsData_allUsers_edges_node', 'username');
   }
 
   @override
-  GgetUsersData_allUsers_edges_node rebuild(
-          void Function(GgetUsersData_allUsers_edges_nodeBuilder) updates) =>
+  GFetchSaleExpsData_allUsers_edges_node rebuild(
+          void Function(GFetchSaleExpsData_allUsers_edges_nodeBuilder)
+              updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  GgetUsersData_allUsers_edges_nodeBuilder toBuilder() =>
-      new GgetUsersData_allUsers_edges_nodeBuilder()..replace(this);
+  GFetchSaleExpsData_allUsers_edges_nodeBuilder toBuilder() =>
+      new GFetchSaleExpsData_allUsers_edges_nodeBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is GgetUsersData_allUsers_edges_node &&
+    return other is GFetchSaleExpsData_allUsers_edges_node &&
         G__typename == other.G__typename &&
         id == other.id &&
         lastName == other.lastName &&
@@ -674,7 +689,8 @@ class _$GgetUsersData_allUsers_edges_node
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('GgetUsersData_allUsers_edges_node')
+    return (newBuiltValueToStringHelper(
+            'GFetchSaleExpsData_allUsers_edges_node')
           ..add('G__typename', G__typename)
           ..add('id', id)
           ..add('lastName', lastName)
@@ -685,11 +701,11 @@ class _$GgetUsersData_allUsers_edges_node
   }
 }
 
-class GgetUsersData_allUsers_edges_nodeBuilder
+class GFetchSaleExpsData_allUsers_edges_nodeBuilder
     implements
-        Builder<GgetUsersData_allUsers_edges_node,
-            GgetUsersData_allUsers_edges_nodeBuilder> {
-  _$GgetUsersData_allUsers_edges_node? _$v;
+        Builder<GFetchSaleExpsData_allUsers_edges_node,
+            GFetchSaleExpsData_allUsers_edges_nodeBuilder> {
+  _$GFetchSaleExpsData_allUsers_edges_node? _$v;
 
   String? _G__typename;
   String? get G__typename => _$this._G__typename;
@@ -715,11 +731,11 @@ class GgetUsersData_allUsers_edges_nodeBuilder
   String? get username => _$this._username;
   set username(String? username) => _$this._username = username;
 
-  GgetUsersData_allUsers_edges_nodeBuilder() {
-    GgetUsersData_allUsers_edges_node._initializeBuilder(this);
+  GFetchSaleExpsData_allUsers_edges_nodeBuilder() {
+    GFetchSaleExpsData_allUsers_edges_node._initializeBuilder(this);
   }
 
-  GgetUsersData_allUsers_edges_nodeBuilder get _$this {
+  GFetchSaleExpsData_allUsers_edges_nodeBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _G__typename = $v.G__typename;
@@ -734,33 +750,33 @@ class GgetUsersData_allUsers_edges_nodeBuilder
   }
 
   @override
-  void replace(GgetUsersData_allUsers_edges_node other) {
+  void replace(GFetchSaleExpsData_allUsers_edges_node other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$GgetUsersData_allUsers_edges_node;
+    _$v = other as _$GFetchSaleExpsData_allUsers_edges_node;
   }
 
   @override
   void update(
-      void Function(GgetUsersData_allUsers_edges_nodeBuilder)? updates) {
+      void Function(GFetchSaleExpsData_allUsers_edges_nodeBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  _$GgetUsersData_allUsers_edges_node build() {
+  _$GFetchSaleExpsData_allUsers_edges_node build() {
     final _$result = _$v ??
-        new _$GgetUsersData_allUsers_edges_node._(
+        new _$GFetchSaleExpsData_allUsers_edges_node._(
             G__typename: BuiltValueNullFieldError.checkNotNull(G__typename,
-                'GgetUsersData_allUsers_edges_node', 'G__typename'),
+                'GFetchSaleExpsData_allUsers_edges_node', 'G__typename'),
             id: BuiltValueNullFieldError.checkNotNull(
-                id, 'GgetUsersData_allUsers_edges_node', 'id'),
+                id, 'GFetchSaleExpsData_allUsers_edges_node', 'id'),
             lastName: BuiltValueNullFieldError.checkNotNull(
-                lastName, 'GgetUsersData_allUsers_edges_node', 'lastName'),
+                lastName, 'GFetchSaleExpsData_allUsers_edges_node', 'lastName'),
             salesExp: BuiltValueNullFieldError.checkNotNull(
-                salesExp, 'GgetUsersData_allUsers_edges_node', 'salesExp'),
+                salesExp, 'GFetchSaleExpsData_allUsers_edges_node', 'salesExp'),
             isActive: BuiltValueNullFieldError.checkNotNull(
-                isActive, 'GgetUsersData_allUsers_edges_node', 'isActive'),
-            username: BuiltValueNullFieldError.checkNotNull(
-                username, 'GgetUsersData_allUsers_edges_node', 'username'));
+                isActive, 'GFetchSaleExpsData_allUsers_edges_node', 'isActive'),
+            username: BuiltValueNullFieldError.checkNotNull(username,
+                'GFetchSaleExpsData_allUsers_edges_node', 'username'));
     replace(_$result);
     return _$result;
   }

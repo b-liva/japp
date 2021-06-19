@@ -11,39 +11,40 @@ import 'package:jcm/components/graphql/user/user.var.gql.dart' as _i3;
 
 part 'user.req.gql.g.dart';
 
-abstract class GgetUsersReq
+abstract class GFetchSaleExpsReq
     implements
-        Built<GgetUsersReq, GgetUsersReqBuilder>,
-        _i1.OperationRequest<_i2.GgetUsersData, _i3.GgetUsersVars> {
-  GgetUsersReq._();
+        Built<GFetchSaleExpsReq, GFetchSaleExpsReqBuilder>,
+        _i1.OperationRequest<_i2.GFetchSaleExpsData, _i3.GFetchSaleExpsVars> {
+  GFetchSaleExpsReq._();
 
-  factory GgetUsersReq([Function(GgetUsersReqBuilder b) updates]) =
-      _$GgetUsersReq;
+  factory GFetchSaleExpsReq([Function(GFetchSaleExpsReqBuilder b) updates]) =
+      _$GFetchSaleExpsReq;
 
-  static void _initializeBuilder(GgetUsersReqBuilder b) => b
+  static void _initializeBuilder(GFetchSaleExpsReqBuilder b) => b
     ..operation =
-        _i4.Operation(document: _i5.document, operationName: 'getUsers')
+        _i4.Operation(document: _i5.document, operationName: 'FetchSaleExps')
     ..executeOnListen = true;
-  _i3.GgetUsersVars get vars;
+  _i3.GFetchSaleExpsVars get vars;
   _i4.Operation get operation;
   _i4.Request get execRequest =>
       _i4.Request(operation: operation, variables: vars.toJson());
   String? get requestId;
   @BuiltValueField(serialize: false)
-  _i2.GgetUsersData? Function(_i2.GgetUsersData?, _i2.GgetUsersData?)?
-      get updateResult;
-  _i2.GgetUsersData? get optimisticResponse;
+  _i2.GFetchSaleExpsData? Function(
+      _i2.GFetchSaleExpsData?, _i2.GFetchSaleExpsData?)? get updateResult;
+  _i2.GFetchSaleExpsData? get optimisticResponse;
   String? get updateCacheHandlerKey;
   Map<String, dynamic>? get updateCacheHandlerContext;
   _i1.FetchPolicy? get fetchPolicy;
   bool get executeOnListen;
   @override
-  _i2.GgetUsersData? parseData(Map<String, dynamic> json) =>
-      _i2.GgetUsersData.fromJson(json);
-  static Serializer<GgetUsersReq> get serializer => _$ggetUsersReqSerializer;
+  _i2.GFetchSaleExpsData? parseData(Map<String, dynamic> json) =>
+      _i2.GFetchSaleExpsData.fromJson(json);
+  static Serializer<GFetchSaleExpsReq> get serializer =>
+      _$gFetchSaleExpsReqSerializer;
   Map<String, dynamic> toJson() =>
-      (_i6.serializers.serializeWith(GgetUsersReq.serializer, this)
+      (_i6.serializers.serializeWith(GFetchSaleExpsReq.serializer, this)
           as Map<String, dynamic>);
-  static GgetUsersReq? fromJson(Map<String, dynamic> json) =>
-      _i6.serializers.deserializeWith(GgetUsersReq.serializer, json);
+  static GFetchSaleExpsReq? fromJson(Map<String, dynamic> json) =>
+      _i6.serializers.deserializeWith(GFetchSaleExpsReq.serializer, json);
 }

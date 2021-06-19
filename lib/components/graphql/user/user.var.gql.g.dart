@@ -6,79 +6,148 @@ part of 'user.var.gql.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializer<GgetUsersVars> _$ggetUsersVarsSerializer =
-    new _$GgetUsersVarsSerializer();
+Serializer<GFetchSaleExpsVars> _$gFetchSaleExpsVarsSerializer =
+    new _$GFetchSaleExpsVarsSerializer();
 
-class _$GgetUsersVarsSerializer implements StructuredSerializer<GgetUsersVars> {
+class _$GFetchSaleExpsVarsSerializer
+    implements StructuredSerializer<GFetchSaleExpsVars> {
   @override
-  final Iterable<Type> types = const [GgetUsersVars, _$GgetUsersVars];
+  final Iterable<Type> types = const [GFetchSaleExpsVars, _$GFetchSaleExpsVars];
   @override
-  final String wireName = 'GgetUsersVars';
+  final String wireName = 'GFetchSaleExpsVars';
 
   @override
-  Iterable<Object?> serialize(Serializers serializers, GgetUsersVars object,
+  Iterable<Object?> serialize(
+      Serializers serializers, GFetchSaleExpsVars object,
       {FullType specifiedType = FullType.unspecified}) {
-    return <Object?>[];
+    final result = <Object?>[];
+    Object? value;
+    value = object.isSales;
+    if (value != null) {
+      result
+        ..add('isSales')
+        ..add(
+            serializers.serialize(value, specifiedType: const FullType(bool)));
+    }
+    value = object.isCustomer;
+    if (value != null) {
+      result
+        ..add('isCustomer')
+        ..add(
+            serializers.serialize(value, specifiedType: const FullType(bool)));
+    }
+    return result;
   }
 
   @override
-  GgetUsersVars deserialize(
+  GFetchSaleExpsVars deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    return new GgetUsersVarsBuilder().build();
+    final result = new GFetchSaleExpsVarsBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case 'isSales':
+          result.isSales = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool?;
+          break;
+        case 'isCustomer':
+          result.isCustomer = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool?;
+          break;
+      }
+    }
+
+    return result.build();
   }
 }
 
-class _$GgetUsersVars extends GgetUsersVars {
-  factory _$GgetUsersVars([void Function(GgetUsersVarsBuilder)? updates]) =>
-      (new GgetUsersVarsBuilder()..update(updates)).build();
+class _$GFetchSaleExpsVars extends GFetchSaleExpsVars {
+  @override
+  final bool? isSales;
+  @override
+  final bool? isCustomer;
 
-  _$GgetUsersVars._() : super._();
+  factory _$GFetchSaleExpsVars(
+          [void Function(GFetchSaleExpsVarsBuilder)? updates]) =>
+      (new GFetchSaleExpsVarsBuilder()..update(updates)).build();
+
+  _$GFetchSaleExpsVars._({this.isSales, this.isCustomer}) : super._();
 
   @override
-  GgetUsersVars rebuild(void Function(GgetUsersVarsBuilder) updates) =>
+  GFetchSaleExpsVars rebuild(
+          void Function(GFetchSaleExpsVarsBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  GgetUsersVarsBuilder toBuilder() => new GgetUsersVarsBuilder()..replace(this);
+  GFetchSaleExpsVarsBuilder toBuilder() =>
+      new GFetchSaleExpsVarsBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is GgetUsersVars;
+    return other is GFetchSaleExpsVars &&
+        isSales == other.isSales &&
+        isCustomer == other.isCustomer;
   }
 
   @override
   int get hashCode {
-    return 180173834;
+    return $jf($jc($jc(0, isSales.hashCode), isCustomer.hashCode));
   }
 
   @override
   String toString() {
-    return newBuiltValueToStringHelper('GgetUsersVars').toString();
+    return (newBuiltValueToStringHelper('GFetchSaleExpsVars')
+          ..add('isSales', isSales)
+          ..add('isCustomer', isCustomer))
+        .toString();
   }
 }
 
-class GgetUsersVarsBuilder
-    implements Builder<GgetUsersVars, GgetUsersVarsBuilder> {
-  _$GgetUsersVars? _$v;
+class GFetchSaleExpsVarsBuilder
+    implements Builder<GFetchSaleExpsVars, GFetchSaleExpsVarsBuilder> {
+  _$GFetchSaleExpsVars? _$v;
 
-  GgetUsersVarsBuilder();
+  bool? _isSales;
+  bool? get isSales => _$this._isSales;
+  set isSales(bool? isSales) => _$this._isSales = isSales;
 
-  @override
-  void replace(GgetUsersVars other) {
-    ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$GgetUsersVars;
+  bool? _isCustomer;
+  bool? get isCustomer => _$this._isCustomer;
+  set isCustomer(bool? isCustomer) => _$this._isCustomer = isCustomer;
+
+  GFetchSaleExpsVarsBuilder();
+
+  GFetchSaleExpsVarsBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _isSales = $v.isSales;
+      _isCustomer = $v.isCustomer;
+      _$v = null;
+    }
+    return this;
   }
 
   @override
-  void update(void Function(GgetUsersVarsBuilder)? updates) {
+  void replace(GFetchSaleExpsVars other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$GFetchSaleExpsVars;
+  }
+
+  @override
+  void update(void Function(GFetchSaleExpsVarsBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  _$GgetUsersVars build() {
-    final _$result = _$v ?? new _$GgetUsersVars._();
+  _$GFetchSaleExpsVars build() {
+    final _$result = _$v ??
+        new _$GFetchSaleExpsVars._(isSales: isSales, isCustomer: isCustomer);
     replace(_$result);
     return _$result;
   }

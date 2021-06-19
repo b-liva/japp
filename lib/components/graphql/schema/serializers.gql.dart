@@ -39,14 +39,14 @@ import 'package:jcm/components/graphql/schema/schema.schema.gql.dart'
         GUpdateCustomerInput;
 import 'package:jcm/components/graphql/user/user.data.gql.dart'
     show
-        GgetUsersData,
-        GgetUsersData_allUsers,
-        GgetUsersData_allUsers_edges,
-        GgetUsersData_allUsers_edges_node;
+        GFetchSaleExpsData,
+        GFetchSaleExpsData_allUsers,
+        GFetchSaleExpsData_allUsers_edges,
+        GFetchSaleExpsData_allUsers_edges_node;
 import 'package:jcm/components/graphql/user/user.req.gql.dart'
-    show GgetUsersReq;
+    show GFetchSaleExpsReq;
 import 'package:jcm/components/graphql/user/user.var.gql.dart'
-    show GgetUsersVars;
+    show GFetchSaleExpsVars;
 
 part 'serializers.gql.g.dart';
 
@@ -66,6 +66,12 @@ final SerializersBuilder _serializersBuilder = _$serializers.toBuilder()
   GDeletePaymentInput,
   GDeleteProformaInput,
   GDeleteProformaSpecInput,
+  GFetchSaleExpsData,
+  GFetchSaleExpsData_allUsers,
+  GFetchSaleExpsData_allUsers_edges,
+  GFetchSaleExpsData_allUsers_edges_node,
+  GFetchSaleExpsReq,
+  GFetchSaleExpsVars,
   GGenericScalar,
   GIncomeModelFormMutationInput,
   GIncomeRowModelFormMutationInput,
@@ -85,12 +91,6 @@ final SerializersBuilder _serializersBuilder = _$serializers.toBuilder()
   GProformaSpecInput,
   GReqSpecModelFormMutationInput,
   GRequestModelFormMutationInput,
-  GUpdateCustomerInput,
-  GgetUsersData,
-  GgetUsersData_allUsers,
-  GgetUsersData_allUsers_edges,
-  GgetUsersData_allUsers_edges_node,
-  GgetUsersReq,
-  GgetUsersVars
+  GUpdateCustomerInput
 ])
 final Serializers serializers = _serializersBuilder.build();

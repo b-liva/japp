@@ -19,6 +19,12 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(GDeletePaymentInput.serializer)
       ..add(GDeleteProformaInput.serializer)
       ..add(GDeleteProformaSpecInput.serializer)
+      ..add(GFetchSaleExpsData.serializer)
+      ..add(GFetchSaleExpsData_allUsers.serializer)
+      ..add(GFetchSaleExpsData_allUsers_edges.serializer)
+      ..add(GFetchSaleExpsData_allUsers_edges_node.serializer)
+      ..add(GFetchSaleExpsReq.serializer)
+      ..add(GFetchSaleExpsVars.serializer)
       ..add(GGenericScalar.serializer)
       ..add(GIncomeModelFormMutationInput.serializer)
       ..add(GIncomeRowModelFormMutationInput.serializer)
@@ -39,19 +45,13 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(GReqSpecModelFormMutationInput.serializer)
       ..add(GRequestModelFormMutationInput.serializer)
       ..add(GUpdateCustomerInput.serializer)
-      ..add(GgetUsersData.serializer)
-      ..add(GgetUsersData_allUsers.serializer)
-      ..add(GgetUsersData_allUsers_edges.serializer)
-      ..add(GgetUsersData_allUsers_edges_node.serializer)
-      ..add(GgetUsersReq.serializer)
-      ..add(GgetUsersVars.serializer)
+      ..addBuilderFactory(
+          const FullType(BuiltList,
+              const [const FullType(GFetchSaleExpsData_allUsers_edges)]),
+          () => new ListBuilder<GFetchSaleExpsData_allUsers_edges>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(GProformaSpecInput)]),
           () => new ListBuilder<GProformaSpecInput>())
-      ..addBuilderFactory(
-          const FullType(
-              BuiltList, const [const FullType(GgetUsersData_allUsers_edges)]),
-          () => new ListBuilder<GgetUsersData_allUsers_edges>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(String)]),
           () => new ListBuilder<String>()))
