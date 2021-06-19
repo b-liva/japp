@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'project_stats.dart';
 
 void main() =>
     runApp(MaterialApp(
@@ -15,10 +16,10 @@ class _HomeState extends State<Home> {
   int monthMw=12;
   int yearMw=95;
 
-  List<String> projectTypeData = [
-    '10 مگاوات پروژه',
-    '12 مگاوات روتین',
-    '2 مگاوات تعمیرات',
+  List<ProjectTypeStats> prTypeData = [
+    ProjectTypeStats(title: 'پروژه', mw: 8, sales: 12000),
+    ProjectTypeStats(title: 'روتین', mw: 6, sales: 8000),
+    ProjectTypeStats(title: 'تعمیرات', mw: 2, sales: 12000),
   ];
 
   @override
@@ -56,7 +57,15 @@ class _HomeState extends State<Home> {
           ),
           SizedBox(height: 40),
           Column(
-            children: projectTypeData.map((d) => Text(d, textDirection: TextDirection.rtl,)).toList(),
+            children: prTypeData.map((d) => Row(
+              textDirection: TextDirection.rtl,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text('${d.title}'),
+                Text('${d.mw}'),
+                Text('${d.sales}'),
+              ],
+            )).toList(),
           )
         ],
       )
