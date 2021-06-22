@@ -8,16 +8,16 @@ class Users extends StatefulWidget {
 
 class _UsersState extends State<Users> {
   String usersList = """
-  query allUsers{
-  allUsers(salesExp:true, isActive:true) {
+  query FetchSaleExps(\$isSales:Boolean, \$isCustomer:Boolean){
+  allUsers(salesExp:\$isSales, isCustomer:\$isCustomer) {
     edges {
       node {
         id
-        username
         lastName
-        lastLogin
+        salesExp
+        isActive
+        username
         orderNotEnteredCount
-        orderEnteredCount
         percentEntered
       }
     }
@@ -32,10 +32,11 @@ class _UsersState extends State<Users> {
           title: Text('Users'),
         ),
         body: Query(
-            options: QueryOptions(
-              document: gql(usersList),
+            options: QueryOptions(document: gql(usersList), variables: {
+              'isSales': true,
+            }
 //              pollInterval: Duration(seconds: 180),
-            ),
+                ),
             builder: (
               QueryResult result, {
               Refetch? refetch,
