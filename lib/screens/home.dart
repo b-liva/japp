@@ -13,7 +13,7 @@ class Home extends StatelessWidget {
 
     return Scaffold(
       body: SafeArea(
-        child: Column(
+        child: Row(
           children: [
             TextButton.icon(
               onPressed: () {
@@ -22,6 +22,13 @@ class Home extends StatelessWidget {
               label: Text('users'),
               icon: Icon(Icons.edit_location),
 
+            ),
+            TextButton.icon(
+              onPressed: () {
+                Navigator.pushNamed(context, '/stats');
+              },
+              label: Text('Stats'),
+              icon: Icon(Icons.download_sharp),
             )
           ],
         )

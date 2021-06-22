@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:jcm/screens/dashboard.dart';
+import 'package:jcm/screens/stats.dart';
 import 'package:jcm/screens/home.dart';
 import 'package:jcm/screens/users.dart';
 import 'project_stats.dart';
@@ -24,7 +24,8 @@ void main() async {
       initialRoute: '/',
       routes: {
         '/': (context) => Home(),
-        '/users': (context) => Users()
+        '/users': (context) => Users(),
+        '/stats': (context) => Stats(),
       },
     ),
   ));
