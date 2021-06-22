@@ -74,7 +74,15 @@ class _HomeState extends State<Home> {
                       child: Card(
                         child: ListTile(
                           onTap: () {},
-                          title: Text(users[index]['node']['lastName']),
+                          title: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            textDirection: TextDirection.rtl,
+                            children: [
+                              Text(users[index]['node']['lastName']),
+                              Text(users[index]['node']['orderNotEnteredCount'].toString()),
+                              Text(users[index]['node']['percentEntered'].toString()),
+                            ],
+                          ),
                         ),
                       ),
                     );
