@@ -14,12 +14,13 @@ class Home extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Row(
+          textDirection: TextDirection.rtl,
           children: [
             TextButton.icon(
               onPressed: () {
                 Navigator.pushNamed(context, '/users');
               },
-              label: Text('users'),
+              label: Text('کارشناسان'),
               icon: Icon(Icons.edit_location),
 
             ),
@@ -27,7 +28,7 @@ class Home extends StatelessWidget {
               onPressed: () {
                 Navigator.pushNamed(context, '/stats');
               },
-              label: Text('Stats'),
+              label: Text('آمار'),
               icon: Icon(Icons.download_sharp),
             )
           ],
