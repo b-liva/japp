@@ -99,6 +99,9 @@ class Stats extends StatelessWidget {
                 Text(stats['total']['kw'].toString()),
               ],
             ),
+            TextButton(onPressed: () {
+              refetch!();
+            }, child: Text('hi'),)
           ]);
         },
       ),
