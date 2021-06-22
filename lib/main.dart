@@ -18,10 +18,22 @@ void main() async {
 
   runApp(GraphQLProvider(
     client: client,
-    child: MaterialApp(
-      title: "Jcm Demo",
-      home: Users(),
-//      home: Dashboard(),
-    ),
+    child: MyApp(),
   ));
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final routes = <String, WidgetBuilder>{
+      '/users': (BuildContext context) => Users()
+    };
+
+    return MaterialApp(
+      title: 'JCM GraphQL Demo',
+//      theme: ThemeData(primaryColor: Colors.black),
+      routes: routes,
+      home: Users(),
+    );
+  }
 }
