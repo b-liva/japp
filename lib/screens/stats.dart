@@ -4,24 +4,29 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 
 class Stats extends StatelessWidget {
   String stats = """
-  query{
+  query dashboardStatistics(\$days:Int){
   dashboardStatistics{
-    total(days:30) {
+    total(days:\$days) {
       title
       kw
       count
     }
-    routine(days:30) {
+    routine(days:\$days) {
       title
       kw
       count
     }
-    project(days:30) {
+    project(days:\$days) {
       title
       kw
       count
     }
-    services {
+    services(days:\$days) {
+      title
+      kw
+      count
+    }
+    ex(days:\$days) {
       title
       kw
       count
@@ -35,7 +40,7 @@ class Stats extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text('Stats')),
       body: Query(
-        options: QueryOptions(document: gql(stats)),
+        options: QueryOptions(document: gql(stats), variables: {'days': 30}),
         builder: (QueryResult result, {
           Refetch? refetch,
           FetchMore? fetchMore,
@@ -69,6 +74,24 @@ class Stats extends StatelessWidget {
                     Text(stats['services']['title']),
                     Text(stats['services']['count'].toString()),
                     Text(stats['services']['kw'].toString()),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  textDirection: TextDirection.rtl,
+                  children: [
+                    Text(stats['ex']['title']),
+                    Text(stats['ex']['count'].toString()),
+                    Text(stats['ex']['kw'].toString()),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  textDirection: TextDirection.rtl,
+                  children: [
+                    Text(stats['total']['title']),
+                    Text(stats['total']['count'].toString()),
+                    Text(stats['total']['kw'].toString()),
                   ],
                 ),
               ]
