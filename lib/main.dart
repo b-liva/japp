@@ -5,23 +5,13 @@ import 'project_stats.dart';
 
 void main() async {
   final HttpLink httpLink = HttpLink(
-    'http://localhost/graphql',
+    'http://10.0.2.2/graphql/',
   );
-
-  final AuthLink authLink = AuthLink(
-//    getToken: () async => 'Bearer <YOUR_PERSONAL_ACCESS_TOKEN>',
-    // OR
-    getToken: () => 'Bearer <YOUR_PERSONAL_ACCESS_TOKEN>',
-  );
-
-  final Link link = authLink.concat(httpLink);
 
   ValueNotifier<GraphQLClient> client = ValueNotifier(
     GraphQLClient(
-      link: link,
       cache: GraphQLCache(),
-      // The default store is the InMemoryStore, which does NOT persist to disk
-//      store: GraphQLCache(store: HiveStore()),
+      link: httpLink,
     ),
   );
 
@@ -42,12 +32,17 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   String usersList = """
-  query{
-  allUsers {
+  query allUsers{
+  allUsers(salesExp:true, isActive:true) {
     edges {
       node {
         id
         username
+        lastName
+        lastLogin
+        orderNotEnteredCount
+        orderEnteredCount
+        percentEntered
       }
     }
   }
@@ -58,19 +53,32 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('hi'),
+          title: Text('Users'),
         ),
         body: Query(
             options: QueryOptions(
               document: gql(usersList),
-              pollInterval: Duration(seconds: 60),
+//              pollInterval: Duration(seconds: 180),
             ),
             builder: (
               QueryResult result, {
               Refetch? refetch,
               FetchMore? fetchMore,
             }) {
-              return Text('hi');
+              var users = result.data!['allUsers']['edges'] ?? [];
+              return ListView.builder(
+                  itemCount: users.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: EdgeInsets.all(5),
+                      child: Card(
+                        child: ListTile(
+                          onTap: () {},
+                          title: Text(users[index]['node']['lastName']),
+                        ),
+                      ),
+                    );
+                  });
             }));
   }
 }
