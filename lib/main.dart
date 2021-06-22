@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:jcm/screens/dashboard.dart';
+import 'package:jcm/screens/home.dart';
 import 'package:jcm/screens/users.dart';
 import 'project_stats.dart';
 
@@ -18,22 +19,13 @@ void main() async {
 
   runApp(GraphQLProvider(
     client: client,
-    child: MyApp(),
+    child: MaterialApp(
+      title: "Jcm Demo",
+      initialRoute: '/',
+      routes: {
+        '/': (context) => Home(),
+        '/users': (context) => Users()
+      },
+    ),
   ));
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final routes = <String, WidgetBuilder>{
-      '/users': (BuildContext context) => Users()
-    };
-
-    return MaterialApp(
-      title: 'JCM GraphQL Demo',
-//      theme: ThemeData(primaryColor: Colors.black),
-      routes: routes,
-      home: Users(),
-    );
-  }
 }
