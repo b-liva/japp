@@ -40,27 +40,48 @@ class _CustomerSalesState extends State<CustomerSales> {
             return Center(child: CircularProgressIndicator());
           }
           var customers = result.data!['customerBySale'];
-          return ListView.builder(
-              itemCount: customers.length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: EdgeInsets.all(5),
-                  child: Card(
-                    child: ListTile(
-                      onTap: () {},
-                      title: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        textDirection: TextDirection.rtl,
-                        children: [
-                          Text(customers[index]['customerName']),
-                          Text(customers[index]['qty'].toString()),
-                          Text(f.format(customers[index]['amount'])),
-                        ],
-                      ),
-                    ),
-                  ),
-                );
-              });
+          return Column(
+            children: [
+              TextField(
+                  controller: daysController,
+                  keyboardType: TextInputType.number,
+                  textAlign: TextAlign.right),
+              TextButton(
+                onPressed: () {
+                  setState(() {
+                    days = daysController.text;
+                  });
+                  refetch!();
+                },
+                child: Text('update'),
+              ),
+              Text("${customers.length} مورد یافت شد"),
+              Expanded(
+                child: ListView.builder(
+                    itemCount: customers.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: EdgeInsets.all(5),
+                        child: Card(
+                          child: ListTile(
+                            onTap: () {},
+                            title: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              textDirection: TextDirection.rtl,
+                              children: [
+                                Text((index + 1).toString()),
+                                Text(customers[index]['customerName']),
+                                Text(customers[index]['qty'].toString()),
+                                Text(f.format(customers[index]['amount'])),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    }),
+              ),
+            ],
+          );
         },
       ),
     );
