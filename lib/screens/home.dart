@@ -37,6 +37,13 @@ class Home extends StatelessWidget {
               },
               label: Text('فروش'),
               icon: Icon(Icons.sensor_door),
+            ),
+            TextButton.icon(
+              onPressed: (){
+                Navigator.pushNamed(context, '/customer');
+              },
+              label: Text('مشتریان'),
+              icon: Icon(Icons.sensor_door),
             )
           ],
         )

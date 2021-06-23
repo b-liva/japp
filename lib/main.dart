@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:jcm/screens/customers.dart';
 import 'package:jcm/screens/sales.dart';
 import 'package:jcm/screens/stats.dart';
 import 'package:jcm/screens/home.dart';
@@ -28,6 +29,7 @@ void main() async {
         '/users': (context) => Users(),
         '/stats': (context) => Stats(),
         '/sales': (context) => Sales(),
+        '/customer': (context) => CustomerSales(),
       },
     ),
   ));
