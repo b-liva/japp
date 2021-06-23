@@ -3,7 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:flutter/services.dart';
 
-class Stats extends StatelessWidget {
+class Stats extends StatefulWidget {
+  @override
+  _StatsState createState() => _StatsState();
+}
+
+class _StatsState extends State<Stats> {
+  TextEditingController daysController = new TextEditingController();
+  var days = "30";
   String stats = """
   query dashboardStatistics(\$days:Int){
   dashboardStatistics{
@@ -41,7 +48,9 @@ class Stats extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text('Stats')),
       body: Query(
-        options: QueryOptions(document: gql(stats), variables: {'days': 30}),
+        options: QueryOptions(
+            document: gql(stats),
+            variables: {'days': days}),
         builder: (
           QueryResult result, {
           Refetch? refetch,
@@ -49,11 +58,14 @@ class Stats extends StatelessWidget {
         }) {
           var stats = result.data!['dashboardStatistics'];
           print(stats);
+          if (result.isLoading) {
+            return Center(child: CircularProgressIndicator());
+          }
           return Column(children: [
-              TextField(
-              keyboardType: TextInputType.number,
-              textAlign: TextAlign.right
-          ),
+            TextField(
+                controller: daysController,
+                keyboardType: TextInputType.number,
+                textAlign: TextAlign.right),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               textDirection: TextDirection.rtl,
@@ -99,9 +111,15 @@ class Stats extends StatelessWidget {
                 Text(stats['total']['kw'].toString()),
               ],
             ),
-            TextButton(onPressed: () {
-              refetch!();
-            }, child: Text('hi'),)
+            TextButton(
+              onPressed: () {
+                setState((){
+                  days = daysController.text;
+                });
+                refetch!();
+              },
+              child: Text('update'),
+            )
           ]);
         },
       ),
