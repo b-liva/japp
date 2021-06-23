@@ -8,9 +8,11 @@ class Sales extends StatefulWidget {
 }
 
 class _SalesState extends State<Sales> {
+  TextEditingController daysController = new TextEditingController();
   var f = intl.NumberFormat("#,###");
+
 //  var f = intl.NumberFormat.currency(locale: "en_US", symbol: "ریال");
-  int days = 30;
+  String days = '30';
   String sales = """
   query fetchSalesData(\$days:Int){
   salesTotal(days:\$days)
@@ -31,16 +33,32 @@ class _SalesState extends State<Sales> {
           Refetch? refetch,
           FetchMore? fetchMore,
         }) {
-          var sale_data = result.data;
+          if (result.isLoading){
+            return Center(child: CircularProgressIndicator());
+          }
+          var saleData = result.data;
 
           return Column(
             children: [
+              TextField(
+                  controller: daysController,
+                  keyboardType: TextInputType.number,
+                  textAlign: TextAlign.right),
+              TextButton(
+                onPressed: () {
+                  setState(() {
+                    days = daysController.text;
+                  });
+                  refetch!();
+                },
+                child: Text('update'),
+              ),
               Row(
                 textDirection: TextDirection.rtl,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Text('فروش'),
-                  Text(f.format(sale_data!['salesTotal']))
+                  Text(f.format(saleData!['salesTotal']))
                 ],
               ),
               Row(
@@ -48,9 +66,9 @@ class _SalesState extends State<Sales> {
                 textDirection: TextDirection.rtl,
                 children: [
                   Text('دریافتی'),
-                  Text(f.format(sale_data['incomeTotal']))
+                  Text(f.format(saleData['incomeTotal']))
                 ],
-              ),
+              )
             ],
           );
         },
