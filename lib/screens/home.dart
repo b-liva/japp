@@ -30,6 +30,13 @@ class Home extends StatelessWidget {
               },
               label: Text('آمار'),
               icon: Icon(Icons.download_sharp),
+            ),
+            TextButton.icon(
+              onPressed: (){
+                Navigator.pushNamed(context, '/sales');
+              },
+              label: Text('فروش'),
+              icon: Icon(Icons.sensor_door),
             )
           ],
         )
