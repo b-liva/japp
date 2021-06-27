@@ -78,21 +78,37 @@ class _DashState extends State<Dash> {
                       return Padding(
                         padding: EdgeInsets.all(5),
                         child: Card(
-                          child: ListTile(
-                            onTap: () {},
-                            title: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              textDirection: TextDirection.rtl,
-                              children: [
-                                Text(data[index]['node']['title']),
-                                Text(f.format(data[index]['node']['salesQtyByDays'])),
-                                Text(f.format(data[index]['node']['salesKwByDays']['amount'])),
-//                          Text(data[index]['node']['salesAmountByDays']['amount']
-//                              .toString()),
-//                          Text(data[index]['node']['salesPricePerKw']
-//                              .toString()),
-                              ],
-                            ),
+                          child: Column(
+                            children: [
+                              ListTile(
+                                onTap: () {},
+                                title: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  textDirection: TextDirection.rtl,
+                                  children: [
+                                    Text(data[index]['node']['title'], style: TextStyle(fontSize: 20),),
+                                  ],
+                                ),
+                              ),
+                              Row(
+                                textDirection: TextDirection.rtl,
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                children: [
+                                  Column(
+                                    children: [
+                                      Text("${f.format(data[index]['node']['salesQtyByDays'])}دستگاه "),
+                                      Text("${f.format(data[index]['node']['salesKwByDays']['amount'])} کیلووات "),
+                                    ],
+                                  ),
+                                  Column(
+                                    children: [
+                                      Text("${f.format(data[index]['node']['salesAmountByDays']['amount'])} ریال"),
+                                      Text("${f.format(data[index]['node']['salesPricePerKw'])} بر کیلووات ")
+                                    ],
+                                  ),
+                                ],
+                              )
+                            ],
                           ),
                         ),
                       );
