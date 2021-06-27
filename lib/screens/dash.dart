@@ -55,31 +55,51 @@ class _DashState extends State<Dash> {
               return Center(child: CircularProgressIndicator());
             }
             var data = result.data!['allProjectTypes']['edges'];
-            return ListView.builder(
-              itemCount: data.length,
-              itemBuilder: (BuildContext context, int index) {
-                return Padding(
-                  padding: EdgeInsets.all(5),
-                  child: Card(
-                    child: ListTile(
-                      onTap: () {},
-                      title: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        textDirection: TextDirection.rtl,
-                        children: [
-                          Text(data[index]['node']['title']),
-                          Text(f.format(data[index]['node']['salesQtyByDays'])),
-                          Text(f.format(data[index]['node']['salesKwByDays']['amount'])),
+
+            return Column(
+              children: [
+                TextField(
+                    controller: daysController,
+                    keyboardType: TextInputType.number,
+                    textAlign: TextAlign.right),
+                TextButton(
+                  onPressed: () {
+                    setState(() {
+                      days = daysController.text;
+                    });
+                    refetch!();
+                  },
+                  child: Text('update'),
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: data.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Padding(
+                        padding: EdgeInsets.all(5),
+                        child: Card(
+                          child: ListTile(
+                            onTap: () {},
+                            title: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              textDirection: TextDirection.rtl,
+                              children: [
+                                Text(data[index]['node']['title']),
+                                Text(f.format(data[index]['node']['salesQtyByDays'])),
+                                Text(f.format(data[index]['node']['salesKwByDays']['amount'])),
 //                          Text(data[index]['node']['salesAmountByDays']['amount']
 //                              .toString()),
 //                          Text(data[index]['node']['salesPricePerKw']
 //                              .toString()),
-                        ],
-                      ),
-                    ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    },
                   ),
-                );
-              },
+                ),
+              ],
             );
           }),
     );
