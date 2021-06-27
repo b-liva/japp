@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:intl/intl.dart' as intl;
@@ -11,6 +12,7 @@ class _DashState extends State<Dash> {
   String days = '2000';
   TextEditingController daysController = new TextEditingController();
   var f = intl.NumberFormat("#,###");
+  var fd = intl.NumberFormat("#.#");
 
 
   String salesQuery = """
@@ -96,14 +98,26 @@ class _DashState extends State<Dash> {
                                 children: [
                                   Column(
                                     children: [
-                                      Text("${f.format(data[index]['node']['salesQtyByDays'])}دستگاه "),
+                                      Text("${f.format(data[index]['node']['salesQtyByDays'])} دستگاه", textDirection: TextDirection.rtl,),
                                       Text("${f.format(data[index]['node']['salesKwByDays']['amount'])} کیلووات "),
+                                      Text("${fd.format(data[index]['node']['salesKwByDays']['percent'])}%",
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          color: Colors.blueAccent
+                                        ),
+                                      )
                                     ],
                                   ),
                                   Column(
                                     children: [
+                                      Text("${f.format(data[index]['node']['salesPricePerKw'])} بر کیلووات "),
                                       Text("${f.format(data[index]['node']['salesAmountByDays']['amount'])} ریال"),
-                                      Text("${f.format(data[index]['node']['salesPricePerKw'])} بر کیلووات ")
+                                      Text("${fd.format(data[index]['node']['salesAmountByDays']['percent'])}%",
+                                        style: TextStyle(
+                                            fontSize: 18,
+                                            color: Colors.blueAccent
+                                        ),
+                                      )
                                     ],
                                   ),
                                 ],

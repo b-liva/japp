@@ -8,9 +8,10 @@ import 'package:jcm/screens/home.dart';
 import 'package:jcm/screens/users.dart';
 import 'project_stats.dart';
 
-void main() async {
+void main() {
   final HttpLink httpLink = HttpLink(
-    'http://10.0.2.2/graphql/',
+//    'http://10.0.2.2/graphql/',
+    'http://crm.jemcomotor.ir/graphql/',
   );
 
   ValueNotifier<GraphQLClient> client = ValueNotifier(
@@ -23,10 +24,11 @@ void main() async {
   runApp(GraphQLProvider(
     client: client,
     child: MaterialApp(
+      home: Directionality(textDirection: TextDirection.rtl, child: Home()),
       title: "Jcm Demo",
       initialRoute: '/',
       routes: {
-        '/': (context) => Home(),
+//        '/': (context) => Home(),
         '/users': (context) => Users(),
         '/stats': (context) => Stats(),
         '/sales': (context) => Sales(),
