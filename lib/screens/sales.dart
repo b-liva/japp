@@ -54,6 +54,7 @@ class _SalesState extends State<Sales> {
                 child: Text('update'),
               ),
               Row(
+                textDirection: TextDirection.rtl,
                 children: [
                   Expanded(
                     child: Container(
@@ -66,7 +67,13 @@ class _SalesState extends State<Sales> {
                           padding: const EdgeInsets.all(15),
                           child: Column(
                             children: [
-                              Text('فروش'),
+                              Text(
+                                'فروش',
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    letterSpacing: 2,
+                                    color: Colors.blueAccent),
+                              ),
                               Text(f.format(saleData!['salesTotal']))
                             ],
                           ),
@@ -85,7 +92,13 @@ class _SalesState extends State<Sales> {
                             padding: const EdgeInsets.all(15.0),
                             child: Column(
                               children: [
-                                Text('دریافتی'),
+                                Text(
+                                  'دریافتی',
+                                  style: TextStyle(
+                                    color: Colors.blueAccent,
+                                    fontSize: 20,
+                                  ),
+                                ),
                                 Text(f.format(saleData['incomeTotal']))
                               ],
                             ),
