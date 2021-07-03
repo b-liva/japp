@@ -53,6 +53,7 @@ class _SalesState extends State<Sales> {
                 },
                 child: Text('update'),
               ),
+              Text('میزان فروش و دریافتی در $days روز اخیر'),
               Row(
                 textDirection: TextDirection.rtl,
                 children: [
