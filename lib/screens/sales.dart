@@ -33,7 +33,7 @@ class _SalesState extends State<Sales> {
           Refetch? refetch,
           FetchMore? fetchMore,
         }) {
-          if (result.isLoading){
+          if (result.isLoading) {
             return Center(child: CircularProgressIndicator());
           }
           var saleData = result.data;
@@ -54,21 +54,46 @@ class _SalesState extends State<Sales> {
                 child: Text('update'),
               ),
               Row(
-                textDirection: TextDirection.rtl,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Text('فروش'),
-                  Text(f.format(saleData!['salesTotal']))
+                  Expanded(
+                    child: Container(
+//                    width: 200,
+//                    padding: EdgeInsets.all(5),
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15.0)),
+                        child: Padding(
+                          padding: const EdgeInsets.all(15),
+                          child: Column(
+                            children: [
+                              Text('فروش'),
+                              Text(f.format(saleData!['salesTotal']))
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+//                    width: 200,
+//                    padding: EdgeInsets.all(15.0),
+                      child: Card(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15.0)),
+                          child: Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Column(
+                              children: [
+                                Text('دریافتی'),
+                                Text(f.format(saleData['incomeTotal']))
+                              ],
+                            ),
+                          )),
+                    ),
+                  ),
                 ],
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                textDirection: TextDirection.rtl,
-                children: [
-                  Text('دریافتی'),
-                  Text(f.format(saleData['incomeTotal']))
-                ],
-              )
             ],
           );
         },
