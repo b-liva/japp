@@ -8,9 +8,9 @@ import 'package:japp/screens/home.dart';
 import 'package:japp/screens/users.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-//const SERVER = 'http://10.0.2.2/graphql/'
-const SERVER = 'http://crm.jemcomotor.ir/graphql/';
-final storage = FlutterSecureStorage();
+//const SERVER = 'http://10.0.2.2/graphql/';
+//const SERVER = 'http://192.168.43.57/graphql/';
+const SERVER = 'http://192.168.1.44/graphql/';
 
 
 void main() {
