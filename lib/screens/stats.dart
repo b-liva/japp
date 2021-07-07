@@ -10,6 +10,13 @@ class Stats extends StatefulWidget {
 
 class _StatsState extends State<Stats> {
   TextEditingController daysController = new TextEditingController();
+  List projectTypes = [
+    'routine',
+    'project',
+    'services',
+    'ex',
+    'total',
+  ];
   var days = "30";
   String stats = """
   query dashboardStatistics(\$days:Int){
@@ -89,99 +96,17 @@ class _StatsState extends State<Stats> {
                       DataColumn(label: Text('تعداد')),
                       DataColumn(label: Text('کیلووات')),
                     ],
-                    rows: [
-                      DataRow(cells: [
-                        DataCell(Text(stats['routine']['title'])),
-                        DataCell(Text(stats['routine']['count'].toString())),
-                        DataCell(Text(stats['routine']['kw'].toString())),
-                      ]),
-                      DataRow(cells: [
-                        DataCell(Text(stats['project']['title'])),
-                        DataCell(Text(stats['project']['count'].toString())),
-                        DataCell(Text(stats['project']['kw'].toString())),
-                      ]),
-                      DataRow(cells: [
-                        DataCell(Text(stats['services']['title'])),
-                        DataCell(Text(stats['services']['count'].toString())),
-                        DataCell(Text(stats['services']['kw'].toString())),
-                      ]),
-                      DataRow(cells: [
-                        DataCell(Text(stats['ex']['title'])),
-                        DataCell(Text(stats['ex']['count'].toString())),
-                        DataCell(Text(stats['ex']['kw'].toString())),
-                      ]),
-                      DataRow(cells: [
-                        DataCell(Text(stats['total']['title'])),
-                        DataCell(Text(stats['total']['count'].toString())),
-                        DataCell(Text(stats['total']['kw'].toString())),
-                      ]),
-                    ],
+                    rows: projectTypes.map((index) {
+                      return DataRow(cells: [
+                        DataCell(Text(stats[index]['title'])),
+                        DataCell(Text(stats[index]['count'].toString())),
+                        DataCell(Text(stats[index]['kw'].toString())),
+                      ]);
+                    }).toList(),
                   ),
                 ],
               ),
             );
-
-//            return Column(children: [
-//              TextField(
-//                  decoration: InputDecoration(labelText: "روز"),
-//                  controller: daysController,
-//                  keyboardType: TextInputType.number,
-//                  textAlign: TextAlign.right),
-//              Row(
-//                mainAxisAlignment: MainAxisAlignment.spaceAround,
-//                textDirection: TextDirection.rtl,
-//                children: [
-//                  Text(stats['routine']['title']),
-//                  Text(stats['routine']['count'].toString()),
-//                  Text(stats['routine']['kw'].toString()),
-//                ],
-//              ),
-//              Row(
-//                mainAxisAlignment: MainAxisAlignment.spaceAround,
-//                textDirection: TextDirection.rtl,
-//                children: [
-//                  Text(stats['project']['title']),
-//                  Text(stats['project']['count'].toString()),
-//                  Text(stats['project']['kw'].toString()),
-//                ],
-//              ),
-//              Row(
-//                mainAxisAlignment: MainAxisAlignment.spaceAround,
-//                textDirection: TextDirection.rtl,
-//                children: [
-//                  Text(stats['services']['title']),
-//                  Text(stats['services']['count'].toString()),
-//                  Text(stats['services']['kw'].toString()),
-//                ],
-//              ),
-//              Row(
-//                mainAxisAlignment: MainAxisAlignment.spaceAround,
-//                textDirection: TextDirection.rtl,
-//                children: [
-//                  Text(stats['ex']['title']),
-//                  Text(stats['ex']['count'].toString()),
-//                  Text(stats['ex']['kw'].toString()),
-//                ],
-//              ),
-//              Row(
-//                mainAxisAlignment: MainAxisAlignment.spaceAround,
-//                textDirection: TextDirection.rtl,
-//                children: [
-//                  Text(stats['total']['title']),
-//                  Text(stats['total']['count'].toString()),
-//                  Text(stats['total']['kw'].toString()),
-//                ],
-//              ),
-//              TextButton(
-//                onPressed: () {
-//                  setState(() {
-//                    days = daysController.text;
-//                  });
-//                  refetch!();
-//                },
-//                child: Text('update'),
-//              )
-//            ]);
           },
         ),
       ),
