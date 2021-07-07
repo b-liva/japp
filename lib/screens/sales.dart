@@ -26,7 +26,7 @@ class _SalesState extends State<Sales> {
       textDirection: TextDirection.rtl,
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Sales'),
+          title: Text('فروش'),
         ),
         body: Query(
           options: QueryOptions(document: gql(sales), variables: {'days': days}),

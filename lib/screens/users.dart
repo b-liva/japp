@@ -35,7 +35,7 @@ class _UsersState extends State<Users> {
       textDirection: TextDirection.rtl,
       child: Scaffold(
           appBar: AppBar(
-            title: Text('Users'),
+            title: Text('کارشناسان'),
           ),
           body: Query(
               options: QueryOptions(document: gql(usersList), variables: {

@@ -58,7 +58,7 @@ class _StatsState extends State<Stats> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-        appBar: AppBar(title: Text('Stats')),
+        appBar: AppBar(title: Text('درخواست ها')),
         body: Query(
           options:
               QueryOptions(document: gql(stats), variables: {'days': days}),

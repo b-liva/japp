@@ -28,7 +28,7 @@ class _CustomerSalesState extends State<CustomerSales> {
       textDirection: TextDirection.rtl,
       child: Scaffold(
         appBar: AppBar(
-          title: Text('مشتریان به ترتیب میزان خرید'),
+          title: Text('مشتریان'),
         ),
         body: Query(
           options: QueryOptions(

@@ -29,7 +29,7 @@ void main() {
     client: client,
     child: MaterialApp(
       home: Directionality(textDirection: TextDirection.rtl, child: Home()),
-      title: "Jcm Demo",
+      title: "Jcm",
       initialRoute: '/',
       routes: {
 //        '/': (context) => Home(),
