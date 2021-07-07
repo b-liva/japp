@@ -16,51 +16,57 @@ class Home extends StatelessWidget {
             textDirection: TextDirection.rtl,
             child: Scaffold(
               body: GridView.count(
-                primary: false,
-                crossAxisCount: 3,
-                padding: const EdgeInsets.all(20),
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
+                crossAxisCount: 1,
                 children: [
-                  Container(
-                    child: TextButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/users');
-                      },
-                      child: Text('کارشناسان'),
-                    ),
-                  ),
-                  Container(
-                    child: TextButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/stats');
-                      },
-                      child: Text('سفارش ها'),
-                    ),
-                  ),
-                  Container(
-                    child: TextButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/sales');
-                      },
-                      child: Text('فروش'),
-                    ),
-                  ),
-                  Container(
-                    child: TextButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/customer');
-                      },
-                      child: Text('مشتریان'),
-                    ),
-                  ),
-                  Container(
-                    child: TextButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/dash');
-                      },
-                      child: Text('dash'),
-                    ),
+                  Center(child: Text('charts')),
+                  GridView.count(
+                    primary: false,
+                    crossAxisCount: 3,
+                    padding: const EdgeInsets.all(20),
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10,
+                    children: [
+                      Container(
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/users');
+                          },
+                          child: Text('کارشناسان'),
+                        ),
+                      ),
+                      Container(
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/stats');
+                          },
+                          child: Text('سفارش ها'),
+                        ),
+                      ),
+                      Container(
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/sales');
+                          },
+                          child: Text('فروش'),
+                        ),
+                      ),
+                      Container(
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/customer');
+                          },
+                          child: Text('مشتریان'),
+                        ),
+                      ),
+                      Container(
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/dash');
+                          },
+                          child: Text('dash'),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
