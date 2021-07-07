@@ -110,8 +110,8 @@ class _DashState extends State<Dash> {
                                   ),
                                   Column(
                                     children: [
-                                      Text("${f.format(data[index]['node']['salesPricePerKw'])} بر کیلووات "),
                                       Text("${f.format(data[index]['node']['salesAmountByDays']['amount'])} ریال"),
+                                      Text("${f.format(data[index]['node']['salesPricePerKw'])} هر کیلووات "),
                                       Text("${fd.format(data[index]['node']['salesAmountByDays']['percent'])}%",
                                         style: TextStyle(
                                             fontSize: 18,
