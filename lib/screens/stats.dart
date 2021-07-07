@@ -82,6 +82,7 @@ class _StatsState extends State<Stats> {
                     },
                     child: Text('update'),
                   ),
+                  Text('در خواست های ورودی برای $days روز اخیر'),
                   DataTable(
                     columns: [
                       DataColumn(label: Text('نوع فروش')),
