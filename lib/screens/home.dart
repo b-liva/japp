@@ -12,51 +12,58 @@ class Home extends StatelessWidget {
 //    WidgetsBinding.instance.addPostFrameCallback((_) => initMethod(context));
 
     return MaterialApp(
-      home: Directionality(
-        textDirection: TextDirection.rtl,
-        child: Scaffold(
-            body: SafeArea(
-                child: Column(
-          textDirection: TextDirection.rtl,
-          children: [
-            TextButton.icon(
-              onPressed: () {
-                Navigator.pushNamed(context, '/users');
-              },
-              label: Text('کارشناسان'),
-              icon: Icon(Icons.edit_location),
-            ),
-            TextButton.icon(
-              onPressed: () {
-                Navigator.pushNamed(context, '/stats');
-              },
-              label: Text('آمار'),
-              icon: Icon(Icons.download_sharp),
-            ),
-            TextButton.icon(
-              onPressed: () {
-                Navigator.pushNamed(context, '/sales');
-              },
-              label: Text('فروش'),
-              icon: Icon(Icons.sensor_door),
-            ),
-            TextButton.icon(
-              onPressed: () {
-                Navigator.pushNamed(context, '/customer');
-              },
-              label: Text('مشتریان'),
-              icon: Icon(Icons.sensor_door),
-            ),
-            TextButton.icon(
-              onPressed: () {
-                Navigator.pushNamed(context, '/dash');
-              },
-              label: Text('dash'),
-              icon: Icon(Icons.sensor_door),
-            ),
-          ],
-        ))),
-      ),
-    );
+        home: Directionality(
+            textDirection: TextDirection.rtl,
+            child: Scaffold(
+              body: GridView.count(
+                primary: false,
+                crossAxisCount: 3,
+                padding: const EdgeInsets.all(20),
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                children: [
+                  Container(
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/users');
+                      },
+                      child: Text('کارشناسان'),
+                    ),
+                  ),
+                  Container(
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/stats');
+                      },
+                      child: Text('آمار'),
+                    ),
+                  ),
+                  Container(
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/sales');
+                      },
+                      child: Text('فروش'),
+                    ),
+                  ),
+                  Container(
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/customer');
+                      },
+                      child: Text('مشتریان'),
+                    ),
+                  ),
+                  Container(
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/dash');
+                      },
+                      child: Text('dash'),
+                    ),
+                  ),
+                ],
+              ),
+            )));
   }
 }
