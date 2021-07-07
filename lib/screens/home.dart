@@ -11,9 +11,12 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
 //    WidgetsBinding.instance.addPostFrameCallback((_) => initMethod(context));
 
-    return Scaffold(
-      body: SafeArea(
-        child: Row(
+    return MaterialApp(
+      home: Directionality(
+        textDirection: TextDirection.rtl,
+        child: Scaffold(
+            body: SafeArea(
+                child: Column(
           textDirection: TextDirection.rtl,
           children: [
             TextButton.icon(
@@ -22,7 +25,6 @@ class Home extends StatelessWidget {
               },
               label: Text('کارشناسان'),
               icon: Icon(Icons.edit_location),
-
             ),
             TextButton.icon(
               onPressed: () {
@@ -32,29 +34,29 @@ class Home extends StatelessWidget {
               icon: Icon(Icons.download_sharp),
             ),
             TextButton.icon(
-              onPressed: (){
+              onPressed: () {
                 Navigator.pushNamed(context, '/sales');
               },
               label: Text('فروش'),
               icon: Icon(Icons.sensor_door),
             ),
             TextButton.icon(
-              onPressed: (){
+              onPressed: () {
                 Navigator.pushNamed(context, '/customer');
               },
               label: Text('مشتریان'),
               icon: Icon(Icons.sensor_door),
             ),
             TextButton.icon(
-              onPressed: (){
+              onPressed: () {
                 Navigator.pushNamed(context, '/dash');
               },
               label: Text('dash'),
               icon: Icon(Icons.sensor_door),
             ),
           ],
-        )
-      )
+        ))),
+      ),
     );
   }
 }
