@@ -72,6 +72,7 @@ class _DashState extends State<Dash> {
                   },
                   child: Text('update'),
                 ),
+                Text('فروش برای $days روز اخیر'),
                 Expanded(
                   child: ListView.builder(
                     itemCount: data.length,
