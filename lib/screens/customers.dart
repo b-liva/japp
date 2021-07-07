@@ -56,6 +56,7 @@ class _CustomerSalesState extends State<CustomerSales> {
                 child: Text('update'),
               ),
               Text("${customers.length} مورد یافت شد"),
+              Text('مشتری به ترتیب خرید برای $days روز اخیر'),
               Expanded(
                 child: ListView.builder(
                     itemCount: customers.length,
