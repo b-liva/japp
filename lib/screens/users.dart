@@ -46,6 +46,11 @@ class _UsersState extends State<Users> {
               Refetch? refetch,
               FetchMore? fetchMore,
             }) {
+
+              if (result.isLoading) {
+                return Center(child: CircularProgressIndicator());
+              }
+              
               var users = result.data!['allUsers']['edges'] ?? [];
               return Directionality(
                 textDirection: TextDirection.rtl,
