@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart' as intl;
 
 class Stats extends StatefulWidget {
   @override
@@ -10,6 +11,8 @@ class Stats extends StatefulWidget {
 
 class _StatsState extends State<Stats> {
   TextEditingController daysController = new TextEditingController();
+  var f = intl.NumberFormat("#,###");
+
   List projectTypes = [
     'routine',
     'project',
@@ -99,8 +102,8 @@ class _StatsState extends State<Stats> {
                     rows: projectTypes.map((index) {
                       return DataRow(cells: [
                         DataCell(Text(stats[index]['title'])),
-                        DataCell(Text(stats[index]['count'].toString())),
-                        DataCell(Text(stats[index]['kw'].toString())),
+                        DataCell(Text(f.format(stats[index]['count']))),
+                        DataCell(Text(f.format(stats[index]['kw']))),
                       ]);
                     }).toList(),
                   ),
