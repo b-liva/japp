@@ -31,48 +31,51 @@ class _UsersState extends State<Users> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text('Users'),
-        ),
-        body: Query(
-            options: QueryOptions(document: gql(usersList), variables: {
-              'isSales': true,
-            }
-//              pollInterval: Duration(seconds: 180),
-                ),
-            builder: (
-              QueryResult result, {
-              Refetch? refetch,
-              FetchMore? fetchMore,
-            }) {
-
-              if (result.isLoading) {
-                return Center(child: CircularProgressIndicator());
+    return Directionality(
+      textDirection: TextDirection.rtl,
+      child: Scaffold(
+          appBar: AppBar(
+            title: Text('Users'),
+          ),
+          body: Query(
+              options: QueryOptions(document: gql(usersList), variables: {
+                'isSales': true,
               }
-              
-              var users = result.data!['allUsers']['edges'] ?? [];
-              return Directionality(
-                textDirection: TextDirection.rtl,
-                child: DataTable(
-                    columns: [
-                      DataColumn(label: Text('کارشناس')),
-                      DataColumn(label: Text('ثبت نشده')),
-                      DataColumn(label: Text('%ثبت شده کل')),
-                    ],
-                    rows: List.generate(
-                        users.length,
-                        (index) => DataRow(cells: [
-                              DataCell(Text(users[index]['node']['lastName'])),
-                              DataCell(Text(users[index]['node']
-                                      ['orderNotEnteredCount']
-                                  .toString())),
-                              DataCell(Text(fd
-                                  .format(
-                                      users[index]['node']['percentEntered'])
-                                  .toString())),
-                            ]))),
-              );
-            }));
+//              pollInterval: Duration(seconds: 180),
+                  ),
+              builder: (
+                QueryResult result, {
+                Refetch? refetch,
+                FetchMore? fetchMore,
+              }) {
+
+                if (result.isLoading) {
+                  return Center(child: CircularProgressIndicator());
+                }
+
+                var users = result.data!['allUsers']['edges'] ?? [];
+                return Directionality(
+                  textDirection: TextDirection.rtl,
+                  child: DataTable(
+                      columns: [
+                        DataColumn(label: Text('کارشناس')),
+                        DataColumn(label: Text('ثبت نشده')),
+                        DataColumn(label: Text('%ثبت شده کل')),
+                      ],
+                      rows: List.generate(
+                          users.length,
+                          (index) => DataRow(cells: [
+                                DataCell(Text(users[index]['node']['lastName'])),
+                                DataCell(Text(users[index]['node']
+                                        ['orderNotEnteredCount']
+                                    .toString())),
+                                DataCell(Text(fd
+                                    .format(
+                                        users[index]['node']['percentEntered'])
+                                    .toString())),
+                              ]))),
+                );
+              })),
+    );
   }
 }

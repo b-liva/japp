@@ -40,98 +40,101 @@ class _DashState extends State<Dash> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('مجوز'),
-      ),
-      body: Query(
-          options: QueryOptions(
-              document: gql(salesQuery), variables: {'days': days}),
-          builder: (
-            QueryResult result, {
-            Refetch? refetch,
-            FetchMore? fetchMore,
-          }) {
-            if (result.isLoading) {
-              return Center(child: CircularProgressIndicator());
-            }
-            var data = result.data!['allProjectTypes']['edges'];
+    return Directionality(
+      textDirection: TextDirection.rtl,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('مجوز'),
+        ),
+        body: Query(
+            options: QueryOptions(
+                document: gql(salesQuery), variables: {'days': days}),
+            builder: (
+              QueryResult result, {
+              Refetch? refetch,
+              FetchMore? fetchMore,
+            }) {
+              if (result.isLoading) {
+                return Center(child: CircularProgressIndicator());
+              }
+              var data = result.data!['allProjectTypes']['edges'];
 
-            return Column(
-              children: [
-                TextField(
-                    controller: daysController,
-                    keyboardType: TextInputType.number,
-                    textAlign: TextAlign.right),
-                TextButton(
-                  onPressed: () {
-                    setState(() {
-                      days = daysController.text;
-                    });
-                    refetch!();
-                  },
-                  child: Text('update'),
-                ),
-                Text('فروش برای $days روز اخیر'),
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: data.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Padding(
-                        padding: EdgeInsets.all(5),
-                        child: Card(
-                          child: Column(
-                            children: [
-                              ListTile(
-                                onTap: () {},
-                                title: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  textDirection: TextDirection.rtl,
-                                  children: [
-                                    Text(data[index]['node']['title'], style: TextStyle(fontSize: 20),),
-                                  ],
-                                ),
-                              ),
-                              Row(
-                                textDirection: TextDirection.rtl,
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                children: [
-                                  Column(
+              return Column(
+                children: [
+                  TextField(
+                      controller: daysController,
+                      keyboardType: TextInputType.number,
+                      textAlign: TextAlign.right),
+                  TextButton(
+                    onPressed: () {
+                      setState(() {
+                        days = daysController.text;
+                      });
+                      refetch!();
+                    },
+                    child: Text('update'),
+                  ),
+                  Text('فروش برای $days روز اخیر'),
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: data.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Padding(
+                          padding: EdgeInsets.all(5),
+                          child: Card(
+                            child: Column(
+                              children: [
+                                ListTile(
+                                  onTap: () {},
+                                  title: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    textDirection: TextDirection.rtl,
                                     children: [
-                                      Text("${f.format(data[index]['node']['salesQtyByDays'])} دستگاه", textDirection: TextDirection.rtl,),
-                                      Text("${f.format(data[index]['node']['salesKwByDays']['amount'])} کیلووات "),
-                                      Text("${fd.format(data[index]['node']['salesKwByDays']['percent'])}%",
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          color: Colors.blueAccent
-                                        ),
-                                      )
+                                      Text(data[index]['node']['title'], style: TextStyle(fontSize: 20),),
                                     ],
                                   ),
-                                  Column(
-                                    children: [
-                                      Text("${f.format(data[index]['node']['salesAmountByDays']['amount'])} ریال"),
-                                      Text("${f.format(data[index]['node']['salesPricePerKw'])} هر کیلووات "),
-                                      Text("${fd.format(data[index]['node']['salesAmountByDays']['percent'])}%",
-                                        style: TextStyle(
+                                ),
+                                Row(
+                                  textDirection: TextDirection.rtl,
+                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Column(
+                                      children: [
+                                        Text("${f.format(data[index]['node']['salesQtyByDays'])} دستگاه", textDirection: TextDirection.rtl,),
+                                        Text("${f.format(data[index]['node']['salesKwByDays']['amount'])} کیلووات "),
+                                        Text("${fd.format(data[index]['node']['salesKwByDays']['percent'])}%",
+                                          style: TextStyle(
                                             fontSize: 18,
                                             color: Colors.blueAccent
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ],
-                              )
-                            ],
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                    Column(
+                                      children: [
+                                        Text("${f.format(data[index]['node']['salesAmountByDays']['amount'])} ریال"),
+                                        Text("${f.format(data[index]['node']['salesPricePerKw'])} هر کیلووات "),
+                                        Text("${fd.format(data[index]['node']['salesAmountByDays']['percent'])}%",
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              color: Colors.blueAccent
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
                           ),
-                        ),
-                      );
-                    },
+                        );
+                      },
+                    ),
                   ),
-                ),
-              ],
-            );
-          }),
+                ],
+              );
+            }),
+      ),
     );
   }
 }

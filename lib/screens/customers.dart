@@ -24,66 +24,69 @@ class _CustomerSalesState extends State<CustomerSales> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('مشتریان به ترتیب میزان خرید'),
-      ),
-      body: Query(
-        options: QueryOptions(
-            document: gql(customerBySale), variables: {'days': days}),
-        builder: (
-          QueryResult result, {
-          Refetch? refetch,
-          FetchMore? fetchMore,
-        }) {
-          if (result.isLoading) {
-            return Center(child: CircularProgressIndicator());
-          }
-          var customers = result.data!['customerBySale'];
-          return Column(
-            children: [
-              TextField(
-                  controller: daysController,
-                  keyboardType: TextInputType.number,
-                  textAlign: TextAlign.right),
-              TextButton(
-                onPressed: () {
-                  setState(() {
-                    days = daysController.text;
-                  });
-                  refetch!();
-                },
-                child: Text('update'),
-              ),
-              Text("${customers.length} مورد یافت شد"),
-              Text('مشتری به ترتیب خرید برای $days روز اخیر'),
-              Expanded(
-                child: ListView.builder(
-                    itemCount: customers.length,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: EdgeInsets.all(5),
-                        child: Card(
-                          child: ListTile(
-                            onTap: () {},
-                            title: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              textDirection: TextDirection.rtl,
-                              children: [
-                                Text((index + 1).toString()),
-                                Text(customers[index]['customerName']),
-                                Text(customers[index]['qty'].toString()),
-                                Text(f.format(customers[index]['amount'])),
-                              ],
+    return Directionality(
+      textDirection: TextDirection.rtl,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('مشتریان به ترتیب میزان خرید'),
+        ),
+        body: Query(
+          options: QueryOptions(
+              document: gql(customerBySale), variables: {'days': days}),
+          builder: (
+            QueryResult result, {
+            Refetch? refetch,
+            FetchMore? fetchMore,
+          }) {
+            if (result.isLoading) {
+              return Center(child: CircularProgressIndicator());
+            }
+            var customers = result.data!['customerBySale'];
+            return Column(
+              children: [
+                TextField(
+                    controller: daysController,
+                    keyboardType: TextInputType.number,
+                    textAlign: TextAlign.right),
+                TextButton(
+                  onPressed: () {
+                    setState(() {
+                      days = daysController.text;
+                    });
+                    refetch!();
+                  },
+                  child: Text('update'),
+                ),
+                Text("${customers.length} مورد یافت شد"),
+                Text('مشتری به ترتیب خرید برای $days روز اخیر'),
+                Expanded(
+                  child: ListView.builder(
+                      itemCount: customers.length,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: EdgeInsets.all(5),
+                          child: Card(
+                            child: ListTile(
+                              onTap: () {},
+                              title: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                textDirection: TextDirection.rtl,
+                                children: [
+                                  Text((index + 1).toString()),
+                                  Text(customers[index]['customerName']),
+                                  Text(customers[index]['qty'].toString()),
+                                  Text(f.format(customers[index]['amount'])),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                      );
-                    }),
-              ),
-            ],
-          );
-        },
+                        );
+                      }),
+                ),
+              ],
+            );
+          },
+        ),
       ),
     );
   }

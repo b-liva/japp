@@ -35,7 +35,7 @@ class Home extends StatelessWidget {
                       onPressed: () {
                         Navigator.pushNamed(context, '/stats');
                       },
-                      child: Text('آمار'),
+                      child: Text('سفارش ها'),
                     ),
                   ),
                   Container(
