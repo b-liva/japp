@@ -8,7 +8,7 @@ class Dash extends StatefulWidget {
 }
 
 class _DashState extends State<Dash> {
-  String days = '2000';
+  String days = '30';
   TextEditingController daysController = new TextEditingController();
   var f = intl.NumberFormat("#,###");
   var fd = intl.NumberFormat("#.#");

@@ -10,7 +10,7 @@ class CustomerSales extends StatefulWidget {
 class _CustomerSalesState extends State<CustomerSales> {
   TextEditingController daysController = new TextEditingController();
   var f = intl.NumberFormat("#,###");
-  String days = '365';
+  String days = '30';
   String customerBySale = """
   query fetchCustomersBySale(\$days:Int){
   customerBySale(days:\$days) {
