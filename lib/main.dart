@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:japp/config/app_config.dart';
 import 'package:japp/screens/customers.dart';
 import 'package:japp/screens/dash.dart';
 import 'package:japp/screens/sales.dart';
@@ -10,12 +11,14 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 //const SERVER = 'http://10.0.2.2/gqlqrs/';
 //const SERVER = 'http://192.168.43.57/gqlqrs/';
-//const SERVER = 'http://192.168.1.44/gqlqrs/';
-const SERVER = 'http://crm.jemcomotor.ir/gqlqrs/';
+const SERVER = 'http://192.168.1.44/gqlqrs/';
+//const SERVER = 'http://crm.jemcomotor.ir/gqlqrs/';
 
-void main() {
+void main({String? env}) async {
+  final config = await AppConfig.forEnvironment(env);
+
   final HttpLink httpLink = HttpLink(
-    SERVER,
+    config.apiUrl,
   );
 
   ValueNotifier<GraphQLClient> client = ValueNotifier(
