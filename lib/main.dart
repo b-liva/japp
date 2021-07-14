@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:japp/screens/customers.dart';
 import 'package:japp/screens/dash.dart';
+import 'package:japp/screens/order.dart';
 import 'package:japp/screens/sales.dart';
 import 'package:japp/screens/stats.dart';
 import 'package:japp/screens/home.dart';
@@ -10,8 +11,8 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 //const SERVER = 'http://10.0.2.2/gqlqrs/';
 //const SERVER = 'http://192.168.43.57/gqlqrs/';
-//const SERVER = 'http://192.168.1.44/gqlqrs/';
-const SERVER = 'http://crm.jemcomotor.ir/gqlqrs/';
+const SERVER = 'http://192.168.1.44/gqlqrs/';
+//const SERVER = 'http://crm.jemcomotor.ir/gqlqrs/';
 
 void main() {
   final HttpLink httpLink = HttpLink(
@@ -38,6 +39,7 @@ void main() {
         '/sales': (context) => Sales(),
         '/dash': (context) => Dash(),
         '/customer': (context) => CustomerSales(),
+        '/order': (context) => Order(),
       },
     ),
   ));

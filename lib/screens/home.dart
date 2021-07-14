@@ -66,6 +66,14 @@ class Home extends StatelessWidget {
                           child: Text('dash'),
                         ),
                       ),
+                      Container(
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/order');
+                          },
+                          child: Text('order'),
+                        ),
+                      ),
                     ],
                   ),
                 ],
