@@ -6,13 +6,35 @@ class Order extends StatefulWidget {
 }
 
 class _OrderState extends State<Order> {
+  TextEditingController numberController = new TextEditingController();
+  String number = '';
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Order'),
+    return Directionality(
+      textDirection: TextDirection.rtl,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Order'),
+        ),
+        body: Column(
+          children: [
+            TextField(
+              controller: numberController,
+              keyboardType: TextInputType.number,
+            ),
+            TextButton(
+              onPressed: () {
+                setState(() {
+                  number = numberController.text;
+                });
+              },
+              child: Text('get'),
+            ),
+            Text('Order nmber: $number'),
+          ],
+        ),
       ),
-      body: Text('Order'),
     );
   }
 }
