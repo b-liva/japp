@@ -1,13 +1,24 @@
 import 'package:flutter/material.dart';
 
-class Login extends StatefulWidget {
-  @override
-  _LoginState createState() => _LoginState();
-}
+class Login extends StatelessWidget {
+  final Future<void> Function() loginAction;
+  final String loginError;
 
-class _LoginState extends State<Login> {
+  const Login(this.loginAction, this.loginError, {Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        TextButton(
+          onPressed: () async {
+            await loginAction();
+          },
+          child: const Text('Login'),
+        ),
+        Text(loginError ?? ''),
+      ],
+    );
   }
 }
