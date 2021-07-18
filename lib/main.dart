@@ -16,7 +16,7 @@ const DEVICE_SERVER = 'http://192.168.1.44/gqlqrs/';
 
 void main() {
   final HttpLink httpLink = HttpLink(
-    SERVER,
+    CHROME_SERVER,
   );
 
   final authLink = AuthLink(

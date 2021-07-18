@@ -14,6 +14,9 @@ class _OrderState extends State<Order> {
   orderByNumber(number:\$number) {
     id
     number
+    totalKw
+    totalQty
+    dateFa
     customer{
       id
       name
@@ -77,9 +80,11 @@ class _OrderState extends State<Order> {
                     child: Text('get'),
                   ),
                   Text(
-                      'شماره درخواست: ${orderRes?['orderByNumber']['number']}'),
+                      'شماره درخواست: ${orderRes?['orderByNumber']['number'] ?? ''}'),
                   Text(orderRes?['orderByNumber']['customer']['name'] ?? ''),
                   Text(orderRes?['orderByNumber']['dateFa'] ?? ''),
+                  Text("کیلووات: ${orderRes?['orderByNumber']['totalKw'].toString() ?? ''}"),
+                  Text("دستگاه: ${orderRes?['orderByNumber']['totalQty'].toString() ?? ''}"),
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: DataTable(
