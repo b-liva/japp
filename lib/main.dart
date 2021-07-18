@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:japp/screens/customers.dart';
 import 'package:japp/screens/dash.dart';
+import 'package:japp/screens/login.dart';
 import 'package:japp/screens/order.dart';
 import 'package:japp/screens/sales.dart';
 import 'package:japp/screens/stats.dart';
@@ -46,6 +47,7 @@ void main() {
         '/dash': (context) => Dash(),
         '/customer': (context) => CustomerSales(),
         '/order': (context) => Order(),
+        '/login': (context) => Login(),
       },
     ),
   ));
