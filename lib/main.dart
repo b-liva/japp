@@ -3,6 +3,7 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:japp/screens/customers.dart';
 import 'package:japp/screens/dash.dart';
 import 'package:japp/screens/order.dart';
+import 'package:japp/screens/proforma.dart';
 import 'package:japp/screens/sales.dart';
 import 'package:japp/screens/stats.dart';
 import 'package:japp/screens/home.dart';
@@ -46,6 +47,7 @@ void main() {
         '/dash': (context) => Dash(),
         '/customer': (context) => CustomerSales(),
         '/order': (context) => Order(),
+        Proforma.routeName: (context) => Proforma(),
       },
     ),
   ));

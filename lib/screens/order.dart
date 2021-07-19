@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:japp/screens/proforma.dart';
 
 class Order extends StatefulWidget {
   @override
@@ -92,29 +93,38 @@ class _OrderState extends State<Order> {
                     children: [
                       Expanded(
                         child: Container(
-                          child: Column(
-                            children: [
-                              Text(
-                                  'شماره درخواست: ${orderRes?['orderByNumber']['number'] ?? ''}'),
-                              Text(orderRes?['orderByNumber']['customer']['name'] ?? ''),
-                              Text(orderRes?['orderByNumber']['dateFa'] ?? ''),
-                              Text("کیلووات: ${orderRes?['orderByNumber']['totalKw'].toString() ?? ''}"),
-                              Text("دستگاه: ${orderRes?['orderByNumber']['totalQty'].toString() ?? ''}"),
-                            ]
-                          ),
+                          child: Column(children: [
+                            Text(
+                                'شماره درخواست: ${orderRes?['orderByNumber']['number'] ?? ''}'),
+                            Text(orderRes?['orderByNumber']['customer']
+                                    ['name'] ??
+                                ''),
+                            Text(orderRes?['orderByNumber']['dateFa'] ?? ''),
+                            Text(
+                                "کیلووات: ${orderRes?['orderByNumber']['totalKw'].toString() ?? ''}"),
+                            Text(
+                                "دستگاه: ${orderRes?['orderByNumber']['totalQty'].toString() ?? ''}"),
+                          ]),
                         ),
                       ),
                       Expanded(
                         child: Container(
-                          child: Column(
-                              children: [
-                                Text('پیش فاکتور'),
-                                ...List<Widget>.generate(
-                                    proformas?.length ?? 0,
-                                        (int index) => Text(proformas[index]['node']['number'].toString())
-                                )
-                              ]
-                          ),
+                          child: Column(children: [
+                            Text('پیش فاکتور'),
+                            ...List<Widget>.generate(proformas?.length ?? 0,
+                                (int index) {
+                              return TextButton(
+                                  onPressed: (){
+                                    Navigator.pushNamed(
+                                      context,
+                                      Proforma.routeName,
+                                      arguments: proformas[index]['node']['id'].toString()
+                                    );
+                                  },
+                                  child: Text(proformas[index]['node']['number']
+                                      .toString()));
+                            })
+                          ]),
                         ),
                       ),
                     ],
