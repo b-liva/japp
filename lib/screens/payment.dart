@@ -17,15 +17,18 @@ class Payment extends StatelessWidget {
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as PaymentArgs;
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('payment'),
+    return Directionality(
+      textDirection: TextDirection.rtl,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('payment'),
+        ),
+        body: Column(
+          children: [
+            Text("مبلغ: ${f.format(args.amount)}"),
+          ],
+        ),
       ),
-      body: Column(
-    children: [
-      Text(f.format(args.amount))
-    ],
-    ),
     );
   }
 }
