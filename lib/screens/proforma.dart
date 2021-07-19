@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:intl/intl.dart' as intl;
+import 'package:japp/screens/payment.dart';
 
 class ProformaArgs {
   final String id;
@@ -40,6 +41,14 @@ class Proforma extends StatelessWidget {
         }
       }
     }
+    paymentSet {
+      edges {
+        node {
+          id
+          amount
+        }
+      }
+    }
   }
 }
   """;
@@ -64,6 +73,7 @@ class Proforma extends StatelessWidget {
           }
           var proforma = result.data!['proforma'];
           var specs = result.data?['proforma']['prefspecSet']['edges'];
+          var payments = result.data?['proforma']['paymentSet']['edges'];
 
           return Scaffold(
             appBar: AppBar(
@@ -103,8 +113,22 @@ class Proforma extends StatelessWidget {
                   ),
                 ),
                 Text('قیمت کل:${f.format(proforma!['prices']['priceNoVat'])}'),
-                Text('ارزش افزوده:${f.format(proforma!['prices']['priceVat'])}'),
-                Text('قیمت با ارزش افزوده:${f.format(proforma!['prices']['priceWithVat'])}'),
+                Text(
+                    'ارزش افزوده:${f.format(proforma!['prices']['priceVat'])}'),
+                Text(
+                    'قیمت با ارزش افزوده:${f.format(proforma!['prices']['priceWithVat'])}'),
+                Text('دریافتی'),
+                ...List<Widget>.generate(payments?.length ?? 0, (int index) {
+                  return TextButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, Payment.routeName,
+                            arguments: PaymentArgs(
+                                payments[index]['node']['id'],
+                                payments[index]['node']['amount']));
+                      },
+                      child:
+                          Text(f.format(payments[index]['node']['amount'])));
+                })
               ],
             ),
           );
