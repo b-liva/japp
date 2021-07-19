@@ -6,11 +6,14 @@ class Proforma extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments;
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('proforma'),
+    return Directionality(
+      textDirection: TextDirection.rtl,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('proforma'),
+        ),
+        body: Text(args.toString()),
       ),
-      body: Text(args.toString()),
     );
   }
 }
