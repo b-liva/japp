@@ -88,20 +88,36 @@ class _OrderState extends State<Order> {
                     },
                     child: Text('get'),
                   ),
-                  Text(
-                      'شماره درخواست: ${orderRes?['orderByNumber']['number'] ?? ''}'),
-                  Text(orderRes?['orderByNumber']['customer']['name'] ?? ''),
-                  Text(orderRes?['orderByNumber']['dateFa'] ?? ''),
-                  Text("کیلووات: ${orderRes?['orderByNumber']['totalKw'].toString() ?? ''}"),
-                  Text("دستگاه: ${orderRes?['orderByNumber']['totalQty'].toString() ?? ''}"),
-                  Column(
+                  Row(
                     children: [
-                      Text('پیش فاکتور'),
-                      ...List<Widget>.generate(
-                          proformas?.length ?? 0,
-                              (int index) => Text(proformas[index]['node']['number'].toString())
-                      )
-                    ]
+                      Expanded(
+                        child: Container(
+                          child: Column(
+                            children: [
+                              Text(
+                                  'شماره درخواست: ${orderRes?['orderByNumber']['number'] ?? ''}'),
+                              Text(orderRes?['orderByNumber']['customer']['name'] ?? ''),
+                              Text(orderRes?['orderByNumber']['dateFa'] ?? ''),
+                              Text("کیلووات: ${orderRes?['orderByNumber']['totalKw'].toString() ?? ''}"),
+                              Text("دستگاه: ${orderRes?['orderByNumber']['totalQty'].toString() ?? ''}"),
+                            ]
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          child: Column(
+                              children: [
+                                Text('پیش فاکتور'),
+                                ...List<Widget>.generate(
+                                    proformas?.length ?? 0,
+                                        (int index) => Text(proformas[index]['node']['number'].toString())
+                                )
+                              ]
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
