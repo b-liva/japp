@@ -20,6 +20,18 @@ class Proforma extends StatelessWidget {
         name
       }
     }
+    prefspecSet {
+      edges {
+        node {
+          id
+          qty
+          kw
+          rpm
+          voltage
+          price
+        }
+      }
+    }
   }
 }
   """;
@@ -43,6 +55,7 @@ class Proforma extends StatelessWidget {
             return Center(child: CircularProgressIndicator());
           }
           var proforma = result.data!['proforma'];
+          var specs = result.data?['proforma']['prefspecSet']['edges'];
 
           return Scaffold(
             appBar: AppBar(
@@ -53,6 +66,35 @@ class Proforma extends StatelessWidget {
 //                Text(args.number.toString()),
                 Text(proforma!['number'].toString()),
                 Text(proforma!['reqId']['customer']['name']),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: DataTable(
+                    columns: [
+                      DataColumn(label: Text('ردیف')),
+                      DataColumn(label: Text('تعداد')),
+                      DataColumn(label: Text('کیلووات')),
+                      DataColumn(label: Text('دور')),
+                      DataColumn(label: Text('ولتاژ')),
+                      DataColumn(label: Text('قیمت')),
+                    ],
+                    rows: List<DataRow>.generate(
+                        specs?.length ?? 0,
+                        (index) => DataRow(cells: [
+                              DataCell(Text((index + 1).toString())),
+                              DataCell(
+                                  Text(specs[index]['node']['qty'].toString())),
+                              DataCell(
+                                  Text(specs[index]['node']['kw'].toString())),
+                              DataCell(
+                                  Text(specs[index]['node']['rpm'].toString())),
+                              DataCell(Text(
+                                  specs[index]['node']['voltage'].toString())),
+                              DataCell(Text((specs[index]['node']['qty'] *
+                                      specs[index]['node']['price'])
+                                  .toString())),
+                            ])),
+                  ),
+                ),
               ],
             ),
           );
