@@ -114,11 +114,13 @@ class _OrderState extends State<Order> {
                             ...List<Widget>.generate(proformas?.length ?? 0,
                                 (int index) {
                               return TextButton(
-                                  onPressed: (){
+                                  onPressed: () {
                                     Navigator.pushNamed(
-                                      context,
-                                      Proforma.routeName,
-                                      arguments: proformas[index]['node']['id'].toString()
+                                        context, Proforma.routeName,
+                                        arguments: ProformaArgs(
+                                            proformas[index]['node']['id'],
+                                            proformas[index]['node']['number']
+                                        )
                                     );
                                   },
                                   child: Text(proformas[index]['node']['number']
