@@ -21,6 +21,14 @@ class _OrderState extends State<Order> {
       id
       name
     }
+    xprefSet {
+      edges {
+        node {
+          id
+          number
+        }
+      }
+    }
     reqspecSet {
       edges {
         node {
@@ -61,6 +69,7 @@ class _OrderState extends State<Order> {
             }
             var orderRes = result.data;
             var specs = result.data?['orderByNumber']['reqspecSet']['edges'];
+            var proformas = result.data?['orderByNumber']['xprefSet']['edges'];
 
             return SingleChildScrollView(
               scrollDirection: Axis.vertical,
@@ -85,6 +94,15 @@ class _OrderState extends State<Order> {
                   Text(orderRes?['orderByNumber']['dateFa'] ?? ''),
                   Text("کیلووات: ${orderRes?['orderByNumber']['totalKw'].toString() ?? ''}"),
                   Text("دستگاه: ${orderRes?['orderByNumber']['totalQty'].toString() ?? ''}"),
+                  Column(
+                    children: [
+                      Text('پیش فاکتور'),
+                      ...List<Widget>.generate(
+                          proformas?.length ?? 0,
+                              (int index) => Text(proformas[index]['node']['number'].toString())
+                      )
+                    ]
+                  ),
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: DataTable(
