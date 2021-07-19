@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:intl/intl.dart' as intl;
 
 class ProformaArgs {
   final String id;
@@ -10,6 +11,8 @@ class ProformaArgs {
 
 class Proforma extends StatelessWidget {
   static const routeName = '/proforma';
+  var f = intl.NumberFormat("#,###");
+  var fd = intl.NumberFormat("#.#");
 
   String getProforma = """
   query getProforma(\$id:ID!){
@@ -89,9 +92,7 @@ class Proforma extends StatelessWidget {
                                   Text(specs[index]['node']['rpm'].toString())),
                               DataCell(Text(
                                   specs[index]['node']['voltage'].toString())),
-                              DataCell(Text((specs[index]['node']['qty'] *
-                                      specs[index]['node']['price'])
-                                  .toString())),
+                              DataCell(Text(f.format(specs[index]['node']['price']))),
                             ])),
                   ),
                 ),
