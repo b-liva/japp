@@ -18,6 +18,11 @@ class Proforma extends StatelessWidget {
   query getProforma(\$id:ID!){
   proforma(id:\$id){
     number
+    prices {
+      priceNoVat
+      priceVat
+      priceWithVat
+    }
     reqId{
       customer{
         name
@@ -92,10 +97,14 @@ class Proforma extends StatelessWidget {
                                   Text(specs[index]['node']['rpm'].toString())),
                               DataCell(Text(
                                   specs[index]['node']['voltage'].toString())),
-                              DataCell(Text(f.format(specs[index]['node']['price']))),
+                              DataCell(Text(
+                                  f.format(specs[index]['node']['price']))),
                             ])),
                   ),
                 ),
+                Text('قیمت کل:${f.format(proforma!['prices']['priceNoVat'])}'),
+                Text('ارزش افزوده:${f.format(proforma!['prices']['priceVat'])}'),
+                Text('قیمت با ارزش افزوده:${f.format(proforma!['prices']['priceWithVat'])}'),
               ],
             ),
           );
