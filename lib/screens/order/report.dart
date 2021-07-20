@@ -5,11 +5,14 @@ class OrderReport extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('order'),
+    return Directionality(
+      textDirection: TextDirection.rtl,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('گزارش درخواست'),
+        ),
+        body: Center(child: Text('گزارش درخواست')),
       ),
-      body: Center(child: Text('hi')),
     );
   }
 }
