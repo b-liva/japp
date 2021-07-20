@@ -119,7 +119,7 @@ class _OrderState extends State<Order> {
                                         context, Proforma.routeName,
                                         arguments: ProformaArgs(
                                             proformas[index]['node']['id'],
-                                            proformas[index]['node']['number']
+                                            number: proformas[index]['node']['number']
                                         )
                                     );
                                   },

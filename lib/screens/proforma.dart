@@ -5,9 +5,9 @@ import 'package:japp/screens/payment.dart';
 
 class ProformaArgs {
   final String id;
-  final int number;
+  final int? number;
 
-  ProformaArgs(this.id, this.number);
+  ProformaArgs(this.id, {this.number});
 }
 
 class Proforma extends StatelessWidget {
