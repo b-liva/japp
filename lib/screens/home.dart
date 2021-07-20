@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:japp/screens/order/report.dart';
 
 class Home extends StatelessWidget {
   @override
@@ -72,6 +73,14 @@ class Home extends StatelessWidget {
                             Navigator.pushNamed(context, '/order');
                           },
                           child: Text('order'),
+                        ),
+                      ),
+                      Container(
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, OrderReport.routeName);
+                          },
+                          child: Text('گزارش درخواست'),
                         ),
                       ),
                     ],
