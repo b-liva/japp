@@ -2,11 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:japp/main.dart';
 
-class OrderReport extends StatelessWidget {
+class OrderReport extends StatefulWidget {
   static const routeName = '/order_report';
+
+  @override
+  _OrderReportState createState() => _OrderReportState();
+}
+
+class _OrderReportState extends State<OrderReport> {
+  TextEditingController customerController = new TextEditingController();
+  String customerName = "Test";
+
   String oq = """
-  {
-  orderReport(customer:"تهران") {
+  query filterOrders(\$customer_name:String){
+  orderReport(customer: \$customer_name) {
     edges {
       node {
         id
@@ -30,7 +39,10 @@ class OrderReport extends StatelessWidget {
             title: Text('orders'),
           ),
           body: Query(
-              options: QueryOptions(document: gql(oq)),
+              options: QueryOptions(
+                  document: gql(oq),
+                variables: {"customer_name": customerName}
+              ),
               builder: (
                 QueryResult result, {
                 Refetch? refetch,
@@ -45,6 +57,20 @@ class OrderReport extends StatelessWidget {
                   scrollDirection: Axis.vertical,
                   child: Column(
                     children: [
+                      TextField(
+                        controller: customerController,
+                        keyboardType: TextInputType.number,
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          setState(() {
+                            customerName = customerController.text;
+                          });
+                          refetch!();
+                        },
+                        child: Text('get'),
+                      ),
+
                       SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         child: DataTable(
