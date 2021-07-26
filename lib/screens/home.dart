@@ -22,7 +22,7 @@ class Home extends StatelessWidget {
                   Center(child: Text('charts')),
                   GridView.count(
                     primary: false,
-                    crossAxisCount: 3,
+                    crossAxisCount: 4,
                     padding: const EdgeInsets.all(20),
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 10,
