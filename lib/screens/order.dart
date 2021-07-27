@@ -30,6 +30,16 @@ class _OrderState extends State<Order> {
       id
       name
     }
+    orderfollowupSet {
+          edges {
+            node {
+              id
+              summary
+              description
+              dateFa
+            }
+          }
+        }
     xprefSet {
       edges {
         node {
@@ -81,6 +91,8 @@ class _OrderState extends State<Order> {
             var orderRes = result.data;
             var specs = result.data?['orderByNumber']['reqspecSet']['edges'];
             var proformas = result.data?['orderByNumber']['xprefSet']['edges'];
+            var followups =
+                result.data?['orderByNumber']['orderfollowupSet']['edges'];
 
             return SingleChildScrollView(
               scrollDirection: Axis.vertical,
@@ -116,9 +128,8 @@ class _OrderState extends State<Order> {
                                         context, Proforma.routeName,
                                         arguments: ProformaArgs(
                                             proformas[index]['node']['id'],
-                                            number: proformas[index]['node']['number']
-                                        )
-                                    );
+                                            number: proformas[index]['node']
+                                                ['number']));
                                   },
                                   child: Text(proformas[index]['node']['number']
                                       .toString()));
@@ -154,6 +165,14 @@ class _OrderState extends State<Order> {
                               ])),
                     ),
                   ),
+                  ...List<Widget>.generate(proformas?.length ?? 0, (int index) {
+                    return Row(
+                      children: [
+                        Text(followups[index]['node']['summary']),
+                        Text(followups[index]['node']['dateFa'])
+                      ],
+                    );
+                  })
                 ],
               ),
             );
