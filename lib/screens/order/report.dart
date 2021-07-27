@@ -66,10 +66,16 @@ class _OrderReportState extends State<OrderReport> {
                   child: Column(
                     children: [
                       TextField(
+                        decoration: InputDecoration(
+                          hintText: "مشتری"
+                        ),
                         controller: customerController,
                         keyboardType: TextInputType.text,
                       ),
                       TextField(
+                        decoration: InputDecoration(
+                          hintText: "شماره"
+                        ),
                         controller: numberController,
                         keyboardType: TextInputType.number,
                       ),
