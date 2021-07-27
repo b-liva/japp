@@ -45,7 +45,7 @@ class _OrderReportState extends State<OrderReport> {
         textDirection: TextDirection.rtl,
         child: Scaffold(
           appBar: AppBar(
-            title: Text('orders'),
+            title: Text('گزاش درخواست'),
           ),
           body: Query(
               options: QueryOptions(
@@ -67,14 +67,14 @@ class _OrderReportState extends State<OrderReport> {
                     children: [
                       TextField(
                         decoration: InputDecoration(
-                          hintText: "مشتری"
+                          hintText: "مشتری",
                         ),
                         controller: customerController,
                         keyboardType: TextInputType.text,
                       ),
                       TextField(
                         decoration: InputDecoration(
-                          hintText: "شماره"
+                            hintText: "شماره"
                         ),
                         controller: numberController,
                         keyboardType: TextInputType.number,
