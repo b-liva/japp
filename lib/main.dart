@@ -48,7 +48,7 @@ void main() {
         '/sales': (context) => Sales(),
         '/dash': (context) => Dash(),
         '/customer': (context) => CustomerSales(),
-        '/order': (context) => Order(),
+        Order.routeName: (context) => Order(),
         Proforma.routeName: (context) => Proforma(),
         Payment.routeName: (context) => Payment(),
         OrderReport.routeName: (context) => OrderReport(),
