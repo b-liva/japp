@@ -12,11 +12,19 @@ class OrderReport extends StatefulWidget {
 
 class _OrderReportState extends State<OrderReport> {
   TextEditingController customerController = new TextEditingController();
-  String customerName = "Test";
+  TextEditingController numberController = new TextEditingController();
+
+  String? customerName;
+
+  int? number;
 
   String oq = """
-  query filterOrders(\$customer_name:String){
-  orderReport(customer: \$customer_name) {
+  query filterOrders(\$customer_name:String, \$number:Int){
+  orderReport(
+    first:50,
+    customer: \$customer_name,
+    number_Contains:\$number
+  ) {
     edges {
       node {
         id
@@ -42,7 +50,7 @@ class _OrderReportState extends State<OrderReport> {
           body: Query(
               options: QueryOptions(
                   document: gql(oq),
-                  variables: {"customer_name": customerName}),
+                  variables: {"customer_name": customerName, "number": number}),
               builder: (
                 QueryResult result, {
                 Refetch? refetch,
@@ -59,12 +67,19 @@ class _OrderReportState extends State<OrderReport> {
                     children: [
                       TextField(
                         controller: customerController,
+                        keyboardType: TextInputType.text,
+                      ),
+                      TextField(
+                        controller: numberController,
                         keyboardType: TextInputType.number,
                       ),
                       TextButton(
                         onPressed: () {
                           setState(() {
-                            customerName = customerController.text;
+                            customerName = customerController.text.toString();
+                            if (numberController.text != "") {
+                              number = int.parse(numberController.text);
+                            }
                           });
                           refetch!();
                         },
