@@ -9,6 +9,7 @@ class Filters {
   String? customerName;
 
   String? orderDateStart;
+  String? orderDateEnd;
 
   int? number;
 }
@@ -27,12 +28,13 @@ class _OrderReportState extends State<OrderReport> {
   Filters filters = Filters();
 
   String oq = """
-  query filterOrders(\$order_date_start:String, \$customer_name:String, \$number:Int){
+  query filterOrders(\$order_date_end:String,\$order_date_start:String, \$customer_name:String, \$number:Int){
   orderReport(
     first:50,
     customer: \$customer_name,
     number_Contains:\$number,
-    dateFa_Gte:\$order_date_start
+    dateFa_Gte:\$order_date_start,
+    dateFa_Lte:\$order_date_end,
   ) {
     edges {
       node {
@@ -61,7 +63,8 @@ class _OrderReportState extends State<OrderReport> {
               options: QueryOptions(document: gql(oq), variables: {
                 "customer_name": filters.customerName,
                 "number": filters.number,
-                "order_date_start": filters.orderDateStart
+                "order_date_start": filters.orderDateStart,
+                "order_date_end": filters.orderDateEnd
               }),
               builder: (
                 QueryResult result, {
@@ -107,6 +110,30 @@ class _OrderReportState extends State<OrderReport> {
                                         dateChangeListener:
                                             (String selectedDate) {
                                           filters.orderDateStart =
+                                              selectedDate.replaceAll('/', '-');
+                                        },
+                                        isJalaali: true),
+                                  ));
+                        },
+                      ),
+                      TextButton(
+                        child: Text(
+                          "تاریخ درخواست(تا)",
+                        ),
+                        onPressed: () async {
+                          filters.orderDateEnd =
+                              filters.orderDateEnd != null
+                                  ? filters.orderDateEnd!.replaceAll('-', "/")
+                                  : formatJalali(Jalali.now());
+
+                          showDialog(
+                              context: context,
+                              builder: (_) => AlertDialog(
+                                    title: Text('Choose Date'),
+                                    content: LinearDatePicker(
+                                        dateChangeListener:
+                                            (String selectedDate) {
+                                          filters.orderDateEnd =
                                               selectedDate.replaceAll('/', '-');
                                         },
                                         isJalaali: true),
