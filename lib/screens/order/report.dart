@@ -5,6 +5,15 @@ import 'package:japp/main.dart';
 import 'package:japp/screens/order.dart';
 import 'package:shamsi_date/shamsi_date.dart';
 
+
+class Filters {
+  String? customerName;
+
+  String? orderDateStart;
+
+  int? number;
+}
+
 class OrderReport extends StatefulWidget {
   static const routeName = '/order_report';
 
@@ -16,9 +25,7 @@ class _OrderReportState extends State<OrderReport> {
   TextEditingController customerController = new TextEditingController();
   TextEditingController numberController = new TextEditingController();
 
-  String? customerName;
-  String? orderDateStart;
-  int? number;
+  Filters filters = Filters();
 
   String oq = """
   query filterOrders(\$order_date_start:String, \$customer_name:String, \$number:Int){
@@ -52,11 +59,11 @@ class _OrderReportState extends State<OrderReport> {
             title: Text('گزاش درخواست'),
           ),
           body: Query(
-              options: QueryOptions(
-                  document: gql(oq),
-                  variables: {"customer_name": customerName, "number": number,
-                    "order_date_start": orderDateStart
-                  }),
+              options: QueryOptions(document: gql(oq), variables: {
+                "customer_name": filters.customerName,
+                "number": filters.number,
+                "order_date_start": filters.orderDateStart
+              }),
               builder: (
                 QueryResult result, {
                 Refetch? refetch,
@@ -92,9 +99,12 @@ class _OrderReportState extends State<OrderReport> {
                       TextButton(
                         onPressed: () {
                           setState(() {
-                            customerName = customerController.text.toString();
+                            filters.customerName =
+                                customerController.text.toString();
                             if (numberController.text != "") {
-                              number = int.parse(numberController.text);
+                              filters.number = int.parse(numberController.text);
+                            }else{
+                              filters.number = 0;
                             }
                           });
                           refetch!();
@@ -126,8 +136,8 @@ class _OrderReportState extends State<OrderReport> {
                                             .toString()))),
                                     DataCell(Text(orders[index]['node']
                                         ['customer']['name'])),
-                                    DataCell(Text(orders[index]['node']
-                                        ['dateFa'])),
+                                    DataCell(
+                                        Text(orders[index]['node']['dateFa'])),
                                   ])),
                         ),
                       ),
