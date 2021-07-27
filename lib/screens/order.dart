@@ -18,7 +18,6 @@ class Order extends StatefulWidget {
 
 class _OrderState extends State<Order> {
   TextEditingController numberController = new TextEditingController();
-  String number = '';
   String getOrder = """
   query getOrder(\$number:Int){
   orderByNumber(number:\$number) {
@@ -59,9 +58,6 @@ class _OrderState extends State<Order> {
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as OrderArgs;
-    if (args.number != ""){
-      number = args.number.toString();
-    }
 
     return Directionality(
       textDirection: TextDirection.rtl,
@@ -72,7 +68,7 @@ class _OrderState extends State<Order> {
         body: Query(
           options: QueryOptions(
             document: gql(getOrder),
-            variables: {'number': number},
+            variables: {'number': args.number.toString()},
           ),
           builder: (
             QueryResult result, {
@@ -90,23 +86,6 @@ class _OrderState extends State<Order> {
               scrollDirection: Axis.vertical,
               child: Column(
                 children: [
-                  TextField(
-                    controller: numberController,
-                    keyboardType: TextInputType.number,
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      setState(() {
-                        if (numberController.text != ""){
-                        number = numberController.text;
-                        }else{
-                          number = args.number.toString();
-                        }
-                      });
-                      refetch!();
-                    },
-                    child: Text('get'),
-                  ),
                   Row(
                     children: [
                       Expanded(
