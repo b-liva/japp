@@ -2,7 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:japp/screens/proforma.dart';
 
+class OrderArgs {
+  final String id;
+  final int? number;
+
+  OrderArgs(this.id, {this.number});
+}
+
 class Order extends StatefulWidget {
+  static const routeName = '/order';
+
   @override
   _OrderState createState() => _OrderState();
 }
@@ -49,6 +58,11 @@ class _OrderState extends State<Order> {
 
   @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context)!.settings.arguments as OrderArgs;
+    if (args.number != ""){
+      number = args.number.toString();
+    }
+
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
@@ -83,7 +97,11 @@ class _OrderState extends State<Order> {
                   TextButton(
                     onPressed: () {
                       setState(() {
+                        if (numberController.text != ""){
                         number = numberController.text;
+                        }else{
+                          number = args.number.toString();
+                        }
                       });
                       refetch!();
                     },

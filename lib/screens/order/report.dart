@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:japp/main.dart';
+import 'package:japp/screens/order.dart';
 
 class OrderReport extends StatefulWidget {
   static const routeName = '/order_report';
@@ -41,8 +42,7 @@ class _OrderReportState extends State<OrderReport> {
           body: Query(
               options: QueryOptions(
                   document: gql(oq),
-                variables: {"customer_name": customerName}
-              ),
+                  variables: {"customer_name": customerName}),
               builder: (
                 QueryResult result, {
                 Refetch? refetch,
@@ -70,7 +70,6 @@ class _OrderReportState extends State<OrderReport> {
                         },
                         child: Text('get'),
                       ),
-
                       SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         child: DataTable(
@@ -81,10 +80,20 @@ class _OrderReportState extends State<OrderReport> {
                           rows: List.generate(
                               orders.length,
                               (index) => DataRow(cells: [
-                                    DataCell(Text(
-                                        orders[index]['node']['number'].toString())),
-                                    DataCell(Text(orders[index]['node']['customer']
-                                            ['name'])),
+                                    DataCell(TextButton(
+                                        onPressed: () {
+                                          Navigator.pushNamed(
+                                              context, Order.routeName,
+                                              arguments: OrderArgs(
+                                                  orders[index]['node']['id'],
+                                                  number: orders[index]['node']
+                                                      ['number']));
+                                        },
+                                        child: Text(orders[index]['node']
+                                                ['number']
+                                            .toString()))),
+                                    DataCell(Text(orders[index]['node']
+                                        ['customer']['name'])),
                                   ])),
                         ),
                       ),
