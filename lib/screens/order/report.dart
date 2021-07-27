@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_linear_datepicker/flutter_datepicker.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:japp/main.dart';
 import 'package:japp/screens/order.dart';
+import 'package:shamsi_date/shamsi_date.dart';
 
 class OrderReport extends StatefulWidget {
   static const routeName = '/order_report';
@@ -15,20 +17,22 @@ class _OrderReportState extends State<OrderReport> {
   TextEditingController numberController = new TextEditingController();
 
   String? customerName;
-
+  String? orderDateStart;
   int? number;
 
   String oq = """
-  query filterOrders(\$customer_name:String, \$number:Int){
+  query filterOrders(\$order_date_start:String, \$customer_name:String, \$number:Int){
   orderReport(
     first:50,
     customer: \$customer_name,
-    number_Contains:\$number
+    number_Contains:\$number,
+    dateFa_Gte:\$order_date_start
   ) {
     edges {
       node {
         id
         number
+        dateFa
         customer {
           id
           name
@@ -50,7 +54,9 @@ class _OrderReportState extends State<OrderReport> {
           body: Query(
               options: QueryOptions(
                   document: gql(oq),
-                  variables: {"customer_name": customerName, "number": number}),
+                  variables: {"customer_name": customerName, "number": number,
+                    "order_date_start": orderDateStart
+                  }),
               builder: (
                 QueryResult result, {
                 Refetch? refetch,
@@ -73,12 +79,16 @@ class _OrderReportState extends State<OrderReport> {
                         keyboardType: TextInputType.text,
                       ),
                       TextField(
-                        decoration: InputDecoration(
-                            hintText: "شماره"
-                        ),
+                        decoration: InputDecoration(hintText: "شماره"),
                         controller: numberController,
                         keyboardType: TextInputType.number,
                       ),
+                      LinearDatePicker(
+                          dateChangeListener: (String selectedDate) {
+                            orderDateStart = selectedDate.replaceAll('/', '-');
+                          },
+                          initialDate: orderDateStart != null ? orderDateStart!.replaceAll('-', "/") : "${Jalali.now().year}/${Jalali.now().month}/${Jalali.now().day}",
+                          isJalaali: true),
                       TextButton(
                         onPressed: () {
                           setState(() {
@@ -97,6 +107,7 @@ class _OrderReportState extends State<OrderReport> {
                           columns: [
                             DataColumn(label: Text('شماره')),
                             DataColumn(label: Text('مشتری')),
+                            DataColumn(label: Text('تاریخ')),
                           ],
                           rows: List.generate(
                               orders.length,
@@ -115,6 +126,8 @@ class _OrderReportState extends State<OrderReport> {
                                             .toString()))),
                                     DataCell(Text(orders[index]['node']
                                         ['customer']['name'])),
+                                    DataCell(Text(orders[index]['node']
+                                        ['dateFa'])),
                                   ])),
                         ),
                       ),
