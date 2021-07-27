@@ -5,7 +5,6 @@ import 'package:japp/main.dart';
 import 'package:japp/screens/order.dart';
 import 'package:shamsi_date/shamsi_date.dart';
 
-
 class Filters {
   String? customerName;
 
@@ -90,12 +89,30 @@ class _OrderReportState extends State<OrderReport> {
                         controller: numberController,
                         keyboardType: TextInputType.number,
                       ),
-                      LinearDatePicker(
-                          dateChangeListener: (String selectedDate) {
-                            orderDateStart = selectedDate.replaceAll('/', '-');
-                          },
-                          initialDate: orderDateStart != null ? orderDateStart!.replaceAll('-', "/") : "${Jalali.now().year}/${Jalali.now().month}/${Jalali.now().day}",
-                          isJalaali: true),
+                      TextButton(
+                        child: Text(
+                          "تاریخ درخواست(از)",
+                        ),
+                        onPressed: () async {
+                          filters.orderDateStart =
+                              filters.orderDateStart != null
+                                  ? filters.orderDateStart!.replaceAll('-', "/")
+                                  : formatJalali(Jalali.now());
+
+                          showDialog(
+                              context: context,
+                              builder: (_) => AlertDialog(
+                                    title: Text('Choose Date'),
+                                    content: LinearDatePicker(
+                                        dateChangeListener:
+                                            (String selectedDate) {
+                                          filters.orderDateStart =
+                                              selectedDate.replaceAll('/', '-');
+                                        },
+                                        isJalaali: true),
+                                  ));
+                        },
+                      ),
                       TextButton(
                         onPressed: () {
                           setState(() {
@@ -103,7 +120,7 @@ class _OrderReportState extends State<OrderReport> {
                                 customerController.text.toString();
                             if (numberController.text != "") {
                               filters.number = int.parse(numberController.text);
-                            }else{
+                            } else {
                               filters.number = 0;
                             }
                           });
@@ -147,4 +164,6 @@ class _OrderReportState extends State<OrderReport> {
               }),
         ));
   }
+
+  String formatJalali(date) => "${date.year}/${date.month}/${date.day}";
 }
