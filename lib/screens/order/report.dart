@@ -236,6 +236,8 @@ class _OrderReportState extends State<OrderReport> {
                       SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         child: DataTable(
+                          dataTextStyle: TextStyle(fontSize:12.0, color: Colors.black87, fontFamily: "B-nazanin"),
+                          columnSpacing: 30.0,
                           columns: [
                             DataColumn(label: Text('شماره')),
                             DataColumn(label: Text('مشتری')),
@@ -255,9 +257,12 @@ class _OrderReportState extends State<OrderReport> {
                                         },
                                         child: Text(orders[index]['node']
                                                 ['number']
-                                            .toString()))),
-                                    DataCell(Text(orders[index]['node']
-                                        ['customer']['name'])),
+                                            .toString(), style: TextStyle(fontFamily: "B-nazanin")),)),
+                                    DataCell(Container(
+                                      width: 150.0,
+                                      child: Text(orders[index]['node']
+                                          ['customer']['name'], style: TextStyle(fontSize: 12),),
+                                    )),
                                     DataCell(
                                         Text(orders[index]['node']['dateFa'])),
                                   ])),
