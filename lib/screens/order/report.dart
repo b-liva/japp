@@ -9,6 +9,7 @@ class Filters {
   String? customerName;
 
   String? orderDateStart;
+
   String? orderDateEnd;
 
   int? number;
@@ -80,65 +81,94 @@ class _OrderReportState extends State<OrderReport> {
                   scrollDirection: Axis.vertical,
                   child: Column(
                     children: [
-                      TextField(
-                        decoration: InputDecoration(
-                          hintText: "مشتری",
-                        ),
-                        controller: customerController,
-                        keyboardType: TextInputType.text,
+                      Row(
+                        children: [
+                          Flexible(
+                            child: TextField(
+                              decoration: InputDecoration(hintText: "شماره"),
+                              controller: numberController,
+                              keyboardType: TextInputType.number,
+                            ),
+                          ),
+                          Flexible(
+                            child: TextField(
+                              decoration: InputDecoration(
+                                hintText: "مشتری",
+                              ),
+                              controller: customerController,
+                              keyboardType: TextInputType.text,
+                            ),
+                          ),
+                        ],
                       ),
-                      TextField(
-                        decoration: InputDecoration(hintText: "شماره"),
-                        controller: numberController,
-                        keyboardType: TextInputType.number,
-                      ),
-                      TextButton(
-                        child: Text(
-                          "تاریخ درخواست(از)",
-                        ),
-                        onPressed: () async {
-                          filters.orderDateStart =
-                              filters.orderDateStart != null
-                                  ? filters.orderDateStart!.replaceAll('-', "/")
-                                  : formatJalali(Jalali.now());
+                      Row(
+                        children: [
+                          Column(
+                            children: [
+                              Text('تاریخ درخواست'),
+                              Row(
+                                children: [
+                                  TextButton(
+                                    child: Text(
+                                      "از",
+                                    ),
+                                    onPressed: () async {
+                                      filters.orderDateStart = filters.orderDateStart !=
+                                          null
+                                          ? filters.orderDateStart!.replaceAll('-', "/")
+                                          : formatJalali(Jalali.now());
 
-                          showDialog(
-                              context: context,
-                              builder: (_) => AlertDialog(
-                                    title: Text('Choose Date'),
-                                    content: LinearDatePicker(
-                                        dateChangeListener:
-                                            (String selectedDate) {
-                                          filters.orderDateStart =
-                                              selectedDate.replaceAll('/', '-');
-                                        },
-                                        isJalaali: true),
-                                  ));
-                        },
-                      ),
-                      TextButton(
-                        child: Text(
-                          "تاریخ درخواست(تا)",
-                        ),
-                        onPressed: () async {
-                          filters.orderDateEnd =
-                              filters.orderDateEnd != null
-                                  ? filters.orderDateEnd!.replaceAll('-', "/")
-                                  : formatJalali(Jalali.now());
+                                      showDialog(
+                                      context: context,
+                                      builder: (_) => AlertDialog(
+                                      title: Text('انتخاب تاریخ', textDirection: TextDirection.rtl,),
+                                      content: LinearDatePicker(
+                                      dateChangeListener:
+                                      (String selectedDate) {
+                                      filters.orderDateStart =
+                                      selectedDate.replaceAll(
+                                      '/', '-');
+                                      },
+                                      isJalaali: true),
+                                      ));
+                                      },
+                                  ),
+                                  Text(filters.orderDateStart!= null ? filters.orderDateStart.toString() : "")
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  TextButton(
+                                    child: Text(
+                                      "تا",
+                                    ),
+                                    onPressed: () async {
+                                      filters.orderDateEnd = filters.orderDateEnd !=
+                                          null
+                                          ? filters.orderDateEnd!.replaceAll('-', "/")
+                                          : formatJalali(Jalali.now());
 
-                          showDialog(
-                              context: context,
-                              builder: (_) => AlertDialog(
-                                    title: Text('Choose Date'),
-                                    content: LinearDatePicker(
-                                        dateChangeListener:
-                                            (String selectedDate) {
-                                          filters.orderDateEnd =
-                                              selectedDate.replaceAll('/', '-');
-                                        },
-                                        isJalaali: true),
-                                  ));
-                        },
+                                      showDialog(
+                                      context: context,
+                                      builder: (_) => AlertDialog(
+                                      title: Text('انتخاب تاریخ', textDirection: TextDirection.rtl,),
+                                      content: LinearDatePicker(
+                                      dateChangeListener:
+                                      (String selectedDate) {
+                                      filters.orderDateEnd =
+                                      selectedDate.replaceAll(
+                                      '/', '-');
+                                      },
+                                      isJalaali: true),
+                                      ));
+                                      },
+                                  ),
+                                  Text(filters.orderDateEnd != null ? filters.orderDateEnd.toString() : "")
+                                ],
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                       TextButton(
                         onPressed: () {
@@ -153,7 +183,7 @@ class _OrderReportState extends State<OrderReport> {
                           });
                           refetch!();
                         },
-                        child: Text('get'),
+                        child: Text('جستجو'),
                       ),
                       SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
