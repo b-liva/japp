@@ -98,22 +98,67 @@ class _OrderState extends State<Order> {
               scrollDirection: Axis.vertical,
               child: Column(
                 children: [
+                  Text(orderRes?['orderByNumber']['customer']['name'] ?? ''),
                   Row(
                     children: [
                       Expanded(
                         child: Container(
-                          child: Column(children: [
-                            Text(
-                                'شماره درخواست: ${orderRes?['orderByNumber']['number'] ?? ''}'),
-                            Text(orderRes?['orderByNumber']['customer']
-                                    ['name'] ??
-                                ''),
-                            Text(orderRes?['orderByNumber']['dateFa'] ?? ''),
-                            Text(
-                                "کیلووات: ${orderRes?['orderByNumber']['totalKw'].toString() ?? ''}"),
-                            Text(
-                                "دستگاه: ${orderRes?['orderByNumber']['totalQty'].toString() ?? ''}"),
-                          ]),
+                          padding: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+//                              color: Colors.blue[400],
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  children: [
+                                    Text(
+                                      orderRes?['orderByNumber']['number']
+                                              .toString() ??
+                                          '',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.calendar_today_rounded,
+                                      size: 12,
+                                    ),
+                                    SizedBox(width: 10),
+                                    Text(
+                                      orderRes?['orderByNumber']['dateFa'] ??
+                                          '',
+                                      style: TextStyle(fontSize: 12),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height:15),
+                                Row(
+                                  children: [
+                                    Text(
+                                      "${orderRes?['orderByNumber']['totalKw'].toString() ?? ''} ",
+                                      style: TextStyle(fontSize: 12),
+                                    ),
+                                    Text(
+                                      " کیلووات",
+                                      style: TextStyle(fontSize: 12),
+                                    )
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                        "${orderRes?['orderByNumber']['totalQty'].toString() ?? ''}"),
+                                    Text(
+                                      "دستگاه",
+                                      style: TextStyle(fontSize: 12),
+                                    )
+                                  ],
+                                ),
+                              ]),
                         ),
                       ),
                       Expanded(
