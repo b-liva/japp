@@ -19,6 +19,10 @@ class Proforma extends StatelessWidget {
   query getProforma(\$id:ID!){
   proforma(id:\$id){
     number
+    perm
+    permNumber
+    qty
+    kw
     prices {
       priceNoVat
       priceVat
@@ -88,7 +92,32 @@ class Proforma extends StatelessWidget {
                     Expanded(
                         child: Container(
                             padding: EdgeInsets.all(10),
-                            child: Text(proforma!['number'].toString()))),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(proforma!['number'].toString()),
+                                Row(
+                                  children: [
+                                    Text("دستگاه: "),
+                                    Text(proforma!['qty'].toString()),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                  Text("کیلووات: "),
+                                  Text(proforma!['kw'].toString()),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Text('شماره مجوز'),
+                                    Text(proforma['perm']
+                                        ? proforma['permNumber'].toString()
+                                        : ''),
+                                  ],
+                                ),
+                              ],
+                            ))),
                     Expanded(
                         child: Container(
                       padding: EdgeInsets.all(10),
@@ -105,8 +134,10 @@ class Proforma extends StatelessWidget {
                                           payments[index]['node']['id'],
                                           payments[index]['node']['amount']));
                                 },
-                                child: Text(f.format(
-                                    payments[index]['node']['amount']), style: TextStyle(fontSize: 12),));
+                                child: Text(
+                                  f.format(payments[index]['node']['amount']),
+                                  style: TextStyle(fontSize: 12),
+                                ));
                           })
                         ],
                       ),
