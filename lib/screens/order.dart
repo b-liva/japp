@@ -68,12 +68,13 @@ class _OrderState extends State<Order> {
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as OrderArgs;
+    double c_width = MediaQuery.of(context).size.width * 0.7;
 
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Order'),
+          title: Text('درخواست'),
         ),
         body: Query(
           options: QueryOptions(
@@ -188,8 +189,14 @@ class _OrderState extends State<Order> {
                     scrollDirection: Axis.horizontal,
                     child: DataTable(
                       columnSpacing: 30.0,
-                      headingTextStyle: TextStyle(fontSize: 16, color: Colors.black87, fontFamily: "B-nazanin"),
-                      dataTextStyle: TextStyle(fontSize: 12, color: Colors.black87, fontFamily: "B-nazanin"),
+                      headingTextStyle: TextStyle(
+                          fontSize: 16,
+                          color: Colors.black87,
+                          fontFamily: "B-nazanin"),
+                      dataTextStyle: TextStyle(
+                          fontSize: 12,
+                          color: Colors.black87,
+                          fontFamily: "B-nazanin"),
                       columns: [
                         DataColumn(label: Text('ردیف')),
                         DataColumn(label: Text('تعداد')),
@@ -213,11 +220,26 @@ class _OrderState extends State<Order> {
                               ])),
                     ),
                   ),
-                  ...List<Widget>.generate(proformas?.length ?? 0, (int index) {
+                  SizedBox(
+                    height: 30.0,
+                  ),
+                  Text('پیگیری های انجام شده', style: TextStyle(color: Colors.blueAccent),),
+                  ...List<Widget>.generate(followups?.length ?? 0, (int index) {
                     return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Text(followups[index]['node']['summary']),
-                        Text(followups[index]['node']['dateFa'])
+                        Text(
+                          followups[index]['node']['dateFa'],
+                          style: TextStyle(
+                              fontSize: 12.0, color: Colors.blueAccent),
+                        ),
+                        Container(
+                            width: c_width,
+                            child: Text(followups[index]['node']['summary'],
+                                style: TextStyle(fontSize: 10.0))),
+                        SizedBox(
+                          height: 25,
+                        )
                       ],
                     );
                   })
