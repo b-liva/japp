@@ -236,6 +236,7 @@ class _OrderReportState extends State<OrderReport> {
                       SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         child: DataTable(
+                          headingTextStyle: TextStyle(fontSize: 16, color: Colors.black87, fontFamily: "B-nazanin"),
                           dataTextStyle: TextStyle(fontSize:12.0, color: Colors.black87, fontFamily: "B-nazanin"),
                           columnSpacing: 30.0,
                           columns: [

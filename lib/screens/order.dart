@@ -135,7 +135,7 @@ class _OrderState extends State<Order> {
                                     ),
                                   ],
                                 ),
-                                SizedBox(height:15),
+                                SizedBox(height: 15),
                                 Row(
                                   children: [
                                     Text(
@@ -187,6 +187,9 @@ class _OrderState extends State<Order> {
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: DataTable(
+                      columnSpacing: 30.0,
+                      headingTextStyle: TextStyle(fontSize: 16, color: Colors.black87, fontFamily: "B-nazanin"),
+                      dataTextStyle: TextStyle(fontSize: 12, color: Colors.black87, fontFamily: "B-nazanin"),
                       columns: [
                         DataColumn(label: Text('ردیف')),
                         DataColumn(label: Text('تعداد')),
