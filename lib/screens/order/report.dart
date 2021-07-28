@@ -86,6 +86,7 @@ class _OrderReportState extends State<OrderReport> {
                         child: Column(
                           children: [
                             Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 Flexible(
                                   child: TextField(
@@ -95,6 +96,7 @@ class _OrderReportState extends State<OrderReport> {
                                   ),
                                 ),
                                 Flexible(
+                                  flex: 3,
                                   child: TextField(
                                     decoration: InputDecoration(
                                       hintText: "مشتری",
