@@ -82,11 +82,20 @@ class Proforma extends StatelessWidget {
             body: Column(
               children: [
 //                Text(args.number.toString()),
-                Text(proforma!['number'].toString()),
                 Text(proforma!['reqId']['customer']['name']),
+                Text(proforma!['number'].toString()),
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: DataTable(
+                    columnSpacing: 30.0,
+                    headingTextStyle: TextStyle(
+                        fontSize: 16,
+                        color: Colors.black87,
+                        fontFamily: "B-nazanin"),
+                    dataTextStyle: TextStyle(
+                        fontSize: 12,
+                        color: Colors.black87,
+                        fontFamily: "B-nazanin"),
                     columns: [
                       DataColumn(label: Text('ردیف')),
                       DataColumn(label: Text('تعداد')),
@@ -126,8 +135,7 @@ class Proforma extends StatelessWidget {
                                 payments[index]['node']['id'],
                                 payments[index]['node']['amount']));
                       },
-                      child:
-                          Text(f.format(payments[index]['node']['amount'])));
+                      child: Text(f.format(payments[index]['node']['amount'])));
                 })
               ],
             ),
