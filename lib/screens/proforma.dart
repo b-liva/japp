@@ -77,13 +77,42 @@ class Proforma extends StatelessWidget {
 
           return Scaffold(
             appBar: AppBar(
-              title: Text('proforma'),
+              title: Text('پیش فاکتور'),
             ),
             body: Column(
               children: [
 //                Text(args.number.toString()),
                 Text(proforma!['reqId']['customer']['name']),
-                Text(proforma!['number'].toString()),
+                Row(
+                  children: [
+                    Expanded(
+                        child: Container(
+                            padding: EdgeInsets.all(10),
+                            child: Text(proforma!['number'].toString()))),
+                    Expanded(
+                        child: Container(
+                      padding: EdgeInsets.all(10),
+                      child: Column(
+                        children: [
+                          Text('دریافتی'),
+                          ...List<Widget>.generate(payments?.length ?? 0,
+                              (int index) {
+                            return TextButton(
+                                onPressed: () {
+                                  Navigator.pushNamed(
+                                      context, Payment.routeName,
+                                      arguments: PaymentArgs(
+                                          payments[index]['node']['id'],
+                                          payments[index]['node']['amount']));
+                                },
+                                child: Text(f.format(
+                                    payments[index]['node']['amount']), style: TextStyle(fontSize: 12),));
+                          })
+                        ],
+                      ),
+                    ))
+                  ],
+                ),
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: DataTable(
@@ -121,22 +150,48 @@ class Proforma extends StatelessWidget {
                             ])),
                   ),
                 ),
-                Text('قیمت کل:${f.format(proforma!['prices']['priceNoVat'])}'),
-                Text(
-                    'ارزش افزوده:${f.format(proforma!['prices']['priceVat'])}'),
-                Text(
-                    'قیمت با ارزش افزوده:${f.format(proforma!['prices']['priceWithVat'])}'),
-                Text('دریافتی'),
-                ...List<Widget>.generate(payments?.length ?? 0, (int index) {
-                  return TextButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, Payment.routeName,
-                            arguments: PaymentArgs(
-                                payments[index]['node']['id'],
-                                payments[index]['node']['amount']));
-                      },
-                      child: Text(f.format(payments[index]['node']['amount'])));
-                })
+                SizedBox(
+                  height: 30,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Column(
+//                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          'قیمت کل',
+                          style: TextStyle(
+                            fontSize: 10,
+                          ),
+                        ),
+                        Text(
+                          '${f.format(proforma!['prices']['priceNoVat'])}',
+                          style:
+                              TextStyle(fontSize: 18, fontFamily: "B-nazanin"),
+                        ),
+                        Text(
+                          'ارزش افزوده',
+                          style: TextStyle(
+                            fontSize: 10,
+                          ),
+                        ),
+                        Text('${f.format(proforma!['prices']['priceVat'])}',
+                            style: TextStyle(
+                                fontSize: 18, fontFamily: "B-nazanin")),
+                        Text(
+                          'قیمت با ارزش افزوده',
+                          style: TextStyle(
+                            fontSize: 10,
+                          ),
+                        ),
+                        Text('${f.format(proforma!['prices']['priceWithVat'])}',
+                            style: TextStyle(
+                                fontSize: 18, fontFamily: "B-nazanin")),
+                      ],
+                    ),
+                  ],
+                ),
               ],
             ),
           );

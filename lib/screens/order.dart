@@ -223,7 +223,10 @@ class _OrderState extends State<Order> {
                   SizedBox(
                     height: 30.0,
                   ),
-                  Text('پیگیری های انجام شده', style: TextStyle(color: Colors.blueAccent),),
+                  Text(
+                    'پیگیری های انجام شده',
+                    style: TextStyle(color: Colors.blueAccent),
+                  ),
                   ...List<Widget>.generate(followups?.length ?? 0, (int index) {
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
