@@ -89,20 +89,31 @@ class _OrderReportState extends State<OrderReport> {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 Flexible(
-                                  child: TextField(
-                                    decoration: InputDecoration(hintText: "شماره"),
-                                    controller: numberController,
-                                    keyboardType: TextInputType.number,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: TextField(
+                                      style: TextStyle(
+                                          fontSize: 12, color: Colors.blue),
+                                      decoration:
+                                          InputDecoration(hintText: "شماره"),
+                                      controller: numberController,
+                                      keyboardType: TextInputType.number,
+                                    ),
                                   ),
                                 ),
                                 Flexible(
                                   flex: 3,
-                                  child: TextField(
-                                    decoration: InputDecoration(
-                                      hintText: "مشتری",
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: TextField(
+                                      style: TextStyle(
+                                          fontSize: 12, color: Colors.blue),
+                                      decoration: InputDecoration(
+                                        hintText: "مشتری",
+                                      ),
+                                      controller: customerController,
+                                      keyboardType: TextInputType.text,
                                     ),
-                                    controller: customerController,
-                                    keyboardType: TextInputType.text,
                                   ),
                                 ),
                               ],
@@ -115,71 +126,102 @@ class _OrderReportState extends State<OrderReport> {
                                       children: [
                                         TextButton.icon(
                                           onPressed: () async {
-                                            filters.orderDateStart = filters.orderDateStart !=
-                                                null
-                                                ? filters.orderDateStart!.replaceAll('-', "/")
+                                            filters.orderDateStart = filters
+                                                        .orderDateStart !=
+                                                    null
+                                                ? filters.orderDateStart!
+                                                    .replaceAll('-', "/")
                                                 : formatJalali(Jalali.now());
 
                                             showDialog(
-                                            context: context,
-                                            builder: (_) => AlertDialog(
-                                            title: Text('انتخاب تاریخ', textDirection: TextDirection.rtl,),
-                                            content: LinearDatePicker(
-                                            dateChangeListener:
-                                            (String selectedDate) {
-                                            filters.orderDateStart =
-                                            selectedDate.replaceAll(
-                                            '/', '-');
-                                            },
-                                            isJalaali: true),
-                                            ));
-                                            }, icon: Icon(Icons.calendar_today_rounded, size: 16,), label: Text(
-                                          "از",
+                                                context: context,
+                                                builder: (_) => AlertDialog(
+                                                      title: Text(
+                                                        'انتخاب تاریخ',
+                                                        textDirection:
+                                                            TextDirection.rtl,
+                                                      ),
+                                                      content: LinearDatePicker(
+                                                          dateChangeListener:
+                                                              (String
+                                                                  selectedDate) {
+                                                            filters.orderDateStart =
+                                                                selectedDate
+                                                                    .replaceAll(
+                                                                        '/',
+                                                                        '-');
+                                                          },
+                                                          isJalaali: true),
+                                                    ));
+                                          },
+                                          icon: Icon(
+                                            Icons.calendar_today_rounded,
+                                            size: 16,
+                                          ),
+                                          label: Text(
+                                            "از",
+                                          ),
                                         ),
-                                        ),
-                                        Text(filters.orderDateStart!= null ? filters.orderDateStart.toString() : "")
+                                        Text(filters.orderDateStart != null
+                                            ? filters.orderDateStart.toString()
+                                            : "")
                                       ],
                                     ),
                                     Row(
                                       children: [
                                         TextButton.icon(
-                                          icon: Icon(Icons.calendar_today_rounded, size: 16,),
+                                          icon: Icon(
+                                            Icons.calendar_today_rounded,
+                                            size: 16,
+                                          ),
                                           label: Text('تا'),
                                           onPressed: () async {
-                                            filters.orderDateEnd = filters.orderDateEnd !=
-                                                null
-                                                ? filters.orderDateEnd!.replaceAll('-', "/")
+                                            filters.orderDateEnd = filters
+                                                        .orderDateEnd !=
+                                                    null
+                                                ? filters.orderDateEnd!
+                                                    .replaceAll('-', "/")
                                                 : formatJalali(Jalali.now());
 
                                             showDialog(
-                                            context: context,
-                                            builder: (_) => AlertDialog(
-                                            title: Text('انتخاب تاریخ', textDirection: TextDirection.rtl,),
-                                            content: LinearDatePicker(
-                                            dateChangeListener:
-                                            (String selectedDate) {
-                                            filters.orderDateEnd =
-                                            selectedDate.replaceAll(
-                                            '/', '-');
-                                            },
-                                            isJalaali: true),
-                                            ));
-                                            },
+                                                context: context,
+                                                builder: (_) => AlertDialog(
+                                                      title: Text(
+                                                        'انتخاب تاریخ',
+                                                        textDirection:
+                                                            TextDirection.rtl,
+                                                      ),
+                                                      content: LinearDatePicker(
+                                                          dateChangeListener:
+                                                              (String
+                                                                  selectedDate) {
+                                                            filters.orderDateEnd =
+                                                                selectedDate
+                                                                    .replaceAll(
+                                                                        '/',
+                                                                        '-');
+                                                          },
+                                                          isJalaali: true),
+                                                    ));
+                                          },
                                         ),
-                                        Text(filters.orderDateEnd != null ? filters.orderDateEnd.toString() : "")
+                                        Text(filters.orderDateEnd != null
+                                            ? filters.orderDateEnd.toString()
+                                            : "")
                                       ],
                                     ),
                                   ],
                                 ),
                               ],
                             ),
-                            TextButton(
+                            ElevatedButton(
                               onPressed: () {
                                 setState(() {
                                   filters.customerName =
                                       customerController.text.toString();
                                   if (numberController.text != "") {
-                                    filters.number = int.parse(numberController.text);
+                                    filters.number =
+                                        int.parse(numberController.text);
                                   } else {
                                     filters.number = 0;
                                   }
