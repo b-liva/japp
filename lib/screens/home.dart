@@ -31,6 +31,14 @@ class Home extends StatelessWidget {
                       Container(
                         child: TextButton(
                           onPressed: () {
+                            Navigator.pushNamed(context, OrderReport.routeName);
+                          },
+                          child: Text('گزارش درخواست'),
+                        ),
+                      ),
+                      Container(
+                        child: TextButton(
+                          onPressed: () {
                             Navigator.pushNamed(context, '/users');
                           },
                           child: Text('کارشناسان'),
@@ -66,14 +74,6 @@ class Home extends StatelessWidget {
                             Navigator.pushNamed(context, '/dash');
                           },
                           child: Text('dash'),
-                        ),
-                      ),
-                      Container(
-                        child: TextButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, OrderReport.routeName);
-                          },
-                          child: Text('گزارش درخواست'),
                         ),
                       ),
                     ],
