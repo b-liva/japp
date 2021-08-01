@@ -27,6 +27,14 @@ class OrderReport extends StatefulWidget {
 }
 
 class _OrderReportState extends State<OrderReport> {
+//  List<Object?> orders = List.empty();
+  bool toScroll = true;
+  ScrollController scrollController = ScrollController();
+
+  void _scrollToend() {
+    scrollController.jumpTo(scrollController.position.maxScrollExtent);
+  }
+
   TextEditingController customerController = new TextEditingController();
   TextEditingController numberController = new TextEditingController();
 
@@ -35,7 +43,7 @@ class _OrderReportState extends State<OrderReport> {
   String oq = """
   query filterOrders(\$before:String, \$after:String, \$order_date_end:String,\$order_date_start:String, \$customer_name:String, \$number:Int){
   orderReport(
-    first:50,
+    first:10,
     customer: \$customer_name,
     number_Contains:\$number,
     dateFa_Gte:\$order_date_start,
@@ -85,17 +93,16 @@ class _OrderReportState extends State<OrderReport> {
                 Refetch? refetch,
                 FetchMore? fetchMore,
               }) {
-                if (result.isLoading) {
+                if (result.isLoading && toScroll) {
                   return Center(child: CircularProgressIndicator());
                 }
-
+                
+                toScroll = false;
                 var orders = result.data!['orderReport']['edges'] ?? [];
                 var pageInfo = result.data!['orderReport']['pageInfo'];
 
                 FetchMoreOptions opts = FetchMoreOptions(
-                  variables: {
-                    "after": pageInfo['endCursor']
-                  },
+                  variables: {"after": pageInfo['endCursor']},
                   updateQuery: (prev, res) {
                     // this is where you combine your previous data and response
                     // in case of this, we want to display previous repos plus next repos
@@ -114,6 +121,7 @@ class _OrderReportState extends State<OrderReport> {
                 );
 
                 return SingleChildScrollView(
+                  controller: scrollController,
                   scrollDirection: Axis.vertical,
                   child: Column(
                     children: [
@@ -253,6 +261,7 @@ class _OrderReportState extends State<OrderReport> {
                             ElevatedButton(
                               onPressed: () {
                                 setState(() {
+                                  toScroll = true;
                                   filters.customerName =
                                       customerController.text.toString();
                                   if (numberController.text != "") {
@@ -265,30 +274,6 @@ class _OrderReportState extends State<OrderReport> {
                                 refetch!();
                               },
                               child: Text('جستجو'),
-                            ),
-                            ElevatedButton(
-                              onPressed: () {
-                                setState(() {
-//                                  filters.cursorAfter = pageInfo['endCursor'];
-//                                  filters.cursorBefore = "";
-//                                  filters.firstLast = 'first';
-                                });
-//                                refetch!();
-                                fetchMore!(opts);
-                              },
-                              child: Text('بعدی'),
-                            ),
-                            ElevatedButton(
-                              onPressed: () {
-                                setState(() {
-                                  filters.cursorAfter = "";
-                                  filters.cursorBefore =
-                                      pageInfo['startCursor'];
-                                  filters.firstLast = 'last';
-                                });
-                                refetch!();
-                              },
-                              child: Text('قبلی'),
                             ),
                           ],
                         ),
@@ -314,8 +299,8 @@ class _OrderReportState extends State<OrderReport> {
                           rows: List.generate(
                               orders.length,
                               (index) => DataRow(cells: [
-                                DataCell(Text((index + 1).toString())),
-                                DataCell(TextButton(
+                                    DataCell(Text((index + 1).toString())),
+                                    DataCell(TextButton(
                                       onPressed: () {
                                         Navigator.pushNamed(
                                             context, Order.routeName,
@@ -342,6 +327,18 @@ class _OrderReportState extends State<OrderReport> {
                                         Text(orders[index]['node']['dateFa'])),
                                   ])),
                         ),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+//                                  filters.cursorAfter = pageInfo['endCursor'];
+//                                  filters.cursorBefore = "";
+//                                  filters.firstLast = 'first';
+                          });
+//                                refetch!();
+                          fetchMore!(opts);
+                        },
+                        child: Text('بیشتر'),
                       ),
                     ],
                   ),
