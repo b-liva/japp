@@ -13,6 +13,10 @@ class Filters {
   String? orderDateEnd;
 
   int? number;
+
+  String cursorBefore = "";
+  String cursorAfter = "";
+  String firstLast = "last";
 }
 
 class OrderReport extends StatefulWidget {
@@ -29,14 +33,22 @@ class _OrderReportState extends State<OrderReport> {
   Filters filters = Filters();
 
   String oq = """
-  query filterOrders(\$order_date_end:String,\$order_date_start:String, \$customer_name:String, \$number:Int){
+  query filterOrders(\$before:String, \$after:String, \$order_date_end:String,\$order_date_start:String, \$customer_name:String, \$number:Int){
   orderReport(
     first:50,
     customer: \$customer_name,
     number_Contains:\$number,
     dateFa_Gte:\$order_date_start,
     dateFa_Lte:\$order_date_end,
+    after:\$after
+    before:\$before
   ) {
+    pageInfo{
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
     edges {
       node {
         id
@@ -65,7 +77,8 @@ class _OrderReportState extends State<OrderReport> {
                 "customer_name": filters.customerName,
                 "number": filters.number,
                 "order_date_start": filters.orderDateStart,
-                "order_date_end": filters.orderDateEnd
+                "order_date_end": filters.orderDateEnd,
+                "after": filters.cursorAfter
               }),
               builder: (
                 QueryResult result, {
@@ -77,6 +90,29 @@ class _OrderReportState extends State<OrderReport> {
                 }
 
                 var orders = result.data!['orderReport']['edges'] ?? [];
+                var pageInfo = result.data!['orderReport']['pageInfo'];
+
+                FetchMoreOptions opts = FetchMoreOptions(
+                  variables: {
+                    "after": pageInfo['endCursor']
+                  },
+                  updateQuery: (prev, res) {
+                    // this is where you combine your previous data and response
+                    // in case of this, we want to display previous repos plus next repos
+                    // so, we combine data in both into a single list of repos
+                    final List<Object?> orders = [
+                      ...prev!['orderReport']['edges'] as List<Object?>,
+                      ...res!['orderReport']['edges'] as List<Object?>
+                    ];
+
+                    // to avoid alot of work, lets just update the list of repos in returned
+                    // data with new data, this also ensure we have the endCursor already set
+                    // correctlty
+                    res['orderReport']['edges'] = orders;
+                    return res;
+                  },
+                );
+
                 return SingleChildScrollView(
                   scrollDirection: Axis.vertical,
                   child: Column(
@@ -230,16 +266,47 @@ class _OrderReportState extends State<OrderReport> {
                               },
                               child: Text('جستجو'),
                             ),
+                            ElevatedButton(
+                              onPressed: () {
+                                setState(() {
+//                                  filters.cursorAfter = pageInfo['endCursor'];
+//                                  filters.cursorBefore = "";
+//                                  filters.firstLast = 'first';
+                                });
+//                                refetch!();
+                                fetchMore!(opts);
+                              },
+                              child: Text('بعدی'),
+                            ),
+                            ElevatedButton(
+                              onPressed: () {
+                                setState(() {
+                                  filters.cursorAfter = "";
+                                  filters.cursorBefore =
+                                      pageInfo['startCursor'];
+                                  filters.firstLast = 'last';
+                                });
+                                refetch!();
+                              },
+                              child: Text('قبلی'),
+                            ),
                           ],
                         ),
                       ),
                       SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         child: DataTable(
-                          headingTextStyle: TextStyle(fontSize: 16, color: Colors.black87, fontFamily: "B-nazanin"),
-                          dataTextStyle: TextStyle(fontSize:12.0, color: Colors.black87, fontFamily: "B-nazanin"),
+                          headingTextStyle: TextStyle(
+                              fontSize: 16,
+                              color: Colors.black87,
+                              fontFamily: "B-nazanin"),
+                          dataTextStyle: TextStyle(
+                              fontSize: 12.0,
+                              color: Colors.black87,
+                              fontFamily: "B-nazanin"),
                           columnSpacing: 30.0,
                           columns: [
+                            DataColumn(label: Text('ردیف')),
                             DataColumn(label: Text('شماره')),
                             DataColumn(label: Text('مشتری')),
                             DataColumn(label: Text('تاریخ')),
@@ -247,22 +314,29 @@ class _OrderReportState extends State<OrderReport> {
                           rows: List.generate(
                               orders.length,
                               (index) => DataRow(cells: [
-                                    DataCell(TextButton(
-                                        onPressed: () {
-                                          Navigator.pushNamed(
-                                              context, Order.routeName,
-                                              arguments: OrderArgs(
-                                                  orders[index]['node']['id'],
-                                                  number: orders[index]['node']
-                                                      ['number']));
-                                        },
-                                        child: Text(orders[index]['node']
-                                                ['number']
-                                            .toString(), style: TextStyle(fontFamily: "B-nazanin")),)),
+                                DataCell(Text((index + 1).toString())),
+                                DataCell(TextButton(
+                                      onPressed: () {
+                                        Navigator.pushNamed(
+                                            context, Order.routeName,
+                                            arguments: OrderArgs(
+                                                orders[index]['node']['id'],
+                                                number: orders[index]['node']
+                                                    ['number']));
+                                      },
+                                      child: Text(
+                                          orders[index]['node']['number']
+                                              .toString(),
+                                          style: TextStyle(
+                                              fontFamily: "B-nazanin")),
+                                    )),
                                     DataCell(Container(
                                       width: 150.0,
-                                      child: Text(orders[index]['node']
-                                          ['customer']['name'], style: TextStyle(fontSize: 12),),
+                                      child: Text(
+                                        orders[index]['node']['customer']
+                                            ['name'],
+                                        style: TextStyle(fontSize: 12),
+                                      ),
                                     )),
                                     DataCell(
                                         Text(orders[index]['node']['dateFa'])),
