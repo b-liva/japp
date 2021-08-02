@@ -43,7 +43,7 @@ class _OrderReportState extends State<OrderReport> {
   String oq = """
   query filterOrders(\$before:String, \$after:String, \$order_date_end:String,\$order_date_start:String, \$customer_name:String, \$number:Int){
   orderReport(
-    first:10,
+    first:50,
     customer: \$customer_name,
     number_Contains:\$number,
     dateFa_Gte:\$order_date_start,
