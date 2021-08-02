@@ -50,6 +50,7 @@ class _OrderReportState extends State<OrderReport> {
     dateFa_Lte:\$order_date_end,
     after:\$after
     before:\$before
+    o:"-date_fa"
   ) {
     pageInfo{
       hasNextPage
