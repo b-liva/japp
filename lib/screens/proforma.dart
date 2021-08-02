@@ -57,6 +57,22 @@ class Proforma extends StatelessWidget {
 }
   """;
 
+  String proformaProfit = """
+  query proformaProfit(\$id:ID!){
+  proforma(id:\$id) {
+    id
+    number
+    customerName
+    profit(discount:0) {
+      cost
+      price
+      profit
+      percent
+    }
+  }
+}
+  """;
+
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as ProformaArgs;
@@ -114,6 +130,39 @@ class Proforma extends StatelessWidget {
                                       Text(proforma['perm']
                                           ? proforma['permNumber'].toString()
                                           : ''),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text('سود'),
+                                      Query(
+                                          options: QueryOptions(
+                                            document: gql(proformaProfit),
+                                            variables: {'id': args.id},
+                                          ),
+                                          builder: (
+                                            QueryResult result, {
+                                            Refetch? refetch,
+                                            FetchMore? fetchMore,
+                                          }) {
+                                            if (result.isLoading) {
+                                              return Center(
+                                                  child: SizedBox(
+                                                      height: 10,
+                                                      width: 10,
+                                                      child:
+                                                          CircularProgressIndicator()));
+                                            }
+                                            var profit =
+                                                result.data!['proforma']
+                                                    ['profit']['percent'];
+                                            if (profit != null) {
+                                              return Text(
+                                                  "${fd.format(profit)}%");
+                                            } else {
+                                              return Text("---");
+                                            }
+                                          })
                                     ],
                                   ),
                                 ],
